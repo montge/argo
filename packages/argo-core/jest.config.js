@@ -8,6 +8,7 @@ module.exports = {
     '!src/**/*.d.ts',
     '!src/**/index.ts'
   ],
+  coverageReporters: ['text', 'lcov', 'clover', 'json-summary'],
   coverageThreshold: {
     global: {
       branches: 80,
