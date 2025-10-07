@@ -51,11 +51,11 @@
 ### Sprint 1: Basic Distributions (Current)
 **Target Date:** Week of 2025-10-14
 
-- [ ] **TC-007: Uniform Distribution**
-  - [ ] Write tests (TDD Red)
-  - [ ] Implement UniformDistribution class
-  - [ ] Verify 100% coverage
-  - [ ] Commit with "feat(core): add Uniform distribution"
+- [x] **TC-007: Uniform Distribution**
+  - [x] Write tests (TDD Red) - 26 comprehensive tests
+  - [x] Implement UniformDistribution class
+  - [x] Verify 100% coverage - UniformDistribution.ts at 100%
+  - [x] Commit with "feat(core): add Uniform distribution" - Commit 74c3ea2
 
 - [ ] **TC-008: Triangular Distribution**
   - [ ] Write tests (TDD Red)
