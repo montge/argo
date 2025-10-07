@@ -1,0 +1,108 @@
+name: Coverage Report
+
+on:
+  push:
+    branches: [ main, master, office365-linux-rebuild ]
+  pull_request:
+    branches: [ main, master, office365-linux-rebuild ]
+
+jobs:
+  coverage:
+    name: Generate Coverage Report
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history for better coverage diffs
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build packages
+      run: npm run build --workspaces
+
+    - name: Generate coverage
+      run: |
+        npm run test:coverage --workspaces
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./packages/argo-core/coverage/coverage-final.json
+        flags: argo-core
+        name: argo-core-coverage
+        fail_ci_if_error: true
+        verbose: true
+
+    - name: Generate coverage badges
+      uses: cicirello/jacoco-badge-generator@v2
+      with:
+        badges-directory: .github/badges
+        generate-branches-badge: true
+        generate-summary: true
+
+    - name: Upload coverage badge
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-badges
+        path: .github/badges/
+
+    - name: Comment PR with coverage
+      if: github.event_name == 'pull_request'
+      uses: romeovs/lcov-reporter-action@v0.3.1
+      with:
+        lcov-file: ./packages/argo-core/coverage/lcov.info
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        delete-old-comments: true
+
+    - name: Check coverage thresholds
+      run: |
+        echo "Checking if coverage meets minimum thresholds (80%)..."
+        npm run test:coverage --workspaces
+
+        # Parse coverage and fail if below threshold
+        if command -v jq &> /dev/null; then
+          for coverage_file in packages/*/coverage/coverage-summary.json; do
+            if [ -f "$coverage_file" ]; then
+              echo "Checking $coverage_file"
+              branches=$(jq -r '.total.branches.pct' "$coverage_file")
+              functions=$(jq -r '.total.functions.pct' "$coverage_file")
+              lines=$(jq -r '.total.lines.pct' "$coverage_file")
+              statements=$(jq -r '.total.statements.pct' "$coverage_file")
+
+              echo "Coverage: Branches: $branches%, Functions: $functions%, Lines: $lines%, Statements: $statements%"
+
+              # Use bc for floating point comparison
+              if (( $(echo "$branches < 80" | bc -l) )) || \
+                 (( $(echo "$functions < 80" | bc -l) )) || \
+                 (( $(echo "$lines < 80" | bc -l) )) || \
+                 (( $(echo "$statements < 80" | bc -l) )); then
+                echo "❌ Coverage below 80% threshold"
+                exit 1
+              else
+                echo "✅ Coverage meets 80% threshold"
+              fi
+            fi
+          done
+        else
+          echo "jq not installed, skipping detailed coverage check"
+        fi
+
+    - name: Coverage Summary
+      run: |
+        echo "## Coverage Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "📊 Test coverage report generated" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Packages" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ argo-core" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "See [Codecov](https://codecov.io) for detailed coverage reports" >> $GITHUB_STEP_SUMMARY

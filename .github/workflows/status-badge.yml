@@ -1,0 +1,73 @@
+name: Status Badges
+
+on:
+  push:
+    branches: [ main, master, office365-linux-rebuild ]
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+
+jobs:
+  update-badges:
+    name: Update Status Badges
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run tests
+      run: npm test --workspaces
+
+    - name: Generate coverage
+      run: npm run test:coverage --workspaces
+
+    - name: Create badges directory
+      run: mkdir -p .github/badges
+
+    - name: Generate test status badge
+      uses: schneegans/dynamic-badges-action@v1.7.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: YOUR_GIST_ID  # Create a gist and put ID here
+        filename: argo-tests.json
+        label: Tests
+        message: Passing
+        color: green
+
+    - name: Generate coverage badge
+      run: |
+        # Extract coverage percentage
+        COVERAGE=$(jq -r '.total.lines.pct' packages/argo-core/coverage/coverage-summary.json)
+        echo "Coverage: $COVERAGE%"
+
+        # Determine badge color
+        if (( $(echo "$COVERAGE >= 90" | bc -l) )); then
+          COLOR="brightgreen"
+        elif (( $(echo "$COVERAGE >= 80" | bc -l) )); then
+          COLOR="green"
+        elif (( $(echo "$COVERAGE >= 70" | bc -l) )); then
+          COLOR="yellow"
+        else
+          COLOR="red"
+        fi
+
+        echo "Badge color: $COLOR"
+
+    - name: Generate build badge
+      uses: schneegans/dynamic-badges-action@v1.7.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: YOUR_GIST_ID
+        filename: argo-build.json
+        label: Build
+        message: Passing
+        color: green

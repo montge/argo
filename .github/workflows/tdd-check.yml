@@ -1,0 +1,101 @@
+name: TDD Check - Tests First
+
+on:
+  pull_request:
+    branches: [ main, master, office365-linux-rebuild, develop ]
+    paths:
+      - 'packages/*/src/**/*.ts'
+      - 'packages/*/tests/**/*.test.ts'
+
+jobs:
+  tdd-validation:
+    name: Validate TDD Approach
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout PR branch
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v40
+      with:
+        files: |
+          packages/*/src/**/*.ts
+          packages/*/tests/**/*.test.ts
+
+    - name: Check for new source files without tests
+      run: |
+        echo "## TDD Validation" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+
+        # Get all new/modified TypeScript source files (not tests)
+        new_src_files=$(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr ' ' '\n' | grep 'src/.*\.ts$' | grep -v '\.test\.ts$' | grep -v 'index\.ts$' || true)
+
+        # Get all new/modified test files
+        new_test_files=$(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr ' ' '\n' | grep 'tests/.*\.test\.ts$' || true)
+
+        echo "### Changed Source Files:" >> $GITHUB_STEP_SUMMARY
+        if [ -z "$new_src_files" ]; then
+          echo "- None" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "$new_src_files" | while read -r file; do
+            echo "- $file" >> $GITHUB_STEP_SUMMARY
+          done
+        fi
+
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Changed Test Files:" >> $GITHUB_STEP_SUMMARY
+        if [ -z "$new_test_files" ]; then
+          echo "- None" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "$new_test_files" | while read -r file; do
+            echo "- $file" >> $GITHUB_STEP_SUMMARY
+          done
+        fi
+
+        echo "" >> $GITHUB_STEP_SUMMARY
+
+        # Check if there are new source files without corresponding tests
+        if [ -n "$new_src_files" ] && [ -z "$new_test_files" ]; then
+          echo "⚠️ **Warning:** New source files added without tests" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**TDD Reminder:** Tests should be written BEFORE implementation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "1. RED: Write failing test" >> $GITHUB_STEP_SUMMARY
+          echo "2. GREEN: Implement code to pass test" >> $GITHUB_STEP_SUMMARY
+          echo "3. REFACTOR: Clean up code" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "✅ TDD check passed - tests detected with source changes" >> $GITHUB_STEP_SUMMARY
+        fi
+
+    - name: Check test coverage on changed files
+      run: |
+        # This is informational - actual coverage is checked in coverage.yml
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Coverage Check" >> $GITHUB_STEP_SUMMARY
+        echo "Full coverage report will be available in the Coverage workflow" >> $GITHUB_STEP_SUMMARY
+
+    - name: TDD reminder comment
+      if: steps.changed-files.outputs.all_changed_files != ''
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const srcFiles = '${{ steps.changed-files.outputs.all_changed_files }}'
+            .split(' ')
+            .filter(f => f.includes('/src/') && f.endsWith('.ts') && !f.endsWith('.test.ts'));
+
+          const testFiles = '${{ steps.changed-files.outputs.all_changed_files }}'
+            .split(' ')
+            .filter(f => f.includes('/tests/') && f.endsWith('.test.ts'));
+
+          if (srcFiles.length > 0 && testFiles.length === 0) {
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '⚠️ **TDD Reminder**\n\nNew source files were added without test files. Please ensure tests are written following TDD methodology:\n\n1. 🔴 **RED:** Write failing test first\n2. 🟢 **GREEN:** Implement code to pass test\n3. 🔵 **REFACTOR:** Clean up code\n\nSee [COLLABORATION.md](../docs/COLLABORATION.md) for TDD guidelines.'
+            });
+          }
