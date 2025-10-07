@@ -376,8 +376,8 @@ describe('LogNormalDistribution', () => {
       const endTime = Date.now();
       const elapsed = endTime - startTime;
 
-      // Should generate 100k samples in under 500ms (relaxed for CI environments)
-      expect(elapsed).toBeLessThan(500);
+      // Should generate 100k samples in under 600ms (relaxed for slower CI runners like Windows)
+      expect(elapsed).toBeLessThan(600);
     });
   });
 });
