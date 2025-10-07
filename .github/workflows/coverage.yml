@@ -43,18 +43,8 @@ jobs:
         fail_ci_if_error: true
         verbose: true
 
-    - name: Generate coverage badges
-      uses: cicirello/jacoco-badge-generator@v2
-      with:
-        badges-directory: .github/badges
-        generate-branches-badge: true
-        generate-summary: true
-
-    - name: Upload coverage badge
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-badges
-        path: .github/badges/
+    # Note: JaCoCo badge generator disabled - we use Jest (JavaScript), not JaCoCo (Java)
+    # Consider adding Istanbul/Jest badge generator in the future if needed
 
     - name: Comment PR with coverage
       if: github.event_name == 'pull_request'
