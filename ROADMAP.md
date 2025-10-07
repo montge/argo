@@ -57,11 +57,11 @@
   - [x] Verify 100% coverage - UniformDistribution.ts at 100%
   - [x] Commit with "feat(core): add Uniform distribution" - Commit 74c3ea2
 
-- [ ] **TC-008: Triangular Distribution**
-  - [ ] Write tests (TDD Red)
-  - [ ] Implement TriangularDistribution class
-  - [ ] Verify 100% coverage
-  - [ ] Commit with "feat(core): add Triangular distribution"
+- [x] **TC-008: Triangular Distribution**
+  - [x] Write tests (TDD Red) - 34 comprehensive tests
+  - [x] Implement TriangularDistribution class
+  - [x] Verify 100% coverage - TriangularDistribution.ts at 100%
+  - [x] Commit with "feat(core): add Triangular distribution" - Commit a49dbf6
 
 - [ ] **TC-009: Log-Normal Distribution**
   - [ ] Write tests (TDD Red)
