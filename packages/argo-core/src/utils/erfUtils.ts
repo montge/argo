@@ -53,7 +53,7 @@ export function erfInv(x: number): number {
   // Refine with Newton's method (2 iterations usually sufficient)
   for (let i = 0; i < 2; i++) {
     const err = erf(y) - x;
-    y -= err / (2 / Math.sqrt(Math.PI) * Math.exp(-y * y));
+    y -= err / ((2 / Math.sqrt(Math.PI)) * Math.exp(-y * y));
   }
 
   return y;

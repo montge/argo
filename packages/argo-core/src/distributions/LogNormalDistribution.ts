@@ -105,7 +105,7 @@ export class LogNormalDistribution implements Distribution {
    * Mean = exp(μ + σ²/2)
    */
   get mean(): number {
-    return Math.exp(this.mu + this.sigma * this.sigma / 2);
+    return Math.exp(this.mu + (this.sigma * this.sigma) / 2);
   }
 
   /**
@@ -113,7 +113,9 @@ export class LogNormalDistribution implements Distribution {
    * Variance = (exp(σ²) - 1) * exp(2μ + σ²)
    */
   get variance(): number {
-    return (Math.exp(this.sigma * this.sigma) - 1) * Math.exp(2 * this.mu + this.sigma * this.sigma);
+    return (
+      (Math.exp(this.sigma * this.sigma) - 1) * Math.exp(2 * this.mu + this.sigma * this.sigma)
+    );
   }
 
   /**
