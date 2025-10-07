@@ -30,6 +30,7 @@
 - **Blazing Fast:** Interactive simulations that update in real-time as spreadsheet values change
 - **Meeting-Ready:** Use simulation models as decision aids during collaborative sessions
 - **Excel Integration:** Seamlessly works with existing Excel spreadsheets and workflows
+- **Project Management Integration:** Connect with Project 365, JIRA, and Primavera P6 (Phase 2-3)
 
 ### Probability Distributions
 - **35+ Distributions:** Normal, Log-Normal, Uniform, Triangular, Beta, Gamma, Exponential, Weibull, Binomial, Poisson, and many more
@@ -86,6 +87,7 @@ See [DEVELOPMENT.md](docs/DEVELOPMENT.md) for detailed setup instructions.
 ## 📚 Documentation
 
 - **[Requirements Document](docs/REQUIREMENTS.md)** - Detailed functional and non-functional requirements
+- **[Integrations Guide](docs/INTEGRATIONS.md)** - Project 365, JIRA, Primavera P6 integrations
 - **[Architecture Document](docs/ARCHITECTURE.md)** - Technical architecture and design
 - **[Collaboration Guide](docs/COLLABORATION.md)** - Multi-user development with TDD
 - **[API Documentation](docs/API.md)** - Public API reference

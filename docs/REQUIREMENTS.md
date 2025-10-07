@@ -29,13 +29,20 @@ Argo is a Monte Carlo simulation add-in for Microsoft Excel that enables:
 - **Operating System:** Windows XP or newer
 
 ### 1.3 Target System (Modern)
-- **Platform:** Office 365 Excel (Desktop + Web)
+- **Primary Platform:** Office 365 Excel (Desktop + Web)
+- **Extended Integrations:** Project management platforms (Phase 2-3)
+  - Microsoft Project 365 (Desktop + Web)
+  - JIRA (Self-hosted + Cloud)
+  - Oracle Primavera P6 (EPPM + Cloud)
 - **Technology Stack:**
   - Office Add-ins (Web-based using Office.js)
   - TypeScript/JavaScript
-  - Modern web frameworks (React/Vue recommended)
-  - Statistical computation library (math.js, simple-statistics, or custom)
+  - Modern web frameworks (React recommended)
+  - Statistical computation library (custom + math.js)
+  - REST API adapters for PM platforms
 - **Operating System:** Cross-platform (Windows primary, with Web support)
+
+**Note:** See [INTEGRATIONS.md](INTEGRATIONS.md) for detailed requirements on project management platform integrations.
 
 ---
 
