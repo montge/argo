@@ -1,0 +1,604 @@
+# Argo Development Roadmap & Task Tracking
+
+**Branch:** `office365-linux-rebuild`
+**Last Updated:** 2025-10-07
+**Status:** Phase 1 - Core Development
+
+---
+
+## Current Status
+
+### ✅ Completed (Sprint 0 - Foundation)
+
+- [x] **Documentation** (400+ pages)
+  - [x] Requirements (FR-001 to FR-###)
+  - [x] Architecture design
+  - [x] TDD collaboration guide
+  - [x] Python support strategy
+  - [x] CLI tool design
+  - [x] Deployment guide (web-based)
+  - [x] Government cloud (GCC High/DoD)
+  - [x] PM integrations (Project 365, JIRA, P6)
+  - [x] Test case traceability matrix
+
+- [x] **Infrastructure**
+  - [x] Monorepo structure (npm workspaces)
+  - [x] TypeScript configuration
+  - [x] Jest testing framework
+  - [x] GitHub Actions CI/CD
+  - [x] Coverage reporting (Codecov)
+  - [x] TDD validation workflow
+  - [x] ESLint + Prettier
+
+- [x] **First Distribution - Normal**
+  - [x] 18 comprehensive tests (TDD approach)
+  - [x] 100% test coverage
+  - [x] 5 million samples/second performance
+  - [x] PDF, CDF, Inverse CDF functions
+  - [x] Parameter validation
+  - [x] Reproducible sampling (seeded RNG)
+
+**Test Results:** 18/18 passing ✅
+**Coverage:** 100% (branches, functions, lines, statements) ✅
+**CI/CD:** Operational with matrix testing ✅
+
+---
+
+## Phase 1: Core Library (argo-core)
+
+**Goal:** Complete statistical foundation with 35+ distributions
+
+### Sprint 1: Basic Distributions (Current)
+**Target Date:** Week of 2025-10-14
+
+- [ ] **TC-007: Uniform Distribution**
+  - [ ] Write tests (TDD Red)
+  - [ ] Implement UniformDistribution class
+  - [ ] Verify 100% coverage
+  - [ ] Commit with "feat(core): add Uniform distribution"
+
+- [ ] **TC-008: Triangular Distribution**
+  - [ ] Write tests (TDD Red)
+  - [ ] Implement TriangularDistribution class
+  - [ ] Verify 100% coverage
+  - [ ] Commit with "feat(core): add Triangular distribution"
+
+- [ ] **TC-009: Log-Normal Distribution**
+  - [ ] Write tests (TDD Red)
+  - [ ] Implement LogNormalDistribution class
+  - [ ] Verify 100% coverage
+  - [ ] Commit with "feat(core): add Log-Normal distribution"
+
+- [ ] **TC-010: Exponential Distribution**
+  - [ ] Write tests (TDD Red)
+  - [ ] Implement ExponentialDistribution class
+  - [ ] Verify 100% coverage
+  - [ ] Commit with "feat(core): add Exponential distribution"
+
+**Sprint 1 Success Criteria:**
+- 5 distributions complete (Normal + 4 new)
+- All tests passing
+- Coverage ≥80% (target: 100%)
+- CI/CD green on all platforms
+
+---
+
+### Sprint 2: Additional Continuous Distributions
+**Target Date:** Week of 2025-10-21
+
+- [ ] **Beta Distribution**
+  - [ ] Tests + Implementation (TDD)
+  - [ ] Alpha/Beta parameter support
+
+- [ ] **Gamma Distribution**
+  - [ ] Tests + Implementation (TDD)
+  - [ ] Shape/Scale parameters
+
+- [ ] **Weibull Distribution**
+  - [ ] Tests + Implementation (TDD)
+  - [ ] Shape/Scale parameters
+
+- [ ] **Pareto Distribution**
+  - [ ] Tests + Implementation (TDD)
+  - [ ] Scale/Shape parameters
+
+- [ ] **PERT Distribution**
+  - [ ] Tests + Implementation (TDD)
+  - [ ] Min/Most Likely/Max parameters
+  - [ ] Common in project management
+
+**Sprint 2 Success Criteria:**
+- 10 distributions total
+- All continuous distributions from requirements
+- Documentation updated
+
+---
+
+### Sprint 3: Discrete Distributions
+**Target Date:** Week of 2025-10-28
+
+- [ ] **Binomial Distribution**
+  - [ ] Tests + Implementation (TDD)
+  - [ ] n trials, p probability
+
+- [ ] **Poisson Distribution**
+  - [ ] Tests + Implementation (TDD)
+  - [ ] Lambda parameter
+
+- [ ] **Geometric Distribution**
+  - [ ] Tests + Implementation (TDD)
+  - [ ] Probability of success
+
+- [ ] **Hypergeometric Distribution**
+  - [ ] Tests + Implementation (TDD)
+  - [ ] Population/sample parameters
+
+- [ ] **Discrete Uniform Distribution**
+  - [ ] Tests + Implementation (TDD)
+  - [ ] Min/Max integers
+
+**Sprint 3 Success Criteria:**
+- 15 distributions total
+- First discrete distributions working
+- Performance benchmarks documented
+
+---
+
+### Sprint 4: Statistical Functions
+**Target Date:** Week of 2025-11-04
+
+- [ ] **Descriptive Statistics Module**
+  - [ ] Mean, Median, Mode
+  - [ ] Standard deviation, Variance
+  - [ ] Skewness, Kurtosis
+  - [ ] Percentiles (5th, 25th, 50th, 75th, 95th)
+  - [ ] Min, Max, Range
+  - [ ] Tests for each function (TDD)
+
+- [ ] **Confidence Intervals**
+  - [ ] Parametric intervals
+  - [ ] Bootstrap intervals
+  - [ ] Tests (TDD)
+
+- [ ] **Risk Metrics**
+  - [ ] Value at Risk (VaR)
+  - [ ] Conditional VaR (CVaR)
+  - [ ] Probability of exceeding threshold
+  - [ ] Tests (TDD)
+
+**Sprint 4 Success Criteria:**
+- 30+ statistical functions
+- All covered by tests
+- Documentation with examples
+
+---
+
+### Sprint 5: Simulation Engine
+**Target Date:** Week of 2025-11-11
+
+- [ ] **Basic Monte Carlo Engine**
+  - [ ] Single input variable simulation
+  - [ ] Multiple input variables
+  - [ ] Formula evaluation engine
+  - [ ] Progress reporting
+  - [ ] Tests (TDD)
+
+- [ ] **Dependency Graph**
+  - [ ] Parse variable dependencies
+  - [ ] Topological sort
+  - [ ] Recalculation engine
+  - [ ] Tests (TDD)
+
+- [ ] **Correlation Engine**
+  - [ ] Correlation matrix validation
+  - [ ] Cholesky decomposition
+  - [ ] Correlated sampling
+  - [ ] Tests (TDD)
+
+**Sprint 5 Success Criteria:**
+- Complete simulation engine
+- 10,000 iterations in <1 second (simple model)
+- Correlation support working
+- All tests passing
+
+---
+
+## Phase 2: CLI Tool (argo-cli)
+
+**Goal:** Command-line interface for Linux/automation
+
+### Sprint 6: CLI Foundation
+**Target Date:** Week of 2025-11-18
+
+- [ ] **Package Setup**
+  - [ ] Create package.json for argo-cli
+  - [ ] Configure TypeScript
+  - [ ] Add Commander.js dependency
+  - [ ] Set up bin/argo entry point
+
+- [ ] **Core Commands**
+  - [ ] `argo simulate` - Run simulation
+  - [ ] `argo validate` - Validate config
+  - [ ] `argo generate` - Generate template
+  - [ ] `argo distributions` - List available distributions
+  - [ ] Tests for each command (TDD)
+
+- [ ] **Configuration Format**
+  - [ ] JSON schema definition
+  - [ ] YAML support
+  - [ ] CSV import
+  - [ ] Schema validation
+  - [ ] Tests (TDD)
+
+**Sprint 6 Success Criteria:**
+- CLI executable working
+- Basic commands functional
+- Help text comprehensive
+- Tests passing
+
+---
+
+### Sprint 7: CLI Advanced Features
+**Target Date:** Week of 2025-11-25
+
+- [ ] **Output Formats**
+  - [ ] JSON output
+  - [ ] CSV output
+  - [ ] Markdown reports
+  - [ ] HTML reports (optional)
+
+- [ ] **Excel File Support**
+  - [ ] Read .xlsx files (ExcelJS)
+  - [ ] Write simulation results to .xlsx
+  - [ ] Preserve formatting
+
+- [ ] **Visualization**
+  - [ ] ASCII histograms (in terminal)
+  - [ ] Export charts as PNG/SVG (optional)
+
+- [ ] **Performance Optimizations**
+  - [ ] Worker threads for large simulations
+  - [ ] Streaming results
+  - [ ] Memory management
+
+**Sprint 7 Success Criteria:**
+- CLI fully functional
+- Government cloud ready (air-gapped)
+- Documentation complete
+- Published to npm as @argo/cli
+
+---
+
+## Phase 3: Office.js Add-in (argo-excel)
+
+**Goal:** Excel add-in for Windows/Mac/Web
+
+### Sprint 8: Add-in Foundation
+**Target Date:** Week of 2025-12-02
+
+- [ ] **Project Setup**
+  - [ ] Create package.json for argo-excel
+  - [ ] Configure Vite + React
+  - [ ] Set up Office.js
+  - [ ] Create manifest.xml
+
+- [ ] **Basic UI**
+  - [ ] Task pane shell (React)
+  - [ ] Fluent UI components
+  - [ ] Basic styling
+  - [ ] Connect to argo-core
+
+- [ ] **Excel Integration**
+  - [ ] Read cell ranges
+  - [ ] Write results back
+  - [ ] Custom functions setup
+  - [ ] Tests with Office.js mocks
+
+**Sprint 8 Success Criteria:**
+- Add-in loads in Excel
+- Can read/write cells
+- Basic UI renders
+- Sideloading works
+
+---
+
+### Sprint 9: Simulation UI
+**Target Date:** Week of 2025-12-09
+
+- [ ] **Simulation Controls**
+  - [ ] Distribution selector
+  - [ ] Parameter input forms
+  - [ ] Iteration count slider
+  - [ ] Run/Stop buttons
+  - [ ] Progress indicator
+
+- [ ] **Results Dashboard**
+  - [ ] Summary statistics table
+  - [ ] Histogram chart (Recharts)
+  - [ ] CDF chart
+  - [ ] Percentile markers
+
+- [ ] **Excel Custom Functions**
+  - [ ] ARGO.NORMAL(mean, stddev)
+  - [ ] ARGO.UNIFORM(min, max)
+  - [ ] ARGO.TRIANGULAR(min, mode, max)
+  - [ ] Registration with Excel
+
+**Sprint 9 Success Criteria:**
+- Full simulation workflow
+- Charts rendering
+- Custom functions working
+- User can run simulation end-to-end
+
+---
+
+### Sprint 10: Advanced Features
+**Target Date:** Week of 2025-12-16
+
+- [ ] **Distribution Builder Dialog**
+  - [ ] Visual distribution preview
+  - [ ] Parameter configuration
+  - [ ] Historical data fitting
+  - [ ] Save/Load distributions
+
+- [ ] **Sensitivity Analysis**
+  - [ ] Tornado chart
+  - [ ] Scatter plots
+  - [ ] Correlation analysis
+
+- [ ] **Export/Import**
+  - [ ] Save simulation config
+  - [ ] Load previous simulations
+  - [ ] Export reports to PowerPoint
+  - [ ] Export charts as images
+
+**Sprint 10 Success Criteria:**
+- MVP feature complete
+- Ready for alpha testing
+- Documentation written
+- AppSource submission prep
+
+---
+
+## Phase 4: PM Integrations
+
+**Goal:** Connect to Project 365, JIRA, Primavera P6
+
+### Sprint 11: Adapter Framework
+**Target Date:** Q1 2026
+
+- [ ] **Common Adapter Interface**
+  - [ ] ProjectManagementAdapter interface
+  - [ ] Task, Dependency, Resource models
+  - [ ] Authentication abstraction
+  - [ ] Tests (TDD)
+
+- [ ] **Mock Adapter**
+  - [ ] For testing without real PM systems
+  - [ ] Generate sample project data
+
+---
+
+### Sprint 12: Project 365 Integration
+**Target Date:** Q1 2026
+
+- [ ] **Project Desktop Adapter**
+  - [ ] Office.js Project API
+  - [ ] Read project schedule
+  - [ ] Apply distributions to tasks
+  - [ ] Run simulation
+
+- [ ] **UI for Project**
+  - [ ] Task selection
+  - [ ] Duration uncertainty
+  - [ ] Results dashboard
+
+---
+
+### Sprint 13: JIRA Integration
+**Target Date:** Q2 2026
+
+- [ ] **JIRA Cloud Adapter**
+  - [ ] Atlassian Connect
+  - [ ] Read sprint data
+  - [ ] Velocity simulation
+  - [ ] Release forecasting
+
+- [ ] **JIRA Server Adapter**
+  - [ ] REST API integration
+  - [ ] Same features as Cloud
+
+---
+
+### Sprint 14: Primavera P6 Integration
+**Target Date:** Q2 2026
+
+- [ ] **P6 EPPM Adapter**
+  - [ ] Web Services API
+  - [ ] Read schedules
+  - [ ] Portfolio simulation
+  - [ ] Cost risk analysis
+
+- [ ] **P6 Cloud Adapter**
+  - [ ] REST API
+  - [ ] Same features as EPPM
+
+---
+
+## Testing Checkpoints
+
+### Every Sprint
+- [ ] All new code has tests written FIRST (TDD)
+- [ ] Coverage ≥80% (target: 100%)
+- [ ] CI/CD passing on all platforms
+- [ ] No critical bugs
+- [ ] Documentation updated
+- [ ] Commit messages follow convention
+
+### Every Phase
+- [ ] Integration tests added
+- [ ] E2E tests for user workflows
+- [ ] Performance benchmarks met
+- [ ] Security review passed
+- [ ] User documentation complete
+
+---
+
+## Performance Targets
+
+| Metric | Target | Current | Status |
+|--------|--------|---------|--------|
+| **Sampling Rate** | 5M samples/sec | 5M samples/sec | ✅ |
+| **10k Iteration Sim** | <1 second | 2ms (0.002s) | ✅ |
+| **50k Iteration Sim** | <10 seconds | TBD | ⏳ |
+| **Code Coverage** | ≥80% | 100% | ✅ |
+| **CI/CD Build** | <5 minutes | ~3 minutes | ✅ |
+
+---
+
+## Release Schedule
+
+### Alpha Release (v2.0.0-alpha.1)
+**Target:** End of Sprint 5 (2025-11-11)
+- Core library with 20+ distributions
+- Basic simulation engine
+- CLI tool MVP
+- Documentation
+
+### Beta Release (v2.0.0-beta.1)
+**Target:** End of Sprint 10 (2025-12-16)
+- Excel add-in MVP
+- Full simulation workflow
+- 35+ distributions
+- Statistical functions
+
+### v2.0.0 GA
+**Target:** Q1 2026
+- Production-ready add-in
+- AppSource listing
+- All MVP features
+- Comprehensive documentation
+
+### v2.1.0
+**Target:** Q2 2026
+- PM integrations (Project 365, JIRA)
+- Portfolio simulation
+- Advanced analytics
+
+### v2.2.0
+**Target:** Q3 2026
+- Primavera P6 integration
+- Python in Excel support
+- Machine learning features
+
+---
+
+## Risk Tracking
+
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| Office.js API limitations | Medium | High | Test early, fallback to CLI |
+| Performance on Web | Medium | Medium | Optimize, use Web Workers |
+| PM API changes | Low | High | Version pinning, adapters |
+| Scope creep | High | Medium | Stick to MVP, phased releases |
+| TDD adoption | Low | Low | CI enforces, documentation clear |
+
+---
+
+## Success Metrics
+
+### Technical
+- [ ] 35+ distributions implemented
+- [ ] 50+ statistical functions
+- [ ] 100% of FR-### requirements met
+- [ ] Test coverage ≥90%
+- [ ] CI/CD operational
+- [ ] Zero critical bugs
+
+### User
+- [ ] 100+ GitHub stars
+- [ ] 10+ contributors
+- [ ] AppSource listing approved
+- [ ] Positive user feedback
+- [ ] Active community
+
+---
+
+## Daily Tracking
+
+Use this checklist for each work session:
+
+```markdown
+## Date: YYYY-MM-DD
+
+### Tasks Completed
+- [ ] Task 1
+- [ ] Task 2
+
+### Tests Written (TDD)
+- [ ] Test case TC-###
+- [ ] Test case TC-###
+
+### Tests Status
+- Passing: #/#
+- Coverage: ##%
+
+### Commits
+- [ ] Commit SHA: Description
+
+### Blockers
+- None / Description
+
+### Next Session
+- [ ] Task to start with
+```
+
+---
+
+## Weekly Review
+
+Every Sunday:
+1. Check GitHub Actions status
+2. Review coverage trends
+3. Update roadmap progress
+4. Plan next week's tasks
+5. Update stakeholders
+
+---
+
+## Resources
+
+- **Project Board:** https://github.com/montge/argo/projects
+- **Issues:** https://github.com/montge/argo/issues
+- **Wiki:** https://github.com/montge/argo/wiki
+- **CI/CD:** https://github.com/montge/argo/actions
+
+---
+
+**Maintained by:** Development Team
+**Review Frequency:** Weekly
+**Last Review:** 2025-10-07
+
+---
+
+## Quick Commands
+
+```bash
+# Start TDD session
+npm run test:watch
+
+# Run full test suite
+npm test
+
+# Check coverage
+npm run test:coverage
+
+# Build all packages
+npm run build
+
+# Commit with tests
+git add -A && git commit -m "feat(core): description" && git push
+
+# Check CI status
+curl -s "https://api.github.com/repos/montge/argo/actions/runs?per_page=1" | jq -r '.workflow_runs[0] | "\(.name): \(.conclusion)"'
+```
