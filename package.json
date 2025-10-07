@@ -1,0 +1,50 @@
+{
+  "name": "argo-monorepo",
+  "version": "2.0.0-alpha.1",
+  "description": "Monte Carlo Simulation for Excel - Monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "test:watch": "npm run test:watch --workspaces",
+    "test:coverage": "npm run test:coverage --workspaces",
+    "lint": "eslint packages/*/src --ext .ts,.tsx",
+    "format": "prettier --write \"packages/*/src/**/*.{ts,tsx,json,md}\"",
+    "clean": "npm run clean --workspaces && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/boozallen/argo.git"
+  },
+  "keywords": [
+    "monte-carlo",
+    "simulation",
+    "excel",
+    "statistics",
+    "probability",
+    "risk-analysis"
+  ],
+  "author": "Booz Allen Hamilton",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/boozallen/argo/issues"
+  },
+  "homepage": "https://github.com/boozallen/argo#readme"
+}
