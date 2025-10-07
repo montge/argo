@@ -75,11 +75,18 @@
   - [x] Verify 95.83% coverage - ExponentialDistribution.ts at 95.83%
   - [x] Commit with "feat(core): add Exponential distribution" - Commit ea855d1
 
+- [ ] **CI/CD Fixes**
+  - [x] Fix artifact actions v3 deprecation warnings (upgraded to v4)
+  - [ ] Diagnose and fix test failures in CI environment
+  - [ ] Fix Coverage Report workflow
+  - [ ] Fix Status Badges workflow
+  - [ ] Verify all workflows pass on all platforms
+
 **Sprint 1 Success Criteria:**
-- 5 distributions complete (Normal + 4 new)
-- All tests passing
-- Coverage ≥80% (target: 100%)
-- CI/CD green on all platforms
+- 5 distributions complete (Normal + 4 new) ✅
+- All tests passing locally ✅
+- Coverage ≥80% (target: 100%) ✅ (97.48%)
+- CI/CD green on all platforms ⏳ (in progress)
 
 ---
 
