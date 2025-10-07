@@ -7,6 +7,7 @@ export { UniformDistribution } from './distributions/UniformDistribution';
 export { TriangularDistribution } from './distributions/TriangularDistribution';
 export { LogNormalDistribution } from './distributions/LogNormalDistribution';
 export { ExponentialDistribution } from './distributions/ExponentialDistribution';
+export { BetaDistribution } from './distributions/BetaDistribution';
 
 // Utilities
 export { SimpleRNG } from './utils/SimpleRNG';
