@@ -11,6 +11,36 @@ This document describes the technical architecture for Argo v2.0, a complete rew
 
 ## 1. High-Level Architecture
 
+### 1.0 Key Advantage: Web-Based Architecture
+
+**Argo v2.0 uses modern Office.js Add-ins, which are fundamentally different from traditional compiled plugins:**
+
+✅ **Web Application** (not compiled executable)
+- HTML/CSS/JavaScript hosted on a web server
+- Excel loads it like embedding a website
+- No .dll, .xll, or native code compilation
+
+✅ **No Code Signing Required** (for development/testing)
+- Optional manifest signing for AppSource
+- No expensive certificates needed ($0 vs $300-500/year)
+
+✅ **Cross-Platform by Default**
+- Same code runs on Windows, Mac, and Web
+- Develop on Linux, deploy everywhere
+
+✅ **Easy Updates**
+- Change files on server → users get updates automatically
+- No reinstallation required
+
+✅ **Simple Deployment**
+- Just an XML manifest pointing to your web URL
+- No installer packages (.msi)
+- No admin rights required (for sideloading)
+
+**See [DEPLOYMENT.md](DEPLOYMENT.md) for complete details on web-based deployment.**
+
+---
+
 ### 1.1 Architecture Diagram
 
 ```
