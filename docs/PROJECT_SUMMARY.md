@@ -8,9 +8,9 @@
 
 ## Overview
 
-This document summarizes the reverse engineering and modernization effort for Argo, a Monte Carlo simulation add-in for Microsoft Excel. The original source code (v1.x for Excel 2007-2016) was lost, prompting a complete rebuild targeting **Office 365 Excel** using modern web technologies.
+This document summarizes the modernization effort for Argo, a Monte Carlo simulation add-in for Microsoft Excel. The original Argo (v1.x) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365, prompting a complete rebuild targeting **Office 365 Excel** using modern web technologies.
 
-**🤖 This project was reverse engineered using Claude Code (AI)** based on available documentation from:
+**🤖 This project was rebuilt using Claude Code (AI)** based on available documentation from:
 - Original Argo landing page (https://boozallen.github.io/argo)
 - Argo Wiki documentation
 - Product license information
@@ -112,7 +112,7 @@ argo/
 ### 3. **Updated Core Files**
 
 #### [README.md](../README.md)
-- Clear acknowledgment of AI-assisted reverse engineering
+- Clear acknowledgment of AI-assisted modern rebuild
 - Comparison: Original Argo vs Argo v2.0
 - Feature overview (Monte Carlo, distributions, statistics)
 - Installation instructions (users + developers)

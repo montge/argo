@@ -2,12 +2,12 @@
 
 **Version:** 2.0
 **Target Platform:** Office 365 Excel (Modern Web + Desktop)
-**Status:** Reverse Engineering Phase
+**Status:** Modern Rebuild Phase
 **Last Updated:** 2025-10-07
 
 ## Acknowledgment
 
-This project represents a **reverse engineering effort using Claude Code (AI)** to recreate Argo based on available documentation. The original source code for Argo (v1.x for Excel 2007-2016) was lost, and this document captures requirements for a modern rebuild targeting Office 365.
+This project represents a **modern rebuild using Claude Code (AI)** to recreate Argo based on available documentation. The original Argo (v1.x) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365, and this document captures requirements for a rebuild targeting Office 365.
 
 ---
 
@@ -412,4 +412,4 @@ argo-office365/
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 1.0 | 2025-10-07 | Claude Code (AI) | Initial requirements document from reverse engineering |
+| 1.0 | 2025-10-07 | Claude Code (AI) | Initial requirements document from modern rebuild |

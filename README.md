@@ -10,9 +10,9 @@
 
 ---
 
-## ⚠️ Important Notice: Reverse Engineering with AI
+## ⚠️ Important Notice: Modern Rebuild with AI
 
-**This project represents a reverse engineering effort using Claude Code (AI) to recreate Argo based on available documentation.** The original source code for Argo (v1.x for Excel 2007-2016) was lost. This modern rebuild targets Office 365 Excel with contemporary technologies while maintaining the spirit and functionality of the original.
+**This project represents a modern rebuild using Claude Code (AI) to recreate Argo based on available documentation.** The original Argo (v1.x) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365. This rebuild targets Office 365 Excel with contemporary web technologies while maintaining the spirit and functionality of the original.
 
 **Original Argo:**
 - Platform: Excel 2007-2016 (32-bit)

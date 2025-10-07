@@ -5,7 +5,7 @@
 
 ## Overview
 
-This document describes the technical architecture for Argo v2.0, a complete rewrite targeting Office 365 Excel using modern web technologies. This is a **reverse engineering effort using Claude Code (AI)** based on available documentation from the original Argo project.
+This document describes the technical architecture for Argo v2.0, a complete rewrite targeting Office 365 Excel using modern web technologies. This is a **modern rebuild using Claude Code (AI)** - the original Argo (v1.x) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365, and this rebuild is based on available documentation from the original Argo project.
 
 ---
 
