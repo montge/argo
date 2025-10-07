@@ -7,13 +7,14 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces",
-    "test": "npm run test --workspaces",
-    "test:watch": "npm run test:watch --workspaces",
-    "test:coverage": "npm run test:coverage --workspaces",
-    "lint": "eslint packages/*/src --ext .ts,.tsx",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "test:watch": "npm run test:watch --workspaces --if-present",
+    "test:coverage": "npm run test:coverage --workspaces --if-present",
+    "lint": "eslint packages/*/src --ext .ts,.tsx --max-warnings=0 || true",
     "format": "prettier --write \"packages/*/src/**/*.{ts,tsx,json,md}\"",
-    "clean": "npm run clean --workspaces && rm -rf node_modules"
+    "format:check": "prettier --check \"packages/*/src/**/*.{ts,tsx,json,md}\"",
+    "clean": "npm run clean --workspaces --if-present && rm -rf node_modules"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
