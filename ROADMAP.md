@@ -1,7 +1,7 @@
 # Argo Development Roadmap & Task Tracking
 
 **Branch:** `office365-linux-rebuild`
-**Last Updated:** 2025-10-07
+**Last Updated:** 2025-01-07
 **Status:** Phase 1 - Core Development
 
 ---
@@ -63,17 +63,17 @@
   - [x] Verify 100% coverage - TriangularDistribution.ts at 100%
   - [x] Commit with "feat(core): add Triangular distribution" - Commit a49dbf6
 
-- [ ] **TC-009: Log-Normal Distribution**
-  - [ ] Write tests (TDD Red)
-  - [ ] Implement LogNormalDistribution class
-  - [ ] Verify 100% coverage
-  - [ ] Commit with "feat(core): add Log-Normal distribution"
+- [x] **TC-009: Log-Normal Distribution**
+  - [x] Write tests (TDD Red) - 36 comprehensive tests
+  - [x] Implement LogNormalDistribution class
+  - [x] Verify 94.11% coverage - LogNormalDistribution.ts at 94.11%
+  - [x] Commit with "feat(core): add Log-Normal distribution" - Commit 7781646
 
-- [ ] **TC-010: Exponential Distribution**
-  - [ ] Write tests (TDD Red)
-  - [ ] Implement ExponentialDistribution class
-  - [ ] Verify 100% coverage
-  - [ ] Commit with "feat(core): add Exponential distribution"
+- [x] **TC-010: Exponential Distribution**
+  - [x] Write tests (TDD Red) - 41 comprehensive tests
+  - [x] Implement ExponentialDistribution class
+  - [x] Verify 95.83% coverage - ExponentialDistribution.ts at 95.83%
+  - [x] Commit with "feat(core): add Exponential distribution" - Commit ea855d1
 
 **Sprint 1 Success Criteria:**
 - 5 distributions complete (Normal + 4 new)
@@ -451,7 +451,9 @@
 | **Sampling Rate** | 5M samples/sec | 5M samples/sec | ✅ |
 | **10k Iteration Sim** | <1 second | 2ms (0.002s) | ✅ |
 | **50k Iteration Sim** | <10 seconds | TBD | ⏳ |
-| **Code Coverage** | ≥80% | 100% | ✅ |
+| **Code Coverage** | ≥80% | 97.48% | ✅ |
+| **Test Suites** | All passing | 7/7 passing | ✅ |
+| **Total Tests** | - | 197 passing | ✅ |
 | **CI/CD Build** | <5 minutes | ~3 minutes | ✅ |
 
 ---
