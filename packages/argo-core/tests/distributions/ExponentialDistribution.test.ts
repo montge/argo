@@ -411,4 +411,23 @@ describe('ExponentialDistribution', () => {
       expect(elapsed).toBeLessThan(200);
     });
   });
+
+  describe('validateParameters', () => {
+    it('should return true for valid parameters', () => {
+      const dist = new ExponentialDistribution(1);
+      expect(dist.validateParameters()).toBe(true);
+    });
+
+    it('should throw error when lambda becomes non-finite', () => {
+      const dist = new ExponentialDistribution(1);
+      (dist as any).lambda = Infinity;
+      expect(() => dist.validateParameters()).toThrow('Lambda must be finite');
+    });
+
+    it('should throw error when lambda becomes non-positive', () => {
+      const dist = new ExponentialDistribution(1);
+      (dist as any).lambda = 0;
+      expect(() => dist.validateParameters()).toThrow('Lambda (rate) must be positive');
+    });
+  });
 });

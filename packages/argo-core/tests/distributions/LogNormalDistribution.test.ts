@@ -380,4 +380,29 @@ describe('LogNormalDistribution', () => {
       expect(elapsed).toBeLessThan(600);
     });
   });
+
+  describe('validateParameters', () => {
+    it('should return true for valid parameters', () => {
+      const dist = new LogNormalDistribution(0, 1);
+      expect(dist.validateParameters()).toBe(true);
+    });
+
+    it('should throw error when mu becomes non-finite', () => {
+      const dist = new LogNormalDistribution(0, 1);
+      (dist as any).mu = Infinity;
+      expect(() => dist.validateParameters()).toThrow('Mu must be finite');
+    });
+
+    it('should throw error when sigma becomes non-finite', () => {
+      const dist = new LogNormalDistribution(0, 1);
+      (dist as any).sigma = Infinity;
+      expect(() => dist.validateParameters()).toThrow('Sigma must be finite');
+    });
+
+    it('should throw error when sigma becomes non-positive', () => {
+      const dist = new LogNormalDistribution(0, 1);
+      (dist as any).sigma = 0;
+      expect(() => dist.validateParameters()).toThrow('Sigma must be positive');
+    });
+  });
 });

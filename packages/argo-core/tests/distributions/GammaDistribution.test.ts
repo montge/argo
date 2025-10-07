@@ -511,4 +511,69 @@ describe('GammaDistribution', () => {
       expect(variance).toBeLessThan(shape / (rate * rate) * 1.05);
     });
   });
+
+  describe('edge cases for numerical stability', () => {
+    it('should handle CDF at x=0', () => {
+      const dist = new GammaDistribution(2, 1);
+      expect(dist.cdf(0)).toBe(0);
+    });
+
+    it('should handle inverseCDF with extreme probabilities', () => {
+      const dist = new GammaDistribution(2, 1);
+
+      // Very small p - close to 0
+      const x1 = dist.inverseCDF(1e-10);
+      expect(x1).toBeGreaterThan(0);
+      expect(x1).toBeLessThan(0.1);
+
+      // Very large p - close to 1 but not exactly 1
+      const x2 = dist.inverseCDF(1 - 1e-10);
+      expect(x2).toBeGreaterThan(5);
+      expect(isFinite(x2)).toBe(true);
+    });
+
+    it('should handle regularizedGammaP with x=0', () => {
+      const dist = new GammaDistribution(2, 1);
+      // This tests the x===0 branch in regularizedGammaP
+      expect(dist.cdf(0)).toBe(0);
+    });
+
+    it('should handle series expansion for small x values', () => {
+      // When x < shape+1, uses series expansion
+      const dist = new GammaDistribution(5, 1);
+      const cdf = dist.cdf(2); // 2 < 5+1, so uses series
+      expect(cdf).toBeGreaterThan(0);
+      expect(cdf).toBeLessThan(1);
+      expect(isFinite(cdf)).toBe(true);
+    });
+
+    it('should handle continued fraction for large x values', () => {
+      // When x >= shape+1, uses continued fraction
+      const dist = new GammaDistribution(2, 1);
+      const cdf = dist.cdf(10); // 10 >= 2+1, so uses continued fraction
+      expect(cdf).toBeGreaterThan(0.9);
+      expect(cdf).toBeLessThan(1);
+      expect(isFinite(cdf)).toBe(true);
+    });
+
+    it('should handle very small shape values in CDF', () => {
+      const dist = new GammaDistribution(0.1, 1);
+      const cdf1 = dist.cdf(0.01);
+      const cdf2 = dist.cdf(0.1);
+      const cdf3 = dist.cdf(1);
+
+      expect(cdf1).toBeGreaterThan(0);
+      expect(cdf2).toBeGreaterThan(cdf1);
+      expect(cdf3).toBeGreaterThan(cdf2);
+      expect(isFinite(cdf1) && isFinite(cdf2) && isFinite(cdf3)).toBe(true);
+    });
+
+    it('should handle edge case where inverseCDF Newton-Raphson reaches max iterations', () => {
+      // This is difficult to trigger, but we can test that it still returns a value
+      const dist = new GammaDistribution(0.01, 0.01);
+      const result = dist.inverseCDF(0.5);
+      expect(isFinite(result)).toBe(true);
+      expect(result).toBeGreaterThan(0);
+    });
+  });
 });

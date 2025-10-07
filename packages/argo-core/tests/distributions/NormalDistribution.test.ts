@@ -204,4 +204,16 @@ describe('NormalDistribution', () => {
       expect(dist.stddev).toBe(15);
     });
   });
+
+  describe('inverseCDF edge cases', () => {
+    it('should return -Infinity for p=0', () => {
+      const dist = new NormalDistribution(0, 1);
+      expect(dist.inverseCDF(0)).toBe(-Infinity);
+    });
+
+    it('should return Infinity for p=1', () => {
+      const dist = new NormalDistribution(0, 1);
+      expect(dist.inverseCDF(1)).toBe(Infinity);
+    });
+  });
 });

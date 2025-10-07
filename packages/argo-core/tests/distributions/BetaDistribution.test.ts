@@ -448,4 +448,95 @@ describe('BetaDistribution', () => {
       expect(dist.beta).toBe(7);
     });
   });
+
+  describe('validateParameters', () => {
+    it('should return true for valid parameters', () => {
+      const dist = new BetaDistribution(2, 3);
+      expect(dist.validateParameters()).toBe(true);
+    });
+
+    it('should throw error when alpha becomes invalid', () => {
+      const dist = new BetaDistribution(2, 3);
+      (dist as any).alpha = 0;
+      expect(() => dist.validateParameters()).toThrow('Alpha must be positive');
+    });
+
+    it('should throw error when beta becomes invalid', () => {
+      const dist = new BetaDistribution(2, 3);
+      (dist as any).beta = -1;
+      expect(() => dist.validateParameters()).toThrow('Beta must be positive');
+    });
+
+    it('should throw error when parameters become non-finite', () => {
+      const dist = new BetaDistribution(2, 3);
+      (dist as any).alpha = Infinity;
+      expect(() => dist.validateParameters()).toThrow('Parameters must be finite numbers');
+    });
+  });
+
+  describe('edge cases for numerical stability', () => {
+    it('should handle CDF at x=0', () => {
+      const dist = new BetaDistribution(2, 3);
+      expect(dist.cdf(0)).toBe(0);
+    });
+
+    it('should handle CDF at x=1', () => {
+      const dist = new BetaDistribution(2, 3);
+      expect(dist.cdf(1)).toBe(1);
+    });
+
+    it('should handle very small alpha for sampling', () => {
+      const dist = new BetaDistribution(0.1, 2);
+      const rng1 = new SimpleRNG(999);
+      const samples = Array.from({ length: 100 }, () => dist.sample(rng1));
+      samples.forEach(s => {
+        expect(s).toBeGreaterThanOrEqual(0);
+        expect(s).toBeLessThanOrEqual(1);
+      });
+    });
+
+    it('should handle very small beta for sampling', () => {
+      const dist = new BetaDistribution(2, 0.1);
+      const rng1 = new SimpleRNG(888);
+      const samples = Array.from({ length: 100 }, () => dist.sample(rng1));
+      samples.forEach(s => {
+        expect(s).toBeGreaterThanOrEqual(0);
+        expect(s).toBeLessThanOrEqual(1);
+      });
+    });
+
+    it('should handle both very small parameters for sampling', () => {
+      const dist = new BetaDistribution(0.1, 0.1);
+      const rng1 = new SimpleRNG(777);
+      const samples = Array.from({ length: 100 }, () => dist.sample(rng1));
+      samples.forEach(s => {
+        expect(s).toBeGreaterThanOrEqual(0);
+        expect(s).toBeLessThanOrEqual(1);
+      });
+    });
+
+    it('should handle inverseCDF with extreme probabilities', () => {
+      const dist = new BetaDistribution(0.5, 0.5);
+      // Very small p
+      const x1 = dist.inverseCDF(1e-10);
+      expect(x1).toBeGreaterThan(0);
+      expect(x1).toBeLessThan(0.1);
+
+      // Very large p
+      const x2 = dist.inverseCDF(1 - 1e-10);
+      expect(x2).toBeGreaterThan(0.9);
+      expect(x2).toBeLessThan(1);
+    });
+
+    it('should handle CDF with values very close to boundaries', () => {
+      const dist = new BetaDistribution(0.5, 0.5);
+      const cdf1 = dist.cdf(1e-10);
+      const cdf2 = dist.cdf(1 - 1e-10);
+
+      expect(cdf1).toBeGreaterThan(0);
+      expect(cdf1).toBeLessThan(0.5);
+      expect(cdf2).toBeGreaterThan(0.5);
+      expect(cdf2).toBeLessThan(1);
+    });
+  });
 });
