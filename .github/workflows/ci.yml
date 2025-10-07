@@ -44,12 +44,14 @@ jobs:
       run: npm run test:coverage --workspaces
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
-        files: ./packages/*/coverage/coverage-final.json
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./packages/argo-core/coverage/lcov.info
         flags: unittests
         name: codecov-${{ matrix.os }}-node-${{ matrix.node-version }}
         fail_ci_if_error: false
+        verbose: true
 
     - name: Archive test results
       if: always()

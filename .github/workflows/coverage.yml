@@ -34,9 +34,10 @@ jobs:
         npm run test:coverage --workspaces
 
     - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
-        files: ./packages/argo-core/coverage/coverage-final.json
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./packages/argo-core/coverage/lcov.info
         flags: argo-core
         name: argo-core-coverage
         fail_ci_if_error: true
