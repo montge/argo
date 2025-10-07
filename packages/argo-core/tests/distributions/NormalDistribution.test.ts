@@ -183,6 +183,17 @@ describe('NormalDistribution', () => {
       expect(() => new NormalDistribution(100, 0)).toThrow();
       expect(() => new NormalDistribution(100, -5)).toThrow();
     });
+
+    it('should throw for non-finite mean', () => {
+      expect(() => new NormalDistribution(NaN, 1)).toThrow('Mean must be finite');
+      expect(() => new NormalDistribution(Infinity, 1)).toThrow('Mean must be finite');
+      expect(() => new NormalDistribution(-Infinity, 1)).toThrow('Mean must be finite');
+    });
+
+    it('should throw for non-finite stddev', () => {
+      expect(() => new NormalDistribution(0, NaN)).toThrow('Standard deviation must be finite');
+      expect(() => new NormalDistribution(0, Infinity)).toThrow('Standard deviation must be finite');
+    });
   });
 
   describe('properties', () => {
