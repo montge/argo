@@ -508,5 +508,30 @@ describe('WeibullDistribution', () => {
       expect(mean).toBeGreaterThan(dist.mean * 0.98);
       expect(mean).toBeLessThan(dist.mean * 1.02);
     });
+
+    it('should trigger gamma reflection formula for shape < 0.5', () => {
+      // This tests gamma function with z < 0.5, which uses reflection formula (line 238)
+      const dist = new WeibullDistribution(0.1, 1);
+      const mean = dist.mean;
+      expect(mean).toBeGreaterThan(0);
+      expect(isFinite(mean)).toBe(true);
+
+      // Also test variance which also uses gamma
+      const variance = dist.variance;
+      expect(variance).toBeGreaterThan(0);
+      expect(isFinite(variance)).toBe(true);
+
+      // Test even smaller shape to definitely hit reflection formula
+      const dist2 = new WeibullDistribution(0.01, 1);
+      const mean2 = dist2.mean;
+      expect(mean2).toBeGreaterThan(0);
+      expect(isFinite(mean2)).toBe(true);
+
+      // Test shape values that produce fractional arguments to gamma
+      const dist3 = new WeibullDistribution(0.3, 2);
+      const mean3 = dist3.mean;
+      expect(mean3).toBeGreaterThan(0);
+      expect(isFinite(mean3)).toBe(true);
+    });
   });
 });

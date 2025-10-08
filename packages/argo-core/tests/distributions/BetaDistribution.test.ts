@@ -538,5 +538,94 @@ describe('BetaDistribution', () => {
       expect(cdf2).toBeGreaterThan(0.5);
       expect(cdf2).toBeLessThan(1);
     });
+
+    it('should trigger gamma reflection formula for small alpha values', () => {
+      // This tests logGamma with z < 0.5, which uses reflection formula
+      const dist = new BetaDistribution(0.1, 2);
+      const pdf = dist.pdf(0.01);
+      expect(pdf).toBeGreaterThan(0);
+      expect(pdf).toBeLessThan(Infinity);
+    });
+
+    it('should handle inverseCDF that causes Newton-Raphson to break on pdf=0', () => {
+      // Test with parameters that might cause pdf(x) = 0 during iteration
+      const dist = new BetaDistribution(0.01, 0.01);
+      const x = dist.inverseCDF(0.999999);
+      expect(x).toBeGreaterThan(0.5);
+      expect(x).toBeLessThan(1);
+    });
+
+    it('should handle regularizedIncompleteBeta edge cases', () => {
+      // Test that exercises continued fraction numerical stability
+      const dist = new BetaDistribution(100, 100);
+
+      // This should exercise the continued fraction calculation
+      const cdf1 = dist.cdf(0.5);
+      expect(cdf1).toBeCloseTo(0.5, 2);
+
+      // Test near boundaries to exercise x=0 and x=1 paths
+      const cdf2 = dist.cdf(0);
+      expect(cdf2).toBe(0);
+
+      const cdf3 = dist.cdf(1);
+      expect(cdf3).toBe(1);
+    });
+
+    it('should handle continued fraction numerical stability checks', () => {
+      // Use parameters that stress the continued fraction algorithm
+      const dist = new BetaDistribution(50, 50);
+
+      // Multiple evaluations to exercise different code paths
+      for (let p = 0.1; p < 1; p += 0.1) {
+        const x = dist.inverseCDF(p);
+        expect(x).toBeGreaterThanOrEqual(0);
+        expect(x).toBeLessThanOrEqual(1);
+      }
+    });
+
+    it('should handle extreme parameter ratios in CDF', () => {
+      // Extreme ratios stress the continued fraction more
+      const dist1 = new BetaDistribution(100, 0.01);
+      const cdf1 = dist1.cdf(0.999);
+      expect(cdf1).toBeGreaterThan(0);
+      expect(cdf1).toBeLessThan(1);
+
+      const dist2 = new BetaDistribution(0.01, 100);
+      const cdf2 = dist2.cdf(0.001);
+      expect(cdf2).toBeGreaterThan(0);
+      expect(cdf2).toBeLessThan(1);
+    });
+
+    it('should handle inverseCDF with extreme parameter combinations', () => {
+      // These combinations trigger different paths in Newton-Raphson
+      const dist1 = new BetaDistribution(0.001, 0.001);
+      const x1 = dist1.inverseCDF(0.5);
+      expect(x1).toBeGreaterThan(0);
+      expect(x1).toBeLessThan(1);
+
+      const dist2 = new BetaDistribution(200, 200);
+      const x2 = dist2.inverseCDF(0.9999);
+      expect(x2).toBeGreaterThan(0.5);
+      expect(x2).toBeLessThan(1);
+    });
+
+    it('should handle CDF calculations that exercise all continued fraction branches', () => {
+      // Test a wide range to hit different numerical paths
+      const testCases = [
+        { alpha: 0.5, beta: 0.5, x: 0.5 },
+        { alpha: 0.1, beta: 10, x: 0.01 },
+        { alpha: 10, beta: 0.1, x: 0.99 },
+        { alpha: 100, beta: 100, x: 0.49 },
+        { alpha: 100, beta: 100, x: 0.51 },
+        { alpha: 0.01, beta: 0.01, x: 0.5 }
+      ];
+
+      testCases.forEach(({ alpha, beta, x }) => {
+        const dist = new BetaDistribution(alpha, beta);
+        const cdf = dist.cdf(x);
+        expect(cdf).toBeGreaterThanOrEqual(0);
+        expect(cdf).toBeLessThanOrEqual(1);
+      });
+    });
   });
 });

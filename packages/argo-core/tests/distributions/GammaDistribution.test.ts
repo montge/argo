@@ -575,5 +575,60 @@ describe('GammaDistribution', () => {
       expect(isFinite(result)).toBe(true);
       expect(result).toBeGreaterThan(0);
     });
+
+    it('should handle inverseCDF that causes Newton-Raphson to break on pdf=0', () => {
+      // Test with parameters that might cause pdf(x) = 0 during iteration
+      const dist = new GammaDistribution(0.01, 1);
+      const x = dist.inverseCDF(0.999999);
+      expect(x).toBeGreaterThan(0);
+      expect(isFinite(x)).toBe(true);
+    });
+
+    it('should handle regularizedGammaP with x=0', () => {
+      // Test explicit x=0 case
+      const dist = new GammaDistribution(2, 1);
+      const cdf = dist.cdf(0);
+      expect(cdf).toBe(0);
+    });
+
+    it('should handle continued fraction numerical stability checks', () => {
+      // Use parameters that stress the continued fraction algorithm
+      const dist = new GammaDistribution(50, 1);
+
+      // Multiple evaluations to exercise different code paths including numerical stability
+      for (let x = 50; x < 100; x += 5) {
+        const cdf = dist.cdf(x);
+        expect(cdf).toBeGreaterThanOrEqual(0);
+        expect(cdf).toBeLessThanOrEqual(1);
+        expect(isFinite(cdf)).toBe(true);
+      }
+    });
+
+    it('should handle extreme shape/rate combinations', () => {
+      // Extreme parameters stress different numerical paths
+      const dist1 = new GammaDistribution(100, 0.01);
+      const cdf1 = dist1.cdf(10000);
+      expect(isFinite(cdf1)).toBe(true);
+      expect(cdf1).toBeGreaterThanOrEqual(0);
+      expect(cdf1).toBeLessThanOrEqual(1);
+
+      const dist2 = new GammaDistribution(0.001, 100);
+      const cdf2 = dist2.cdf(0.00001);
+      expect(isFinite(cdf2)).toBe(true);
+      expect(cdf2).toBeGreaterThanOrEqual(0);
+      expect(cdf2).toBeLessThanOrEqual(1);
+    });
+
+    it('should handle inverseCDF with wide range of extreme probabilities', () => {
+      const dist = new GammaDistribution(0.001, 1);
+
+      // Test a range that might trigger Newton-Raphson edge cases
+      const probabilities = [0.0001, 0.001, 0.5, 0.999, 0.9999, 0.99999];
+      probabilities.forEach(p => {
+        const x = dist.inverseCDF(p);
+        expect(x).toBeGreaterThan(0);
+        expect(isFinite(x)).toBe(true);
+      });
+    });
   });
 });
