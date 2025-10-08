@@ -1,6 +1,6 @@
 # Python Support for Argo
 
-**Version:** 2.0
+**Version:** 5.0
 **Last Updated:** 2025-10-07
 
 ## Overview
@@ -291,7 +291,7 @@ def var(data, confidence=0.95):
 
 ## 6. Migration Path
 
-### 6.1 From Legacy Argo to Argo v2.0
+### 6.1 From Legacy Argo to Argo v5.0
 
 Users of original Argo (Excel 2007-2016) have **three** migration paths:
 
@@ -302,7 +302,7 @@ Original Argo (Excel DNA)
 ┌────────┴────────────────────────────────┐
 │                                          │
 v                                          v
-Argo v2.0 Add-in                   Argo Python Package
+Argo v5.0 Add-in                   Argo Python Package
 (Office.js)                        (Python in Excel)
 - Full feature parity              - Core features only
 - Rich UI experience               - Formula-based
@@ -317,7 +317,7 @@ Argo v2.0 Add-in                   Argo Python Package
 
 ### 6.2 Function Mapping
 
-**Legacy Argo → Argo v2.0 (Office.js):**
+**Legacy Argo → Argo v5.0 (Office.js):**
 ```
 =ARGO.NORMAL(mean, std)  →  =ARGO.NORMAL(mean, std)  [Unchanged]
 =ARGO.TRIANGULAR(a,b,c)  →  =ARGO.TRIANGULAR(a,b,c)  [Unchanged]

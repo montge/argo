@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Argo v2.0** is a Monte Carlo simulation add-in for Microsoft Excel (Office 365), rebuilt from scratch using modern web technologies (TypeScript, React, Office.js). This is a **modern rebuild** - the original Argo (v1.x) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365, and this project recreates it using AI assistance based on available documentation.
+**Argo v5.0** is a Monte Carlo simulation add-in for Microsoft Excel (Office 365), rebuilt from scratch using modern web technologies (TypeScript, React, Office.js). This is a **modern rebuild** - the original Argo (v1.0 through v4.3.1) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365, and this project recreates it using AI assistance based on available documentation.
 
 **Key Technologies:**
 - TypeScript 5.x with strict type checking

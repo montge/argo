@@ -1,6 +1,6 @@
 # Multi-User Collaboration Guide for Argo
 
-**Version:** 2.0
+**Version:** 5.0
 **Last Updated:** 2025-10-07
 
 This document provides guidelines for multiple developers (including AI assistants like Claude Code) working simultaneously on the Argo project.

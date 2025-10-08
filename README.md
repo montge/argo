@@ -12,14 +12,14 @@
 
 ## ⚠️ Important Notice: Modern Rebuild with AI
 
-**This project represents a modern rebuild using Claude Code (AI) to recreate Argo based on available documentation.** The original Argo (v1.x) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365. This rebuild targets Office 365 Excel with contemporary web technologies while maintaining the spirit and functionality of the original.
+**This project represents a modern rebuild using Claude Code (AI) to recreate Argo based on available documentation.** The original Argo (v1.0 through v4.3.1) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365. This rebuild targets Office 365 Excel with contemporary web technologies while maintaining the spirit and functionality of the original.
 
 **Original Argo:**
 - Platform: Excel 2007-2016 (32-bit)
 - Technology: .NET, ExcelDNA, VSTO
 - Status: No longer under active development
 
-**Argo v2.0 (This Project):**
+**Argo v5.0 (This Project):**
 - Platform: Office 365 Excel (Desktop + Web)
 - Technology: TypeScript, React, Office.js
 - Status: Active development with AI assistance
@@ -177,7 +177,7 @@ This project is licensed under the **Apache License 2.0** - see [LICENSE.md](LIC
 
 ### Open Source Dependencies
 
-Argo v2.0 builds upon these excellent open-source libraries:
+Argo v5.0 builds upon these excellent open-source libraries:
 
 - **React** (MIT License) - UI framework
 - **TypeScript** (Apache 2.0) - Language
@@ -187,7 +187,7 @@ Argo v2.0 builds upon these excellent open-source libraries:
 
 See [NOTICE.md](NOTICE.md) for complete attribution.
 
-### Legacy Argo Dependencies (v1.x)
+### Legacy Argo Dependencies (v1.0 through v4.3.1)
 
 The original Argo used:
 - **ExcelDNA** (MIT License) - .NET-Excel integration
@@ -203,7 +203,7 @@ The original Argo used:
 - [Argo Wiki](https://github.com/boozallen/argo/wiki)
 - [Argo User Group](https://groups.google.com/forum/#!forum/argo-users)
 
-### Argo v2.0 (Office 365)
+### Argo v5.0 (Office 365)
 - [GitHub Repository](https://github.com/boozallen/argo)
 - [Issue Tracker](https://github.com/boozallen/argo/issues)
 - [Discussions](https://github.com/boozallen/argo/discussions)
@@ -215,7 +215,7 @@ The original Argo used:
 ### Original Argo
 Developed by **[Booz Allen Hamilton](http://www.boozallen.com/)** and released as open source.
 
-### Argo v2.0
+### Argo v5.0
 Reverse engineered and rebuilt with assistance from **Claude Code (AI)** based on available documentation, user guides, and feature descriptions from the original project.
 
 **Special Thanks:**

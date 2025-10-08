@@ -1,6 +1,6 @@
 # Argo CLI Tool
 
-**Version:** 2.0
+**Version:** 5.0
 **Last Updated:** 2025-10-07
 
 ## Overview

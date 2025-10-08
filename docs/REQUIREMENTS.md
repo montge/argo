@@ -1,13 +1,13 @@
 # Argo for Office 365 Excel - Requirements Document
 
-**Version:** 2.0
+**Version:** 5.0
 **Target Platform:** Office 365 Excel (Modern Web + Desktop)
 **Status:** Modern Rebuild Phase
 **Last Updated:** 2025-10-07
 
 ## Acknowledgment
 
-This project represents a **modern rebuild using Claude Code (AI)** to recreate Argo based on available documentation. The original Argo (v1.x) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365, and this document captures requirements for a rebuild targeting Office 365.
+This project represents a **modern rebuild using Claude Code (AI)** to recreate Argo based on available documentation. The original Argo (v1.0 through v4.3.1) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365, and this document captures requirements for a rebuild targeting Office 365.
 
 ---
 

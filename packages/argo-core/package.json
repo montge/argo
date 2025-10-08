@@ -1,6 +1,6 @@
 {
   "name": "@argo/core",
-  "version": "2.0.0-alpha.1",
+  "version": "5.0.0-alpha.1",
   "description": "Core Monte Carlo simulation engine and statistical functions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

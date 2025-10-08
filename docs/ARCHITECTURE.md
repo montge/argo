@@ -1,11 +1,11 @@
 # Argo for Office 365 Excel - Architecture Document
 
-**Version:** 2.0
+**Version:** 5.0
 **Last Updated:** 2025-10-07
 
 ## Overview
 
-This document describes the technical architecture for Argo v2.0, a complete rewrite targeting Office 365 Excel using modern web technologies. This is a **modern rebuild using Claude Code (AI)** - the original Argo (v1.x) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365, and this rebuild is based on available documentation from the original Argo project.
+This document describes the technical architecture for Argo v5.0, a complete rewrite targeting Office 365 Excel using modern web technologies. This is a **modern rebuild using Claude Code (AI)** - the original Argo (v1.0 through v4.3.1) was built for Excel 2007-2016 using .NET technologies that are not suitable for modern Office 365, and this rebuild is based on available documentation from the original Argo project.
 
 ---
 
@@ -13,7 +13,7 @@ This document describes the technical architecture for Argo v2.0, a complete rew
 
 ### 1.0 Key Advantage: Web-Based Architecture
 
-**Argo v2.0 uses modern Office.js Add-ins, which are fundamentally different from traditional compiled plugins:**
+**Argo v5.0 uses modern Office.js Add-ins, which are fundamentally different from traditional compiled plugins:**
 
 ✅ **Web Application** (not compiled executable)
 - HTML/CSS/JavaScript hosted on a web server

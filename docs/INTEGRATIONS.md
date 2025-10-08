@@ -1,11 +1,11 @@
 # Argo Integrations - Project Management Systems
 
-**Version:** 2.0
+**Version:** 5.0
 **Last Updated:** 2025-10-07
 
 ## Overview
 
-Argo v2.0 extends beyond Excel to integrate with major project management platforms, enabling Monte Carlo simulation directly on project schedules, risks, and resource data.
+Argo v5.0 extends beyond Excel to integrate with major project management platforms, enabling Monte Carlo simulation directly on project schedules, risks, and resource data.
 
 ---
 
@@ -796,4 +796,4 @@ describe('Project 365 Integration (E2E)', () => {
 
 ---
 
-**Summary:** Argo v2.0 will integrate with major PM platforms, providing Monte Carlo simulation where teams already work. The adapter pattern ensures consistent functionality across all platforms.
+**Summary:** Argo v5.0 will integrate with major PM platforms, providing Monte Carlo simulation where teams already work. The adapter pattern ensures consistent functionality across all platforms.

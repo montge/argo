@@ -1,17 +1,17 @@
 # Argo Deployment Guide
 
-**Version:** 2.0
+**Version:** 5.0
 **Last Updated:** 2025-10-07
 
 ## Overview
 
-This document explains how Argo v2.0 is deployed and installed. **Modern Office Add-ins are fundamentally different from traditional COM/VSTO plugins.**
+This document explains how Argo v5.0 is deployed and installed. **Modern Office Add-ins are fundamentally different from traditional COM/VSTO plugins.**
 
 ---
 
 ## Important: Web-Based vs Compiled Add-ins
 
-### Argo v2.0 (Office.js Add-in) - Web-Based ✅
+### Argo v5.0 (Office.js Add-in) - Web-Based ✅
 
 **What it is:**
 - A web application (HTML/CSS/JavaScript/TypeScript)
@@ -662,7 +662,7 @@ jobs:
 
 ## Summary: Key Differences
 
-### Office.js Add-ins (Argo v2.0) ✅
+### Office.js Add-ins (Argo v5.0) ✅
 
 - **Format:** Web app (HTML/JS/CSS)
 - **Hosting:** Web server or CDN
