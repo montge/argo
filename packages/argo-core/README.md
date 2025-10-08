@@ -4,12 +4,27 @@ Core Monte Carlo simulation engine and probability distributions for Argo.
 
 ## Status
 
-🚧 **Alpha Development** - First distribution implemented with TDD
+🚀 **Alpha v5.0.0-alpha.1** - Sprint 2 Complete! 10 distributions with 97%+ coverage
 
-- ✅ Normal Distribution (fully tested)
-- ⏳ 34 more distributions to come
-- ⏳ Simulation engine
-- ⏳ Statistical functions
+**Sprint 1 & 2 Complete (10 Continuous Distributions):**
+- ✅ Normal Distribution (100% coverage)
+- ✅ Uniform Distribution (100% coverage)
+- ✅ Triangular Distribution (100% coverage)
+- ✅ Log-Normal Distribution (100% coverage)
+- ✅ Exponential Distribution (100% coverage)
+- ✅ Beta Distribution (93% coverage)
+- ✅ Gamma Distribution (96% coverage)
+- ✅ Weibull Distribution (95% coverage)
+- ✅ Pareto Distribution (100% coverage)
+- ✅ PERT Distribution (100% coverage)
+
+**Test Coverage:** 97.28% statements, 90.67% branches (504 tests)
+
+**Coming Next (Sprint 3 - Discrete Distributions):**
+- ⏳ Binomial Distribution
+- ⏳ Poisson Distribution
+- ⏳ Geometric Distribution
+- ⏳ Hypergeometric Distribution
 
 ## Installation
 
@@ -19,7 +34,7 @@ npm install @argo/core
 
 ## Usage
 
-### Basic Example
+### Basic Example - Normal Distribution
 
 ```typescript
 import { NormalDistribution, SimpleRNG } from '@argo/core';
@@ -42,6 +57,36 @@ const prob = dist.cdf(115); // P(X ≤ 115) ≈ 0.8413
 
 // Calculate quantiles (inverse CDF)
 const p95 = dist.inverseCDF(0.95); // 95th percentile ≈ 124.67
+```
+
+### More Distribution Examples
+
+```typescript
+import {
+  TriangularDistribution,
+  BetaDistribution,
+  PERTDistribution,
+  ParetoDistribution,
+  SimpleRNG
+} from '@argo/core';
+
+const rng = new SimpleRNG(42);
+
+// Triangular: common in project planning (min, mode, max)
+const triangular = new TriangularDistribution(5, 8, 15);
+console.log(`Task duration: ${triangular.sample(rng)} days`);
+
+// PERT: smooth alternative to Triangular for project management
+const pert = new PERTDistribution(5, 8, 15);
+console.log(`PERT estimate: ${pert.sample(rng)} days`);
+
+// Beta: flexible bounded distribution (0 to 1)
+const beta = new BetaDistribution(2, 5);
+console.log(`Success rate: ${(beta.sample(rng) * 100).toFixed(1)}%`);
+
+// Pareto: 80/20 rule, wealth distribution
+const pareto = new ParetoDistribution(1, 1.16); // 80/20 rule
+console.log(`Income level: $${pareto.sample(rng).toFixed(0)}`);
 ```
 
 ### Monte Carlo Simulation
@@ -189,15 +234,19 @@ npm run test:watch
 
 ## Roadmap
 
-### Phase 1: Core Distributions (In Progress)
-- [x] Normal
-- [ ] Uniform
-- [ ] Triangular
-- [ ] Log-Normal
-- [ ] Exponential
-- [ ] Beta
-- [ ] Gamma
-- [ ] Weibull
+### Sprint 1 & 2: Continuous Distributions ✅ COMPLETE
+- [x] Normal, Uniform, Triangular
+- [x] Log-Normal, Exponential
+- [x] Beta, Gamma, Weibull
+- [x] Pareto, PERT
+- [x] 97%+ test coverage
+- [x] 504 comprehensive tests
+
+### Sprint 3: Discrete Distributions (Current)
+- [ ] Binomial
+- [ ] Poisson
+- [ ] Geometric
+- [ ] Hypergeometric
 
 ### Phase 2: Statistical Functions
 - [ ] Descriptive statistics (mean, median, std dev, etc.)
