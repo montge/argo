@@ -47,3 +47,11 @@ export {
   iqr,
   percentiles,
 } from './stats/percentiles';
+
+// Statistical Functions - Confidence Intervals
+export {
+  confidenceIntervalNormal,
+  confidenceIntervalBootstrap,
+  marginOfError,
+  sampleSize,
+} from './stats/intervals';
