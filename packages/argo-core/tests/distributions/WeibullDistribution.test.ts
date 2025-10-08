@@ -463,8 +463,8 @@ describe('WeibullDistribution', () => {
       }
 
       const elapsed = Date.now() - start;
-      // Should generate 100k samples in under 200ms (relaxed for CI environments)
-      expect(elapsed).toBeLessThan(200);
+      // Should generate 100k samples in under 500ms (relaxed for Windows CI)
+      expect(elapsed).toBeLessThan(500);
     });
   });
 
