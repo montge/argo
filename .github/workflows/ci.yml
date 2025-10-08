@@ -34,8 +34,11 @@ jobs:
       run: npm run lint
       continue-on-error: true
 
-    - name: Build packages
-      run: npm run build --workspaces
+    - name: Build argo-core
+      run: npm run build --workspace=@argo/core
+
+    - name: Build argo-cli
+      run: npm run build --workspace=@argo/cli
 
     - name: Run tests
       run: npm test --workspaces
