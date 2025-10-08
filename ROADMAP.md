@@ -246,11 +246,20 @@
   - [ ] Correlated sampling
   - [ ] Tests (TDD)
 
+- [ ] **Node.js/npm Version Verification**
+  - [ ] Update package.json engines to Node >=20.0.0 (LTS)
+  - [ ] Update @types/node to match Node 22
+  - [ ] Verify all tests pass with Node 22.x and npm 10.x
+  - [ ] Document supported Node versions in README
+  - [ ] Add CI matrix test for Node 20.x and 22.x
+  - [ ] Update .nvmrc if present
+
 **Sprint 5 Success Criteria:**
 - Complete simulation engine
 - 10,000 iterations in <1 second (simple model)
 - Correlation support working
 - All tests passing
+- Node 20.x and 22.x compatibility verified
 
 ---
 
