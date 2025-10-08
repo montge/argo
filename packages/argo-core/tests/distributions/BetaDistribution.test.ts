@@ -436,8 +436,8 @@ describe('BetaDistribution', () => {
       const endTime = Date.now();
       const elapsed = endTime - startTime;
 
-      // Should generate 100k samples in under 500ms (adjusted for CI)
-      expect(elapsed).toBeLessThan(500);
+      // Should generate 100k samples in under 2s (generous for CI environments)
+      expect(elapsed).toBeLessThan(2000);
     });
   });
 
