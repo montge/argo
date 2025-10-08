@@ -10,6 +10,7 @@ export { ExponentialDistribution } from './distributions/ExponentialDistribution
 export { BetaDistribution } from './distributions/BetaDistribution';
 export { GammaDistribution } from './distributions/GammaDistribution';
 export { WeibullDistribution } from './distributions/WeibullDistribution';
+export { ParetoDistribution } from './distributions/ParetoDistribution';
 
 // Utilities
 export { SimpleRNG } from './utils/SimpleRNG';
