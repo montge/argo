@@ -6,6 +6,12 @@ export interface RandomNumberGenerator {
    * Generate a random number between 0 and 1
    */
   next(): number;
+
+  /**
+   * Set the random seed for reproducibility
+   * @param seed - Seed value
+   */
+  setSeed(seed: number): void;
 }
 
 /**

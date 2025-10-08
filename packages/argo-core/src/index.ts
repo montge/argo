@@ -1,5 +1,6 @@
 // Types
 export * from './types/Distribution';
+export * from './types/Simulation';
 
 // Continuous Distributions
 export { NormalDistribution } from './distributions/NormalDistribution';
@@ -68,3 +69,6 @@ export {
 
 // Statistical Functions - Distribution Fitting
 export { fitNormal, fitLogNormal, goodnessOfFit } from './stats/fitting';
+
+// Simulation Engine
+export { MonteCarloEngine } from './simulation/MonteCarloEngine';

@@ -44,4 +44,12 @@ export class SimpleRNG implements RandomNumberGenerator {
     } while (!isFinite(z));
     return z;
   }
+
+  /**
+   * Set the random seed for reproducibility
+   * @param seed - Seed value
+   */
+  setSeed(seed: number): void {
+    this.state = seed >>> 0;
+  }
 }
