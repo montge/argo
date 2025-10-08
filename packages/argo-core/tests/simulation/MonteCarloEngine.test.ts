@@ -643,4 +643,299 @@ describe('MonteCarloEngine', () => {
       expect(() => engine.simulate(config)).not.toThrow();
     });
   });
+
+  describe('simulate - correlated variables', () => {
+    it('should accept correlation matrix', () => {
+      const rng = new SimpleRNG(12345);
+      const engine = new MonteCarloEngine(rng);
+
+      const config: SimulationConfig = {
+        iterations: 100,
+        variables: [
+          {
+            name: 'X',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+          {
+            name: 'Y',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+        ],
+        correlations: {
+          'X-Y': 0.7,
+        },
+      };
+
+      // Should not throw error
+      expect(() => engine.simulate(config)).not.toThrow();
+    });
+
+    it('should generate correlated samples', () => {
+      const rng = new SimpleRNG(12345);
+      const engine = new MonteCarloEngine(rng);
+
+      const config: SimulationConfig = {
+        iterations: 1000,
+        variables: [
+          {
+            name: 'X',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+          {
+            name: 'Y',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+        ],
+        correlations: {
+          'X-Y': 0.8, // Strong positive correlation
+        },
+      };
+
+      const result = engine.simulate(config);
+
+      // Calculate correlation between X and Y samples
+      const xSamples = result.samples.X;
+      const ySamples = result.samples.Y;
+
+      const xMean = xSamples.reduce((a, b) => a + b) / xSamples.length;
+      const yMean = ySamples.reduce((a, b) => a + b) / ySamples.length;
+
+      let numerator = 0;
+      let xDenom = 0;
+      let yDenom = 0;
+
+      for (let i = 0; i < xSamples.length; i++) {
+        const xDiff = xSamples[i] - xMean;
+        const yDiff = ySamples[i] - yMean;
+        numerator += xDiff * yDiff;
+        xDenom += xDiff * xDiff;
+        yDenom += yDiff * yDiff;
+      }
+
+      const correlation = numerator / Math.sqrt(xDenom * yDenom);
+
+      // Correlation should be close to 0.8
+      expect(correlation).toBeGreaterThan(0.7);
+      expect(correlation).toBeLessThan(0.9);
+    });
+
+    it('should handle negative correlation', () => {
+      const rng = new SimpleRNG(12345);
+      const engine = new MonteCarloEngine(rng);
+
+      const config: SimulationConfig = {
+        iterations: 1000,
+        variables: [
+          {
+            name: 'A',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+          {
+            name: 'B',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+        ],
+        correlations: {
+          'A-B': -0.7, // Strong negative correlation
+        },
+      };
+
+      const result = engine.simulate(config);
+
+      // Calculate correlation
+      const aSamples = result.samples.A;
+      const bSamples = result.samples.B;
+
+      const aMean = aSamples.reduce((a, b) => a + b) / aSamples.length;
+      const bMean = bSamples.reduce((a, b) => a + b) / bSamples.length;
+
+      let numerator = 0;
+      let aDenom = 0;
+      let bDenom = 0;
+
+      for (let i = 0; i < aSamples.length; i++) {
+        const aDiff = aSamples[i] - aMean;
+        const bDiff = bSamples[i] - bMean;
+        numerator += aDiff * bDiff;
+        aDenom += aDiff * aDiff;
+        bDenom += bDiff * bDiff;
+      }
+
+      const correlation = numerator / Math.sqrt(aDenom * bDenom);
+
+      // Correlation should be close to -0.7
+      expect(correlation).toBeLessThan(-0.6);
+      expect(correlation).toBeGreaterThan(-0.8);
+    });
+
+    it('should handle multiple correlated variables', () => {
+      const rng = new SimpleRNG(12345);
+      const engine = new MonteCarloEngine(rng);
+
+      const config: SimulationConfig = {
+        iterations: 1000,
+        variables: [
+          {
+            name: 'X',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+          {
+            name: 'Y',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+          {
+            name: 'Z',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+        ],
+        correlations: {
+          'X-Y': 0.6,
+          'X-Z': 0.4,
+          'Y-Z': 0.5,
+        },
+      };
+
+      const result = engine.simulate(config);
+
+      expect(result.samples.X).toHaveLength(1000);
+      expect(result.samples.Y).toHaveLength(1000);
+      expect(result.samples.Z).toHaveLength(1000);
+    });
+
+    it('should throw error for invalid correlation coefficient > 1', () => {
+      const engine = new MonteCarloEngine();
+
+      const config: SimulationConfig = {
+        iterations: 100,
+        variables: [
+          {
+            name: 'X',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+          {
+            name: 'Y',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+        ],
+        correlations: {
+          'X-Y': 1.5, // Invalid: > 1
+        },
+      };
+
+      expect(() => engine.simulate(config)).toThrow('Correlation coefficient must be between -1 and 1');
+    });
+
+    it('should throw error for invalid correlation coefficient < -1', () => {
+      const engine = new MonteCarloEngine();
+
+      const config: SimulationConfig = {
+        iterations: 100,
+        variables: [
+          {
+            name: 'X',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+          {
+            name: 'Y',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+        ],
+        correlations: {
+          'X-Y': -1.5, // Invalid: < -1
+        },
+      };
+
+      expect(() => engine.simulate(config)).toThrow('Correlation coefficient must be between -1 and 1');
+    });
+
+    it('should throw error for correlation on non-input variable', () => {
+      const engine = new MonteCarloEngine();
+
+      const config: SimulationConfig = {
+        iterations: 100,
+        variables: [
+          {
+            name: 'X',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+          {
+            name: 'Y',
+            type: 'formula',
+            formula: 'X * 2',
+          },
+        ],
+        correlations: {
+          'X-Y': 0.5, // Y is not an input variable
+        },
+      };
+
+      expect(() => engine.simulate(config)).toThrow('Correlation can only be applied to input variables');
+    });
+
+    it('should throw error for correlation on undefined variable', () => {
+      const engine = new MonteCarloEngine();
+
+      const config: SimulationConfig = {
+        iterations: 100,
+        variables: [
+          {
+            name: 'X',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+        ],
+        correlations: {
+          'X-Z': 0.5, // Z doesn't exist
+        },
+      };
+
+      expect(() => engine.simulate(config)).toThrow('Correlation references undefined variable');
+    });
+
+    it('should throw error for non-positive definite correlation matrix', () => {
+      const engine = new MonteCarloEngine();
+
+      const config: SimulationConfig = {
+        iterations: 100,
+        variables: [
+          {
+            name: 'X',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+          {
+            name: 'Y',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+          {
+            name: 'Z',
+            type: 'input',
+            distribution: new NormalDistribution(0, 1),
+          },
+        ],
+        correlations: {
+          'X-Y': 0.9,
+          'X-Z': 0.9,
+          'Y-Z': -0.9, // This creates a non-positive definite matrix
+        },
+      };
+
+      expect(() => engine.simulate(config)).toThrow('Correlation matrix is not positive definite');
+    });
+  });
 });
