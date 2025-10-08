@@ -29,6 +29,9 @@ RUN npm install
 # Copy source code
 COPY . .
 
+# Build the argo-core package
+RUN npm run build
+
 # Register tslab with Jupyter
 RUN tslab install --python=python3
 

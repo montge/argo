@@ -1,10 +1,10 @@
 #!/bin/bash
-# Quick start script for Argo Jupyter notebooks
+# Quick start script for Argo Jupyter notebooks with virtual environment
 
 set -e
 
-echo "🚀 Argo Notebook Quick Start"
-echo "=============================="
+echo "🚀 Argo Notebook Quick Start (with Virtual Environment)"
+echo "======================================================"
 echo ""
 
 # Check if we're in the right directory
@@ -42,32 +42,24 @@ echo ""
 echo "📦 Installing npm dependencies..."
 npm install
 
-# Check for tslab
-if ! command -v tslab &> /dev/null; then
-    echo ""
-    echo "📦 Installing tslab (TypeScript kernel for Jupyter)..."
-    npm install -g tslab
+# Build the argo-core package
+echo ""
+echo "🔨 Building argo-core package..."
+npm run build
 
-    echo "📝 Registering tslab with Jupyter..."
-    tslab install --python=python3
-else
-    echo "✅ tslab already installed"
+# Check if virtual environment exists
+if [ ! -d "notebooks/.venv" ]; then
+    echo ""
+    echo "⚠️  Virtual environment not found. Running setup..."
+    echo "   This will create notebooks/.venv and install dependencies"
+    echo ""
+    ./notebooks/setup-venv.sh
 fi
 
-# Check for Jupyter
-if ! command -v jupyter &> /dev/null; then
-    echo ""
-    echo "📦 Installing Jupyter..."
-    pip3 install --user jupyter notebook
-
-    # Add user bin to PATH if needed
-    if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-        echo "⚠️  Adding ~/.local/bin to PATH"
-        export PATH="$HOME/.local/bin:$PATH"
-    fi
-else
-    echo "✅ Jupyter already installed"
-fi
+# Activate virtual environment
+echo ""
+echo "🔄 Activating virtual environment..."
+source notebooks/.venv/bin/activate
 
 # Verify tslab kernel is registered
 echo ""
@@ -76,7 +68,7 @@ if jupyter kernelspec list | grep -q tslab; then
     echo "✅ TypeScript kernel (tslab) registered"
 else
     echo "📝 Registering TypeScript kernel..."
-    tslab install --python=python3
+    tslab install --python=notebooks/.venv/bin/python
 fi
 
 # Start Jupyter

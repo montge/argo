@@ -1,0 +1,47 @@
+{
+  "iterations": 10000,
+  "seed": 42,
+  "variables": [
+    {
+      "name": "Revenue",
+      "type": "input",
+      "description": "Annual revenue",
+      "units": "$",
+      "distribution": {
+        "type": "Normal",
+        "parameters": {
+          "mean": 1000000,
+          "stddev": 150000
+        }
+      }
+    },
+    {
+      "name": "Cost",
+      "type": "input",
+      "description": "Annual costs",
+      "units": "$",
+      "distribution": {
+        "type": "Normal",
+        "parameters": {
+          "mean": 700000,
+          "stddev": 100000
+        }
+      }
+    },
+    {
+      "name": "Profit",
+      "type": "formula",
+      "description": "Net profit",
+      "units": "$",
+      "formula": "Revenue - Cost"
+    }
+  ],
+  "correlations": {
+    "Revenue-Cost": 0.3
+  },
+  "outputs": [
+    "Revenue",
+    "Cost",
+    "Profit"
+  ]
+}

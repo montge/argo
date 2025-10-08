@@ -18,52 +18,65 @@ A comprehensive tutorial covering:
 ### Prerequisites
 
 - Node.js 20.x or 22.x (LTS)
-- Python 3.7+ with Jupyter
+- Python 3.7+ 
 - npm 10.x
 
-### Installation
+### Option 1: Automated Setup (Recommended)
+
+1. **Run the setup script from the project root:**
+   ```bash
+   cd /path/to/argo
+   ./notebooks/setup-venv.sh
+   ```
+
+2. **Start the notebook server:**
+   ```bash
+   ./notebooks/start-notebook.sh
+   ```
+
+The setup script will:
+- Create a Python virtual environment in `notebooks/.venv`
+- Install Jupyter and required Python packages
+- Install and register tslab (TypeScript kernel)
+- Build the argo-core package
+- Start Jupyter with the tutorial notebook
+
+### Option 2: Manual Setup
 
 1. **Install Argo dependencies:**
    ```bash
    cd /path/to/argo
    npm install
+   npm run build
    ```
 
-2. **Install tslab (TypeScript kernel for Jupyter):**
+2. **Create Python virtual environment:**
+   ```bash
+   python3 -m venv notebooks/.venv
+   source notebooks/.venv/bin/activate
+   ```
+
+3. **Install Python requirements:**
+   ```bash
+   pip install -r notebooks/requirements.txt
+   ```
+
+4. **Install tslab (TypeScript kernel for Jupyter):**
    ```bash
    npm install -g tslab
+   tslab install --python=notebooks/.venv/bin/python
    ```
 
-3. **Register tslab with Jupyter:**
+5. **Start Jupyter:**
    ```bash
-   tslab install --python=python3
-   ```
-
-4. **Verify installation:**
-   ```bash
-   jupyter kernelspec list
-   ```
-
-   You should see `tslab` in the output:
-   ```
-   Available kernels:
-     python3    /usr/local/share/jupyter/kernels/python3
-     tslab      /usr/local/share/jupyter/kernels/tslab
+   source notebooks/.venv/bin/activate
+   jupyter notebook notebooks/argo-tutorial.ipynb
    ```
 
 ### Running the Notebooks
 
-1. **Start Jupyter from the project root:**
-   ```bash
-   cd /path/to/argo
-   jupyter notebook
-   ```
-
-2. **Navigate to the notebooks directory** and open `argo-tutorial.ipynb`
-
-3. **Select the TypeScript kernel** (tslab) if prompted
-
-4. **Run cells** using `Shift+Enter` or the Run button
+1. **Select the TypeScript kernel** (tslab) if prompted
+2. **Run cells** using `Shift+Enter` or the Run button
 
 ## 🐳 Running in Docker (Optional)
 

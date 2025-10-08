@@ -8,6 +8,8 @@
 
 import { Command } from 'commander';
 import { executeDistributionsCommand } from './commands/distributions';
+import { executeGenerateCommand } from './commands/generate';
+import { executeValidateCommand } from './commands/validate';
 
 const program = new Command();
 
@@ -23,6 +25,26 @@ program
   .description('List all available probability distributions')
   .action(() => {
     executeDistributionsCommand();
+  });
+
+// Generate command
+program
+  .command('generate <output>')
+  .alias('gen')
+  .description('Generate a template simulation configuration file')
+  .option('-f, --format <format>', 'Output format (json or yaml)', 'json')
+  .option('-o, --overwrite', 'Overwrite existing file', false)
+  .action((output: string, options: { format?: string; overwrite?: boolean }) => {
+    executeGenerateCommand(output, options);
+  });
+
+// Validate command
+program
+  .command('validate <config>')
+  .alias('val')
+  .description('Validate a simulation configuration file')
+  .action((config: string) => {
+    executeValidateCommand(config);
   });
 
 // Parse command line arguments
