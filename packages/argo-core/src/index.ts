@@ -22,3 +22,19 @@ export { HypergeometricDistribution } from './distributions/HypergeometricDistri
 // Utilities
 export { SimpleRNG } from './utils/SimpleRNG';
 export { erf, erfc, erfInv } from './utils/erfUtils';
+
+// Statistical Functions - Descriptive Statistics
+export {
+  mean,
+  median,
+  mode,
+  min,
+  max,
+  range,
+  variance,
+  standardDeviation,
+  geometricMean,
+  harmonicMean,
+  skewness,
+  kurtosis,
+} from './stats/descriptive';
