@@ -6,7 +6,7 @@
 [![CI](https://github.com/montge/argo/workflows/CI%20-%20Build%20and%20Test/badge.svg?branch=office365-linux-rebuild)](https://github.com/montge/argo/actions)
 [![codecov](https://codecov.io/gh/montge/argo/branch/office365-linux-rebuild/graph/badge.svg)](https://codecov.io/gh/montge/argo)
 
-**Argo** is a powerful Monte Carlo simulation add-in for Microsoft Excel, enabling interactive decision support and risk analysis. This is version 2.0, a complete rewrite targeting **Office 365 Excel** using modern web technologies.
+**Argo** is a powerful Monte Carlo simulation add-in for Microsoft Excel, enabling interactive decision support and risk analysis. This is version 5.0, a complete rewrite targeting **Office 365 Excel** using modern web technologies.
 
 ---
 
@@ -235,7 +235,7 @@ Reverse engineered and rebuilt with assistance from **Claude Code (AI)** based o
 
 ## 🗺️ Roadmap
 
-### MVP (v2.0-alpha)
+### MVP (v5.0-alpha)
 - [ ] 20+ core probability distributions
 - [ ] 30+ statistical functions
 - [ ] Basic Monte Carlo simulation engine
@@ -243,7 +243,7 @@ Reverse engineered and rebuilt with assistance from **Claude Code (AI)** based o
 - [ ] Simple output dashboard
 - [ ] Excel Desktop (Windows) support
 
-### Full Release (v2.0)
+### Full Release (v5.0)
 - [ ] All 35+ distributions
 - [ ] All 50+ statistical functions
 - [ ] Rank correlation support

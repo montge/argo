@@ -96,7 +96,7 @@ License: Microsoft Public License (MS-PL)
 
 ## Reverse Engineering Notice
 
-This project (Argo v2.0) is a **reverse engineering effort using Claude Code (AI)** to recreate the functionality of the original Argo based on available documentation. The original source code for Argo (v1.x for Excel 2007-2016) was lost.
+This project (Argo v5.0) is a **reverse engineering effort using Claude Code (AI)** to recreate the functionality of the original Argo based on available documentation. The original source code for Argo (v1.x through v4.x for Excel 2007-2016) was lost.
 
 The implementation in this repository is a clean-room rebuild that:
 - Does not include any original source code
@@ -119,7 +119,7 @@ This project is licensed under the Apache License 2.0. See [LICENSE.md](LICENSE.
 - Released as open source in 2016
 - No longer under active development as of 2022
 
-### Argo v2.0 Team
+### Argo v5.0 Team
 - Reverse engineered with Claude Code (AI) assistance
 - Based on documentation from original project
 - Targeting modern Office 365 Excel platform

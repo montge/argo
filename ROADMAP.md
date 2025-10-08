@@ -511,34 +511,34 @@
 
 ## Release Schedule
 
-### Alpha Release (v2.0.0-alpha.1)
+### Alpha Release (v5.0.0-alpha.1)
 **Target:** End of Sprint 5 (2025-11-11)
 - Core library with 20+ distributions
 - Basic simulation engine
 - CLI tool MVP
 - Documentation
 
-### Beta Release (v2.0.0-beta.1)
+### Beta Release (v5.0.0-beta.1)
 **Target:** End of Sprint 10 (2025-12-16)
 - Excel add-in MVP
 - Full simulation workflow
 - 35+ distributions
 - Statistical functions
 
-### v2.0.0 GA
+### v5.0.0 GA
 **Target:** Q1 2026
 - Production-ready add-in
 - AppSource listing
 - All MVP features
 - Comprehensive documentation
 
-### v2.1.0
+### v5.1.0
 **Target:** Q2 2026
 - PM integrations (Project 365, JIRA)
 - Portfolio simulation
 - Advanced analytics
 
-### v2.2.0
+### v5.2.0
 **Target:** Q3 2026
 - Primavera P6 integration
 - Python in Excel support
