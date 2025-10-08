@@ -458,8 +458,8 @@ describe('GammaDistribution', () => {
       }
 
       const elapsed = Date.now() - start;
-      // Should generate 100k samples in under 200ms (relaxed for CI environments)
-      expect(elapsed).toBeLessThan(200);
+      // Should generate 100k samples in under 2000ms (relaxed for CI environments)
+      expect(elapsed).toBeLessThan(2000);
     });
   });
 

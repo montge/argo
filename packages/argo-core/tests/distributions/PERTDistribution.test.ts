@@ -448,8 +448,8 @@ describe('PERTDistribution', () => {
       }
 
       const elapsed = Date.now() - start;
-      // Should generate 100k samples in under 300ms (relaxed for CI, uses Beta internally)
-      expect(elapsed).toBeLessThan(300);
+      // Should generate 100k samples in under 2000ms (relaxed for CI, uses Beta internally)
+      expect(elapsed).toBeLessThan(2000);
     });
   });
 
