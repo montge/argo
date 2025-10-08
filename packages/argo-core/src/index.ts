@@ -9,6 +9,7 @@ export { LogNormalDistribution } from './distributions/LogNormalDistribution';
 export { ExponentialDistribution } from './distributions/ExponentialDistribution';
 export { BetaDistribution } from './distributions/BetaDistribution';
 export { GammaDistribution } from './distributions/GammaDistribution';
+export { WeibullDistribution } from './distributions/WeibullDistribution';
 
 // Utilities
 export { SimpleRNG } from './utils/SimpleRNG';
