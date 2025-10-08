@@ -320,6 +320,50 @@
 
 ---
 
+### Sprint 7.5: UI/UX Design & Asset Creation
+**Target Date:** Week of 2025-11-25
+**Duration:** 1 week
+
+- [ ] **Icon Design**
+  - [ ] Create add-in logo (16x16, 32x32, 64x64, 80x80, 128x128)
+  - [ ] Design ribbon command icons (6 commands × 2 sizes: 32x32, 80x80)
+  - [ ] Create distribution type icons (14 distributions × 24x24)
+  - [ ] Design UI state icons (loading, error, success, warning)
+  - [ ] Export in PNG and SVG formats
+
+- [ ] **UI/UX Design**
+  - [ ] Wireframes for all dialogs (Distribution Builder, Dashboard, Settings)
+  - [ ] Color palette aligned with Fluent UI
+  - [ ] Typography system definition
+  - [ ] Component design library
+  - [ ] Accessibility review (WCAG 2.1 AA compliance)
+
+- [ ] **Asset Organization**
+  - [ ] Create assets/ directory structure
+  - [ ] Organize by size and purpose (icons/, logos/, screenshots/)
+  - [ ] Document asset naming conventions
+  - [ ] Set up asset pipeline in build system
+
+- [ ] **AppSource Marketing Materials**
+  - [ ] Hero image mockup (1366x768)
+  - [ ] Screenshot templates (1366x768)
+  - [ ] Promotional graphics
+
+**Sprint 7.5 Success Criteria:**
+- All required icons created and exported
+- Wireframes approved for all major UI components
+- Assets integrated into build pipeline
+- Icon paths ready for manifest.xml
+- Accessibility guidelines documented
+
+**Deliverables:**
+- assets/ directory with all icons
+- Figma/Adobe XD design files
+- Icon specification document
+- Accessibility compliance checklist
+
+---
+
 ## Phase 3: Office.js Add-in (argo-excel)
 
 **Goal:** Excel add-in for Windows/Mac/Web
@@ -345,11 +389,27 @@
   - [ ] Custom functions setup
   - [ ] Tests with Office.js mocks
 
+- [ ] **Accessibility Implementation (NFR-002)**
+  - [ ] Implement keyboard shortcuts
+  - [ ] Add ARIA labels to all interactive elements
+  - [ ] Ensure focus management (visible focus indicators)
+  - [ ] Test with screen readers (NVDA, JAWS)
+  - [ ] Document keyboard navigation
+
+- [ ] **Security & Privacy (NFR-007)**
+  - [ ] Review Office.js permissions in manifest (minimize scope)
+  - [ ] Document data handling (all data stays in Excel, no server transmission)
+  - [ ] Implement secure RNG for simulations
+  - [ ] Draft privacy policy
+  - [ ] Security audit checklist
+
 **Sprint 8 Success Criteria:**
 - Add-in loads in Excel
 - Can read/write cells
 - Basic UI renders
 - Sideloading works
+- Keyboard navigation functional
+- Security review passed
 
 ---
 
@@ -531,6 +591,12 @@
 - AppSource listing
 - All MVP features
 - Comprehensive documentation
+- **Code signing certificate obtained (NFR-008)**
+- **Add-in signed for distribution**
+- **AppSource validation passed**
+- **Security audit completed**
+- **Privacy policy published**
+- **Accessibility audit (WCAG 2.1 AA) passed**
 
 ### v5.1.0
 **Target:** Q2 2026
