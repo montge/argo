@@ -16,6 +16,7 @@ export { PERTDistribution } from './distributions/PERTDistribution';
 // Discrete Distributions
 export { BinomialDistribution } from './distributions/BinomialDistribution';
 export { PoissonDistribution } from './distributions/PoissonDistribution';
+export { GeometricDistribution } from './distributions/GeometricDistribution';
 
 // Utilities
 export { SimpleRNG } from './utils/SimpleRNG';
