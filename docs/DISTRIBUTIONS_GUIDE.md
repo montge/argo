@@ -19,7 +19,11 @@ This guide provides practical information for using probability distributions in
   - [Weibull Distribution](#weibull-distribution)
   - [Pareto Distribution](#pareto-distribution)
   - [PERT Distribution](#pert-distribution)
-- [Discrete Distributions](#discrete-distributions) _(Coming in Sprint 3)_
+- [Discrete Distributions](#discrete-distributions)
+  - [Binomial Distribution](#binomial-distribution)
+  - [Poisson Distribution](#poisson-distribution)
+  - [Geometric Distribution](#geometric-distribution)
+  - [Hypergeometric Distribution](#hypergeometric-distribution)
 - [Choosing the Right Distribution](#choosing-the-right-distribution)
 - [Examples by Use Case](#examples-by-use-case)
 
@@ -27,13 +31,14 @@ This guide provides practical information for using probability distributions in
 
 ## Overview
 
-Argo provides 10 continuous probability distributions (as of Sprint 2) for modeling uncertainty in Monte Carlo simulations. Each distribution has specific characteristics that make it suitable for different scenarios.
+Argo provides 14 probability distributions (10 continuous + 4 discrete) for modeling uncertainty in Monte Carlo simulations. Each distribution has specific characteristics that make it suitable for different scenarios.
 
 **Key Concepts:**
-- **PDF (Probability Density Function):** Describes the relative likelihood of different values
+- **PDF/PMF:** Probability Density Function (continuous) or Probability Mass Function (discrete)
 - **CDF (Cumulative Distribution Function):** Probability that a value is ≤ x
 - **Inverse CDF (Quantile Function):** Given a probability p, returns the value x where CDF(x) = p
 - **Sample:** Generate a random value following the distribution
+- **Discrete vs Continuous:** Discrete distributions model countable outcomes (0, 1, 2...), continuous distributions model measurable quantities
 
 ---
 
@@ -474,13 +479,212 @@ console.log(`Expected cost: $${cost.mean.toFixed(0)}`); // ~105,000
 
 ## Discrete Distributions
 
-_(Coming in Sprint 3: Binomial, Poisson, Geometric, Hypergeometric)_
+### Binomial Distribution
+
+**When to use:**
+- Fixed number of independent trials with success/fail outcomes
+- Quality control (defects in a batch)
+- A/B testing (conversions from visitors)
+- Clinical trials (patients responding to treatment)
+- Any scenario with "n tries, probability p of success each time"
+
+**Parameters:**
+- `n` (integer ≥ 1): Number of independent trials
+- `p` (0 ≤ p ≤ 1): Probability of success on each trial
+
+**Mean:** n × p
+**Variance:** n × p × (1 - p)
+
+**Example:**
+```typescript
+import { BinomialDistribution, SimpleRNG } from '@argo/core';
+
+// Quality control: 100 items tested, 5% defect rate
+const dist = new BinomialDistribution(100, 0.05);
+const rng = new SimpleRNG(42);
+
+console.log(dist.mean);        // 5 (expected defects)
+console.log(dist.variance);    // 4.75
+
+// Sample: How many defects in this batch?
+const defects = dist.sample(rng);  // e.g., 3, 7, 4, 6...
+
+// PMF: Probability of exactly 5 defects
+console.log(dist.pmf(5));      // ~0.1800
+
+// CDF: Probability of 5 or fewer defects
+console.log(dist.cdf(5));      // ~0.6160
+```
+
+**Real-world scenarios:**
+- **Manufacturing:** Out of 1000 units, how many will be defective if defect rate is 2%?
+- **Marketing:** 500 email recipients, 10% conversion rate - how many conversions?
+- **Clinical:** 50 patients, 70% response rate - how many will respond to treatment?
+
+---
+
+### Poisson Distribution
+
+**When to use:**
+- Events occurring randomly over time or space
+- Rare events with many opportunities
+- Call center arrivals, website visits, equipment failures
+- Radioactive decay, emails per hour
+- When you know the **rate** but not when individual events occur
+
+**Parameters:**
+- `λ` (lambda > 0): Average rate of events per interval
+
+**Mean:** λ
+**Variance:** λ
+
+**Example:**
+```typescript
+import { PoissonDistribution, SimpleRNG } from '@argo/core';
+
+// Customer support: average 4 calls per hour
+const dist = new PoissonDistribution(4);
+const rng = new SimpleRNG(42);
+
+console.log(dist.mean);        // 4
+console.log(dist.variance);    // 4
+
+// Sample: How many calls this hour?
+const calls = dist.sample(rng);  // e.g., 3, 5, 2, 6...
+
+// PMF: Probability of exactly 4 calls
+console.log(dist.pmf(4));      // ~0.1954
+
+// CDF: Probability of 4 or fewer calls
+console.log(dist.cdf(4));      // ~0.6288
+
+// Inverse CDF: 90% of hours have this many calls or fewer
+console.log(dist.inverseCDF(0.90));  // 7 calls
+```
+
+**Real-world scenarios:**
+- **IT Operations:** Server receives average 20 requests/minute - simulate load
+- **Healthcare:** Emergency room gets 3 patients/hour on average - staffing needs
+- **Retail:** Store has 15 customers/hour - checkout lane requirements
+- **Network Security:** Website gets 0.5 attacks/day - risk assessment
+
+---
+
+### Geometric Distribution
+
+**When to use:**
+- "How many trials until the first success?"
+- Memoryless processes (past doesn't affect future)
+- Time until first failure, first sale, first defect
+- Waiting time problems with constant probability
+
+**Parameters:**
+- `p` (0 < p ≤ 1): Probability of success on each trial
+
+**Mean:** 1/p
+**Variance:** (1 - p) / p²
+
+**Example:**
+```typescript
+import { GeometricDistribution, SimpleRNG } from '@argo/core';
+
+// Sales: 10% chance each call converts
+const dist = new GeometricDistribution(0.10);
+const rng = new SimpleRNG(42);
+
+console.log(dist.mean);        // 10 (average calls until sale)
+console.log(dist.variance);    // 90
+
+// Sample: How many calls until first sale?
+const calls = dist.sample(rng);  // e.g., 3, 15, 7, 22...
+
+// PMF: Probability first sale on call #5
+console.log(dist.pmf(5));      // ~0.0656
+
+// CDF: Probability first sale within 10 calls
+console.log(dist.cdf(10));     // ~0.6513
+
+// Inverse CDF: 50% chance of sale within this many calls
+console.log(dist.inverseCDF(0.50));  // 7 calls
+```
+
+**Real-world scenarios:**
+- **Quality Control:** Rolling dice until you get a 6 - how many rolls?
+- **Marketing:** Cold calling until first conversion - calls needed?
+- **Reliability:** Component with 1% failure rate - how long until first failure?
+- **Gaming:** Slot machine with 5% jackpot probability - spins until win?
+
+**Key Property - Memoryless:**
+If you've already made 10 attempts without success, the expected number of *additional* attempts is still 1/p. Past failures don't change future probabilities.
+
+---
+
+### Hypergeometric Distribution
+
+**When to use:**
+- Sampling **WITHOUT replacement** from finite population
+- Population has two categories (success/failure)
+- Drawing cards, quality inspection of small batches
+- Different from Binomial (which uses replacement/independent trials)
+
+**Parameters:**
+- `N` (integer ≥ 1): Total population size
+- `K` (0 ≤ K ≤ N): Number of success states in population
+- `n` (1 ≤ n ≤ N): Number of draws (sample size)
+
+**Mean:** n × (K/N)
+**Variance:** n × (K/N) × (1 - K/N) × ((N - n)/(N - 1))
+
+**Example:**
+```typescript
+import { HypergeometricDistribution, SimpleRNG } from '@argo/core';
+
+// Quality control: Box of 100 parts, 10 defective, inspect 20
+const dist = new HypergeometricDistribution(100, 10, 20);
+const rng = new SimpleRNG(42);
+
+console.log(dist.mean);        // 2 (expected defects in sample)
+console.log(dist.variance);    // 1.455
+
+// Sample: How many defects in this sample of 20?
+const defects = dist.sample(rng);  // e.g., 1, 3, 2, 0...
+
+// PMF: Probability of exactly 2 defects
+console.log(dist.pmf(2));      // ~0.2909
+
+// CDF: Probability of 2 or fewer defects
+console.log(dist.cdf(2));      // ~0.6766
+
+// Inverse CDF: 95% of samples have this many defects or fewer
+console.log(dist.inverseCDF(0.95));  // 5 defects
+```
+
+**Real-world scenarios:**
+- **Card Games:** Draw 5 cards from deck - how many hearts? (N=52, K=13, n=5)
+- **Quality Control:** Inspect 30 units from batch of 500 with 20 defects
+- **Jury Selection:** Pick 12 jurors from pool of 100 (60 men, 40 women)
+- **Ecology:** Capture-recapture studies - tag 50 fish, release, recapture 30
+
+**When to use Hypergeometric vs Binomial:**
+- **Hypergeometric:** Small population, sampling without replacement, dependent trials
+- **Binomial:** Large population or sampling with replacement, independent trials
+- **Rule of thumb:** If n < 0.05×N (sample < 5% of population), Binomial is good approximation
 
 ---
 
 ## Choosing the Right Distribution
 
 ### Decision Tree
+
+**Is your outcome discrete (countable) or continuous (measurable)?**
+
+**DISCRETE (integers: 0, 1, 2, 3...):**
+- **Fixed number of independent trials (n) with success probability (p):** Binomial Distribution
+- **Count of events in fixed interval with rate (λ):** Poisson Distribution
+- **Number of trials until first success:** Geometric Distribution
+- **Sampling without replacement from finite population:** Hypergeometric Distribution
+
+**CONTINUOUS (measurable values):**
 
 **Is your variable bounded?**
 - **Bounded [0, 1]:** Beta Distribution
@@ -520,12 +724,21 @@ _(Coming in Sprint 3: Binomial, Poisson, Geometric, Hypergeometric)_
 **Quality Control:**
 - Measurement errors: Normal
 - Defect rates: Beta
+- Defects in batch: Binomial, Hypergeometric
 - Inspection times: Log-Normal
 
 **Sales & Marketing:**
 - Customer lifetime value: Pareto, Log-Normal
 - Conversion rates: Beta
+- Conversions from visitors: Binomial
+- Calls until first sale: Geometric
 - Sales volume: Normal, Log-Normal
+
+**IT Operations & Support:**
+- Server requests per minute: Poisson
+- Calls per hour: Poisson
+- Incidents per day: Poisson
+- Tests until first failure: Geometric
 
 ---
 
@@ -617,17 +830,125 @@ console.log(`Percentage: ${(top20Value / totalValue * 100).toFixed(1)}%`);
 // Should be close to 80%
 ```
 
+### Example 4: Quality Control Inspection (Discrete)
+
+```typescript
+import { BinomialDistribution, HypergeometricDistribution, SimpleRNG } from '@argo/core';
+
+const rng = new SimpleRNG(54321);
+
+// Scenario: Manufacturing batch of 1000 units with 2% defect rate
+
+// Method 1: Sample with replacement (Binomial)
+const binomial = new BinomialDistribution(100, 0.02); // Inspect 100 units
+
+// Method 2: Sample without replacement (Hypergeometric)
+const hypergeometric = new HypergeometricDistribution(1000, 20, 100);
+// Population: 1000, Defective: 20, Sample: 100
+
+// Run 10,000 simulations for each
+const binomialResults: number[] = [];
+const hyperResults: number[] = [];
+
+for (let i = 0; i < 10000; i++) {
+  binomialResults.push(binomial.sample(rng));
+  hyperResults.push(hypergeometric.sample(rng));
+}
+
+const binomialMean = binomialResults.reduce((a, b) => a + b) / binomialResults.length;
+const hyperMean = hyperResults.reduce((a, b) => a + b) / hyperResults.length;
+
+console.log(`Binomial - Expected defects: ${binomialMean.toFixed(2)}`);
+console.log(`Hypergeometric - Expected defects: ${hyperMean.toFixed(2)}`);
+console.log(`Theoretical (both): ${binomial.mean.toFixed(2)}`);
+
+// Probability of finding 0 defects (batch appears good)
+console.log(`P(0 defects | Binomial): ${(binomial.pmf(0) * 100).toFixed(1)}%`);
+console.log(`P(0 defects | Hypergeometric): ${(hypergeometric.pmf(0) * 100).toFixed(1)}%`);
+```
+
+### Example 5: Customer Support Staffing (Poisson)
+
+```typescript
+import { PoissonDistribution, SimpleRNG } from '@argo/core';
+
+const rng = new SimpleRNG(11111);
+
+// Average 12 calls per hour
+const callsPerHour = new PoissonDistribution(12);
+
+// Simulate 24 hours
+const hourlyResults: number[] = [];
+for (let hour = 0; hour < 24; hour++) {
+  hourlyResults.push(callsPerHour.sample(rng));
+}
+
+// Calculate statistics
+const maxCalls = Math.max(...hourlyResults);
+const avgCalls = hourlyResults.reduce((a, b) => a + b) / hourlyResults.length;
+
+console.log(`Average calls per hour: ${avgCalls.toFixed(1)}`);
+console.log(`Maximum in any hour: ${maxCalls}`);
+
+// Staffing question: How many agents needed to handle 95% of hours?
+const p95 = callsPerHour.inverseCDF(0.95);
+console.log(`95th percentile: ${p95} calls`);
+console.log(`Recommended staffing: ${Math.ceil(p95 / 5)} agents (5 calls/hour each)`);
+
+// Probability of overwhelm (>20 calls in an hour)
+const probOverwhelm = 1 - callsPerHour.cdf(20);
+console.log(`P(>20 calls in hour): ${(probOverwhelm * 100).toFixed(2)}%`);
+```
+
+### Example 6: Sales Conversion Pipeline (Geometric)
+
+```typescript
+import { GeometricDistribution, SimpleRNG } from '@argo/core';
+
+const rng = new SimpleRNG(33333);
+
+// 8% conversion rate per sales call
+const conversionDist = new GeometricDistribution(0.08);
+
+// Simulate 100 sales reps
+const callsNeeded: number[] = [];
+for (let rep = 0; rep < 100; rep++) {
+  callsNeeded.push(conversionDist.sample(rng));
+}
+
+// Calculate statistics
+callsNeeded.sort((a, b) => a - b);
+const median = callsNeeded[50];
+const p90 = callsNeeded[90];
+const totalCalls = callsNeeded.reduce((a, b) => a + b);
+
+console.log(`Expected calls per sale: ${conversionDist.mean.toFixed(1)}`);
+console.log(`Median calls (simulated): ${median}`);
+console.log(`90th percentile: ${p90} calls`);
+console.log(`Total calls for 100 sales: ${totalCalls}`);
+
+// Business question: What if we make 50 calls per rep?
+const prob50orLess = conversionDist.cdf(50);
+console.log(`P(sale within 50 calls): ${(prob50orLess * 100).toFixed(1)}%`);
+
+// How many calls to be 90% confident of at least one sale?
+const callsFor90 = conversionDist.inverseCDF(0.90);
+console.log(`Calls needed for 90% confidence: ${callsFor90}`);
+```
+
 ---
 
 ## Best Practices
 
-1. **Start Simple:** Use Triangular/Uniform when you lack data
-2. **Validate Assumptions:** Check if your chosen distribution matches reality
-3. **Seed Your RNG:** Use `SimpleRNG(seed)` for reproducible results
-4. **Run Enough Iterations:** 10,000+ for most simulations
-5. **Check Percentiles:** Look at P10, P50, P90, not just mean
-6. **Document Your Choices:** Explain why you chose each distribution
-7. **Sensitivity Analysis:** Test how results change with different distributions
+1. **Start Simple:** Use Triangular/Uniform when you lack data (continuous), Binomial for counts
+2. **Discrete vs Continuous:** Count outcomes → Discrete; Measure values → Continuous
+3. **Validate Assumptions:** Check if your chosen distribution matches reality
+4. **Seed Your RNG:** Use `SimpleRNG(seed)` for reproducible results
+5. **Run Enough Iterations:** 10,000+ for most simulations
+6. **Check Percentiles:** Look at P10, P50, P90, not just mean
+7. **Document Your Choices:** Explain why you chose each distribution
+8. **Sensitivity Analysis:** Test how results change with different distributions
+9. **Sampling Method Matters:** With/without replacement affects Binomial vs Hypergeometric choice
 
 ---
 
