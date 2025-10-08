@@ -38,3 +38,12 @@ export {
   skewness,
   kurtosis,
 } from './stats/descriptive';
+
+// Statistical Functions - Percentiles & Quantiles
+export {
+  percentile,
+  quantile,
+  quartiles,
+  iqr,
+  percentiles,
+} from './stats/percentiles';
