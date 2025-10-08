@@ -1,8 +1,8 @@
 # Argo Development Roadmap & Task Tracking
 
 **Branch:** `office365-linux-rebuild`
-**Last Updated:** 2025-10-07
-**Status:** Phase 1 - Core Development (Sprint 2 COMPLETE ✅)
+**Last Updated:** 2025-10-08
+**Status:** Phase 1 - Core Development (Sprint 4 IN PROGRESS - 70% complete)
 
 ---
 
@@ -195,32 +195,86 @@
 
 ---
 
-### Sprint 4: Statistical Functions
+### Sprint 4: Statistical Functions ⏳ IN PROGRESS
 **Target Date:** Week of 2025-11-04
+**Current Date:** 2025-10-08
+**Status:** 21/30 functions complete (70%)
 
-- [ ] **Descriptive Statistics Module**
-  - [ ] Mean, Median, Mode
-  - [ ] Standard deviation, Variance
-  - [ ] Skewness, Kurtosis
-  - [ ] Percentiles (5th, 25th, 50th, 75th, 95th)
-  - [ ] Min, Max, Range
-  - [ ] Tests for each function (TDD)
+#### ✅ Module 1: Descriptive Statistics (12 functions) - COMPLETE
+**Location:** `packages/argo-core/src/stats/descriptive.ts`
 
-- [ ] **Confidence Intervals**
-  - [ ] Parametric intervals
-  - [ ] Bootstrap intervals
-  - [ ] Tests (TDD)
+- [x] **Central Tendency** (5 functions)
+  - [x] `mean()` - Arithmetic mean
+  - [x] `median()` - Middle value
+  - [x] `mode()` - Most frequent value(s)
+  - [x] `geometricMean()` - Nth root of product
+  - [x] `harmonicMean()` - Reciprocal of mean of reciprocals
 
-- [ ] **Risk Metrics**
-  - [ ] Value at Risk (VaR)
-  - [ ] Conditional VaR (CVaR)
-  - [ ] Probability of exceeding threshold
-  - [ ] Tests (TDD)
+- [x] **Dispersion** (5 functions)
+  - [x] `min()` - Minimum value
+  - [x] `max()` - Maximum value
+  - [x] `range()` - Max - Min
+  - [x] `variance()` - Sample/population variance
+  - [x] `standardDeviation()` - Square root of variance
+
+- [x] **Shape** (2 functions)
+  - [x] `skewness()` - Asymmetry measure (Fisher's)
+  - [x] `kurtosis()` - Tail heaviness (Fisher's excess)
+
+**Tests:** 109 passing ✅ | **Coverage:** 100% ✅
+
+#### ✅ Module 2: Percentiles & Quantiles (5 functions) - COMPLETE
+**Location:** `packages/argo-core/src/stats/percentiles.ts`
+
+- [x] `percentile(data, p)` - Calculate specific percentile (0-100)
+- [x] `quantile(data, q)` - Calculate quantile (0-1)
+- [x] `quartiles(data)` - Q1, Q2, Q3
+- [x] `iqr(data)` - Interquartile range (Q3 - Q1)
+- [x] `percentiles(data, ps)` - Batch percentile calculation
+
+**Method:** Linear interpolation (R's Type 7)
+**Tests:** 51 passing ✅ | **Coverage:** 100% ✅
+
+#### ✅ Module 3: Confidence Intervals (4 functions) - COMPLETE
+**Location:** `packages/argo-core/src/stats/intervals.ts`
+
+- [x] `confidenceIntervalNormal(data, confidence)` - Parametric CI (t/z-distribution)
+- [x] `confidenceIntervalBootstrap(data, confidence, iterations, rng)` - Non-parametric bootstrap
+- [x] `marginOfError(data, confidence)` - Half-width of CI
+- [x] `sampleSize(margin, stdDev, confidence)` - Required sample size
+
+**Features:** T-distribution for n<30, bootstrap resampling (10k iterations)
+**Tests:** 49 passing ✅ | **Coverage:** 100% ✅
+
+#### 🔜 Module 4: Risk Metrics (6 functions) - PENDING
+**Location:** `packages/argo-core/src/stats/risk.ts`
+
+- [ ] `valueAtRisk(data, confidence)` - VaR at confidence level
+- [ ] `conditionalVaR(data, confidence)` - CVaR (Expected Shortfall)
+- [ ] `probabilityExceeding(data, threshold)` - P(X > threshold)
+- [ ] `probabilityBelow(data, threshold)` - P(X < threshold)
+- [ ] `probabilityBetween(data, lower, upper)` - P(lower < X < upper)
+- [ ] `probabilityOfTarget(data, target, direction)` - Target achievement
+
+**Use Cases:** Risk analysis, VaR calculations, threshold probabilities
+
+#### 🔜 Module 5: Distribution Fitting (3 functions) - PENDING
+**Location:** `packages/argo-core/src/stats/fitting.ts`
+
+- [ ] `fitNormal(data)` - Estimate μ, σ parameters
+- [ ] `fitLogNormal(data)` - Estimate log-normal parameters
+- [ ] `goodnessOfFit(data, distribution)` - Chi-square test
+
+**Methods:** Maximum Likelihood Estimation (MLE), χ² goodness-of-fit
 
 **Sprint 4 Success Criteria:**
-- 30+ statistical functions
-- All covered by tests
-- Documentation with examples
+- ✅ 21/30 functions complete (70%)
+- ✅ 964 tests passing
+- ✅ 100% coverage on completed modules
+- [ ] 30+ statistical functions (9 remaining)
+- [ ] All covered by comprehensive tests
+- [ ] Full JSDoc documentation
+- [ ] Performance targets met
 
 ---
 
