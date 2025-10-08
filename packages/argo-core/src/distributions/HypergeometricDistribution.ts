@@ -361,7 +361,7 @@ export class HypergeometricDistribution implements Distribution {
    * @param x - Value to evaluate
    * @returns 0 (discrete distributions don't have PDFs)
    */
-  pdf(x: number): number {
+  pdf(_x: number): number {
     // Discrete distributions don't have a PDF, use PMF instead
     return 0;
   }

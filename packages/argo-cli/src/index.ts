@@ -10,6 +10,7 @@ import { Command } from 'commander';
 import { executeDistributionsCommand } from './commands/distributions';
 import { executeGenerateCommand } from './commands/generate';
 import { executeValidateCommand } from './commands/validate';
+import { executeSimulateCommand } from './commands/simulate';
 
 const program = new Command();
 
@@ -45,6 +46,17 @@ program
   .description('Validate a simulation configuration file')
   .action((config: string) => {
     executeValidateCommand(config);
+  });
+
+// Simulate command
+program
+  .command('simulate <config>')
+  .alias('sim')
+  .description('Run a Monte Carlo simulation from configuration file')
+  .option('-o, --output <file>', 'Save results to JSON file')
+  .option('-v, --verbose', 'Include all samples in output (large file)', false)
+  .action((config: string, options: { output?: string; verbose?: boolean }) => {
+    executeSimulateCommand(config, options);
   });
 
 // Parse command line arguments
