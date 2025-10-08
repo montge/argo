@@ -11,6 +11,7 @@ export { BetaDistribution } from './distributions/BetaDistribution';
 export { GammaDistribution } from './distributions/GammaDistribution';
 export { WeibullDistribution } from './distributions/WeibullDistribution';
 export { ParetoDistribution } from './distributions/ParetoDistribution';
+export { PERTDistribution } from './distributions/PERTDistribution';
 
 // Utilities
 export { SimpleRNG } from './utils/SimpleRNG';
