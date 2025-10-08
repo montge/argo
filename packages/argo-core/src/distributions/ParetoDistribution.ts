@@ -106,10 +106,7 @@ export class ParetoDistribution implements Distribution {
     }
 
     // PDF = α * x_m^α / x^(α+1)
-    return (
-      (this.shape * Math.pow(this.scale, this.shape)) /
-      Math.pow(x, this.shape + 1)
-    );
+    return (this.shape * Math.pow(this.scale, this.shape)) / Math.pow(x, this.shape + 1);
   }
 
   /**
@@ -185,10 +182,7 @@ export class ParetoDistribution implements Distribution {
     const scale2 = this.scale * this.scale;
     const shapeMinus1 = this.shape - 1;
 
-    return (
-      (scale2 * this.shape) /
-      (shapeMinus1 * shapeMinus1 * (this.shape - 2))
-    );
+    return (scale2 * this.shape) / (shapeMinus1 * shapeMinus1 * (this.shape - 2));
   }
 
   /**

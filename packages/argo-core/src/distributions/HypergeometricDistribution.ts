@@ -82,7 +82,14 @@ export class HypergeometricDistribution implements Distribution {
     if (!isFinite(N) || !isFinite(K) || !isFinite(n)) {
       throw new Error('Parameters must be finite numbers');
     }
-    if (N <= 0 || K < 0 || n < 0 || !Number.isInteger(N) || !Number.isInteger(K) || !Number.isInteger(n)) {
+    if (
+      N <= 0 ||
+      K < 0 ||
+      n < 0 ||
+      !Number.isInteger(N) ||
+      !Number.isInteger(K) ||
+      !Number.isInteger(n)
+    ) {
       throw new Error('N, K, and n must be positive integers');
     }
     if (K > N) {

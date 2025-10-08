@@ -100,8 +100,8 @@ export class PERTDistribution implements Distribution {
     const range = max - min;
     const lambda = 4;
 
-    const alpha = 1 + lambda * (mode - min) / range;
-    const beta = 1 + lambda * (max - mode) / range;
+    const alpha = 1 + (lambda * (mode - min)) / range;
+    const beta = 1 + (lambda * (max - mode)) / range;
 
     this.beta = new BetaDistribution(alpha, beta);
   }
