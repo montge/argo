@@ -97,7 +97,8 @@ tests/
 3. **Refactor:** Improve code while keeping tests passing
 
 **Test Requirements:**
-- Minimum 80% coverage (branches, functions, lines, statements)
+- Target 95%+ coverage, aiming for 100% where feasible (branches, functions, lines, statements)
+- Minimum acceptable: 80% coverage, but strive for higher
 - Tests written BEFORE implementation
 - Each distribution requires comprehensive tests (see existing tests as examples)
 - Tests verify: parameter validation, sampling accuracy, PDF/CDF correctness, edge cases
