@@ -320,9 +320,8 @@
 
 ---
 
-### Sprint 7.5: UI/UX Design & Asset Creation
+### Sprint 8: UI/UX Design & Asset Creation
 **Target Date:** Week of 2025-11-25
-**Duration:** 1 week
 
 - [ ] **Icon Design**
   - [ ] Create add-in logo (16x16, 32x32, 64x64, 80x80, 128x128)
@@ -349,7 +348,7 @@
   - [ ] Screenshot templates (1366x768)
   - [ ] Promotional graphics
 
-**Sprint 7.5 Success Criteria:**
+**Sprint 8 Success Criteria:**
 - All required icons created and exported
 - Wireframes approved for all major UI components
 - Assets integrated into build pipeline
@@ -368,7 +367,7 @@
 
 **Goal:** Excel add-in for Windows/Mac/Web
 
-### Sprint 8: Add-in Foundation
+### Sprint 9: Add-in Foundation
 **Target Date:** Week of 2025-12-02
 
 - [ ] **Project Setup**
@@ -403,7 +402,7 @@
   - [ ] Draft privacy policy
   - [ ] Security audit checklist
 
-**Sprint 8 Success Criteria:**
+**Sprint 9 Success Criteria:**
 - Add-in loads in Excel
 - Can read/write cells
 - Basic UI renders
@@ -413,7 +412,7 @@
 
 ---
 
-### Sprint 9: Simulation UI
+### Sprint 10: Simulation UI
 **Target Date:** Week of 2025-12-09
 
 - [ ] **Simulation Controls**
@@ -435,7 +434,7 @@
   - [ ] ARGO.TRIANGULAR(min, mode, max)
   - [ ] Registration with Excel
 
-**Sprint 9 Success Criteria:**
+**Sprint 10 Success Criteria:**
 - Full simulation workflow
 - Charts rendering
 - Custom functions working
@@ -443,7 +442,7 @@
 
 ---
 
-### Sprint 10: Advanced Features
+### Sprint 11: Advanced Features
 **Target Date:** Week of 2025-12-16
 
 - [ ] **Distribution Builder Dialog**
@@ -463,7 +462,7 @@
   - [ ] Export reports to PowerPoint
   - [ ] Export charts as images
 
-**Sprint 10 Success Criteria:**
+**Sprint 11 Success Criteria:**
 - MVP feature complete
 - Ready for alpha testing
 - Documentation written
@@ -475,7 +474,7 @@
 
 **Goal:** Connect to Project 365, JIRA, Primavera P6
 
-### Sprint 11: Adapter Framework
+### Sprint 12: Adapter Framework
 **Target Date:** Q1 2026
 
 - [ ] **Common Adapter Interface**
@@ -490,7 +489,7 @@
 
 ---
 
-### Sprint 12: Project 365 Integration
+### Sprint 13: Project 365 Integration
 **Target Date:** Q1 2026
 
 - [ ] **Project Desktop Adapter**
@@ -506,7 +505,7 @@
 
 ---
 
-### Sprint 13: JIRA Integration
+### Sprint 14: JIRA Integration
 **Target Date:** Q2 2026
 
 - [ ] **JIRA Cloud Adapter**
@@ -521,7 +520,7 @@
 
 ---
 
-### Sprint 14: Primavera P6 Integration
+### Sprint 15: Primavera P6 Integration
 **Target Date:** Q2 2026
 
 - [ ] **P6 EPPM Adapter**
@@ -579,7 +578,7 @@
 - Documentation
 
 ### Beta Release (v5.0.0-beta.1)
-**Target:** End of Sprint 10 (2025-12-16)
+**Target:** End of Sprint 11 (2025-12-16)
 - Excel add-in MVP
 - Full simulation workflow
 - 35+ distributions
