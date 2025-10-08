@@ -55,3 +55,16 @@ export {
   marginOfError,
   sampleSize,
 } from './stats/intervals';
+
+// Statistical Functions - Risk Metrics
+export {
+  valueAtRisk,
+  conditionalVaR,
+  probabilityExceeding,
+  probabilityBelow,
+  probabilityBetween,
+  probabilityOfTarget,
+} from './stats/risk';
+
+// Statistical Functions - Distribution Fitting
+export { fitNormal, fitLogNormal, goodnessOfFit } from './stats/fitting';
