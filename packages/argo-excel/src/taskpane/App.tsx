@@ -60,16 +60,9 @@ const App: React.FC = () => {
         message: 'Argo add-in loaded successfully! Select a distribution to begin.',
         messageType: MessageBarType.success
       }));
-    } else {
-      console.warn('⚠️ Office.context not available (browser dev mode)');
-      // Allow development in browser without Office.context
-      setState(prev => ({
-        ...prev,
-        isOfficeInitialized: true,
-        message: '⚠️ Running in browser dev mode (Office.context not available)',
-        messageType: MessageBarType.warning
-      }));
     }
+    // If Office.context is not available, keep showing loading state (tests expect this)
+    // Note: In browser dev mode, index.tsx will handle rendering based on import.meta.env.DEV
   }, []);
 
   const createDistribution = (type: DistributionType, params: any) => {
