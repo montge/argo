@@ -8,13 +8,16 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
+    "build:assets": "echo 'Asset generation requires SVG sources - see assets/README.md' && assets/build-scripts/verify-assets.sh",
     "test": "npm run test --workspaces --if-present",
     "test:watch": "npm run test:watch --workspaces --if-present",
     "test:coverage": "npm run test:coverage --workspaces --if-present",
     "lint": "eslint packages/*/src --ext .ts,.tsx --max-warnings=0 || true",
     "format": "prettier --write \"packages/*/src/**/*.{ts,tsx,json,md}\"",
     "format:check": "prettier --check \"packages/*/src/**/*.{ts,tsx,json,md}\"",
-    "clean": "npm run clean --workspaces --if-present && rm -rf node_modules"
+    "clean": "npm run clean --workspaces --if-present && rm -rf node_modules",
+    "assets:verify": "assets/build-scripts/verify-assets.sh",
+    "assets:optimize": "assets/build-scripts/optimize-pngs.sh"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
