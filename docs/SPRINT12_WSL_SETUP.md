@@ -34,7 +34,7 @@ You're already running WSL on Windows, so you have the BEST setup possible:
 │  ┌──────┴─────────────────────────────────────────────┐   │
 │  │  WSL2 (Ubuntu/Debian)                              │   │
 │  │                                                     │   │
-│  │  /home/{USER}/{REPO_PATH}/packages/argo-excel/     │   │
+│  │  /home/{USER}/{REPO_PATH}/packages/argo-excel/    │   │
 │  │                                                     │   │
 │  │  $ npm run dev                                     │   │
 │  │  → Vite dev server on https://localhost:3000      │   │
@@ -101,55 +101,70 @@ npm run dev
 
 ### 4. Sideload Add-in in Excel 365
 
-**Option A: Manual Sideloading (Easiest for Screenshots)**
+**Step 4.1: Trust the localhost certificate**
+
+Before Excel can load the add-in, Windows needs to trust the dev server certificate:
+
+1. Open Edge or Chrome on Windows
+2. Navigate to: `https://localhost:3000`
+3. Accept the certificate warning: "Advanced" → "Proceed to localhost (unsafe)"
+4. You should see the Argo UI
+5. Close the browser (certificate is now trusted)
+
+---
+
+**Step 4.2: Configure Trusted Add-in Catalog**
+
+Excel requires adding the manifest location as a trusted catalog:
 
 1. **Open Excel 365 on Windows**
 
-2. **Trust the localhost certificate:**
-   - In browser, visit `https://localhost:3000`
-   - Accept the certificate warning
-   - This tells Windows to trust the dev server
+2. **Navigate to Trust Center:**
+   - Click **File** → **Options**
+   - Select **Trust Center** (left sidebar)
+   - Click **Trust Center Settings** button
+   - Select **Trusted Add-in Catalogs** (left sidebar)
 
-3. **Sideload the manifest:**
-   - In Excel: Insert → Add-ins → Get Add-ins
-   - Click "Upload My Add-in" (bottom right)
-   - Browse to the manifest file
+3. **Add the WSL folder as trusted catalog:**
 
-   **Important:** The manifest is in WSL, so you need to access it:
-
-   **Windows path to your WSL files:**
+   In the "Catalog Url" field, enter:
    ```
-   \\wsl$\{DISTRO}\home\{USER}\{REPO_PATH}\packages\argo-excel\manifest.xml
+   \\wsl$\{DISTRO}\home\{USER}\{REPO_PATH}\packages\argo-excel
    ```
 
    **Example:**
    ```
-   \\wsl$\Ubuntu\home\john\Development\argo\packages\argo-excel\manifest.xml
+   \\wsl$\Ubuntu\home\john\Development\argo\packages\argo-excel
    ```
 
-4. **The add-in should load!**
-   - Task pane appears on the right
-   - You can interact with the UI
-   - Custom functions are available
+   **Note:** Replace `{DISTRO}`, `{USER}`, and `{REPO_PATH}` with your actual values
+
+   - Click **Add catalog**
+   - Check the **Show in Menu** checkbox for the newly-added catalog
+   - Click **OK** to close Trust Center Settings
+   - Click **OK** to close Excel Options
+
+4. **Close and reopen Excel** (required for catalog to take effect)
 
 ---
 
-### 5. Alternative: Network Share Method
+**Step 4.3: Load the Add-in**
 
-**If manual upload doesn't work:**
+1. **In Excel, navigate to Add-ins:**
+   - Click **Home** tab on ribbon
+   - Click **Add-ins** button
+   - Select **Advanced** (or "More Add-ins")
 
-1. **Share the folder from WSL:**
-   ```bash
-   # In WSL - make manifest accessible
-   # Windows can already access \\wsl$\Ubuntu\...
-   ```
+2. **Select the add-in:**
+   - Choose **SHARED FOLDER** at the top
+   - You should see "Argo - Monte Carlo Simulation" listed
+   - Select it and click **Add**
 
-2. **In Excel:**
-   - File → Options → Trust Center → Trust Center Settings
-   - Trusted Add-in Catalogs
-   - Add: `\\wsl$\{DISTRO}\home\{USER}\{REPO_PATH}\packages\argo-excel\`
-   - Check "Show in Menu"
-   - Restart Excel
+3. **The add-in should load!**
+   - Task pane appears on the right side of Excel
+   - Header shows "Argo Monte Carlo Simulation v5.0"
+   - You can interact with the UI
+   - If add-in button doesn't appear automatically, click Home > Add-ins and select Argo from the flyout
 
 ---
 
@@ -197,7 +212,7 @@ npm run dev
 cp /mnt/c/Users/{WINDOWS_USER}/Pictures/Screenshots/* \
    /home/{USER}/{REPO_PATH}/assets/screenshots/
 
-# Or use \\wsl$\Ubuntu\... path from Windows to save directly
+# Or use \\wsl$\{DISTRO}\... path from Windows to save directly
 ```
 
 ---
@@ -264,9 +279,10 @@ npm run dev
 # 2. In Windows:
 #    - Open browser → https://localhost:3000 (accept cert)
 #    - Open Excel 365
-#    - Insert → Add-ins → Upload My Add-in
-#    - Browse to: \\wsl$\{DISTRO}\home\{USER}\{REPO_PATH}\packages\argo-excel\manifest.xml
-#    - Add-in loads!
+#    - File → Options → Trust Center → Trust Center Settings
+#    - Trusted Add-in Catalogs → Add: \\wsl$\{DISTRO}\home\{USER}\{REPO_PATH}\packages\argo-excel
+#    - Check "Show in Menu" → OK → Restart Excel
+#    - Home → Add-ins → Advanced → SHARED FOLDER → Select "Argo - Monte Carlo Simulation" → Add
 
 # 3. Take screenshots with Windows Snipping Tool
 

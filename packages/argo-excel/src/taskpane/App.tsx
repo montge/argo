@@ -49,13 +49,25 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
+    console.log('📱 App mounted, checking Office context...');
+
     // Check if Office.js is initialized
     if (Office.context) {
+      console.log('✅ Office.context available:', Office.context);
       setState(prev => ({
         ...prev,
         isOfficeInitialized: true,
         message: 'Argo add-in loaded successfully! Select a distribution to begin.',
         messageType: MessageBarType.success
+      }));
+    } else {
+      console.warn('⚠️ Office.context not available (browser dev mode)');
+      // Allow development in browser without Office.context
+      setState(prev => ({
+        ...prev,
+        isOfficeInitialized: true,
+        message: '⚠️ Running in browser dev mode (Office.context not available)',
+        messageType: MessageBarType.warning
       }));
     }
   }, []);
