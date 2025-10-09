@@ -682,39 +682,46 @@
 
 ---
 
-### Sprint 11: Advanced Features
+### 🔄 Sprint 11: Testing & Polish (IN PROGRESS)
 **Target Date:** Week of 2025-12-23
+**Platform:** Linux-compatible
+**Started:** 2025-10-09
 
-- [ ] **Distribution Builder Dialog**
-  - [ ] Visual distribution preview
-  - [ ] Parameter configuration
-  - [ ] Historical data fitting
-  - [ ] Save/Load distributions
+**Focus:** Complete deferred Sprint 10 items, add tests, and polish for MVP
 
-- [ ] **Sensitivity Analysis**
-  - [ ] Tornado chart
-  - [ ] Scatter plots
-  - [ ] Correlation analysis
+- [ ] **Component Testing (TDD)**
+  - [ ] DistributionSelector.test.tsx - Test grid rendering, selection, icons
+  - [ ] SimulationControls.test.tsx - Test parameter forms, validation
+  - [ ] ResultsDashboard.test.tsx - Test statistics display, chart rendering
+  - [ ] App.test.tsx - Test tab navigation, simulation workflow
+  - [ ] Custom functions tests - Test all 14 ARGO.* functions
+  - [ ] Target: 80% coverage for React components
 
-- [ ] **Export/Import**
-  - [ ] Save simulation config
-  - [ ] Load previous simulations
-  - [ ] Export reports to PowerPoint
-  - [ ] Export charts as images
+- [ ] **Accessibility (NFR-002)**
+  - [ ] Keyboard navigation - Tab order, Enter/Space activation
+  - [ ] ARIA labels - All interactive elements labeled
+  - [ ] Focus management - Visible focus indicators
+  - [ ] Screen reader testing - NVDA/JAWS compatibility notes
+  - [ ] Document keyboard shortcuts in help
 
-- [ ] **Notebook Updates (Sprint 11)**
-  - [ ] Update notebooks with advanced features
-  - [ ] Add sensitivity analysis examples
-  - [ ] Document distribution fitting workflows
-  - [ ] Run headless notebook tests
-  - [ ] Verify all notebooks execute successfully
+- [ ] **Documentation Complete**
+  - [ ] Privacy policy (extend SECURITY.md)
+  - [ ] User guide for custom functions
+  - [ ] Troubleshooting guide
+  - [ ] AppSource submission prep
+
+- [ ] **Advanced Features (Optional for MVP)**
+  - [ ] Distribution Builder Dialog
+  - [ ] Sensitivity Analysis (Tornado chart)
+  - [ ] Export/Import simulation configs
 
 **Sprint 11 Success Criteria:**
-- MVP feature complete
-- Ready for alpha testing
-- Documentation written
-- AppSource submission prep
-- Notebooks updated and passing headless tests
+- ✅ Component tests passing (80%+ coverage)
+- ✅ Accessibility implemented (keyboard + ARIA)
+- ✅ Privacy policy complete
+- ✅ All notebooks passing in CI
+- ✅ MVP ready for alpha testing
+- ⏸️ Advanced features (nice-to-have)
 
 ---
 
