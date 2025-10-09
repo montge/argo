@@ -3,6 +3,7 @@ module.exports = {
   testEnvironment: 'node',
   roots: ['<rootDir>/tests'],
   testMatch: ['**/*.test.ts'],
+  maxWorkers: 1, // Run tests sequentially to avoid file system conflicts
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.d.ts',
