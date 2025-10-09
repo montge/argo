@@ -32,10 +32,11 @@ jobs:
         ls -la packages/
         ls -la packages/argo-core/
     
-    - name: Build
-      run: |
-        npm run build --workspaces
-        echo "Build completed"
+    - name: Build argo-core
+      run: npm run build --workspace=@argo/core
+
+    - name: Build argo-cli
+      run: npm run build --workspace=@argo/cli
     
     - name: Run tests with verbose output
       run: |

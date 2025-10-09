@@ -24,6 +24,12 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    - name: Build argo-core
+      run: npm run build --workspace=@argo/core
+
+    - name: Build argo-cli
+      run: npm run build --workspace=@argo/cli
+
     - name: Run tests
       run: npm test --workspaces
 
