@@ -40,6 +40,9 @@ jobs:
     - name: Build argo-cli
       run: npm run build --workspace=@argo/cli
 
+    - name: Build argo-excel
+      run: npm run build --workspace=@argo/excel
+
     - name: Run tests
       run: npm test --workspaces
 
