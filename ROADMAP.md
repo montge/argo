@@ -639,8 +639,8 @@
 **Platform:** Linux-compatible
 
 - [ ] **Simulation Controls**
-  - [ ] Distribution selector
-  - [ ] Parameter input forms
+  - [ ] Distribution selector (with colorful teal icons)
+  - [ ] Parameter input forms (dynamic per distribution)
   - [ ] Iteration count slider
   - [ ] Run/Stop buttons
   - [ ] Progress indicator
@@ -649,27 +649,29 @@
   - [ ] Summary statistics table
   - [ ] Histogram chart (Recharts)
   - [ ] CDF chart
-  - [ ] Percentile markers
+  - [ ] Percentile markers (P5, P50, P95)
 
-- [ ] **Excel Custom Functions**
-  - [ ] ARGO.NORMAL(mean, stddev)
-  - [ ] ARGO.UNIFORM(min, max)
-  - [ ] ARGO.TRIANGULAR(min, mode, max)
-  - [ ] Registration with Excel
+- [ ] **Excel Custom Functions Registration**
+  - [ ] Register ARGO.NORMAL in manifest
+  - [ ] Register ARGO.UNIFORM in manifest
+  - [ ] Register ARGO.TRIANGULAR in manifest
+  - [ ] Add remaining 11 distributions
 
-- [ ] **Notebook Updates (Sprint 10)**
-  - [ ] Update notebooks with simulation UI examples
-  - [ ] Add charts and dashboard visualizations
-  - [ ] Document custom functions usage
+- [ ] **Deferred from Sprint 9:**
+  - [ ] Office.js mocks for testing
+  - [ ] Accessibility (keyboard shortcuts, ARIA labels, focus management)
+  - [ ] Security documentation (data handling, privacy policy)
+  - [ ] Create `06-excel-addin.ipynb` notebook
   - [ ] Run headless notebook tests
-  - [ ] Verify all notebooks execute successfully
 
 **Sprint 10 Success Criteria:**
-- Full simulation workflow
-- Charts rendering
-- Custom functions working
-- User can run simulation end-to-end
-- Notebooks updated and passing headless tests
+- Full simulation workflow working
+- All 14 distributions selectable with icons
+- Charts rendering correctly
+- Custom functions registered (can be called in Excel formulas)
+- User can run end-to-end simulation from UI
+- Accessibility basics implemented
+- Security documentation drafted
 
 ---
 

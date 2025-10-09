@@ -1,0 +1,16 @@
+/* Simulation Controls Styles */
+
+.simulation-controls {
+  padding: 16px;
+  background-color: #faf9f8;
+  border-radius: 8px;
+  border: 1px solid #e1dfdd;
+}
+
+.section-title {
+  font-weight: 600;
+  color: #263846;
+  border-bottom: 2px solid #01807e;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
