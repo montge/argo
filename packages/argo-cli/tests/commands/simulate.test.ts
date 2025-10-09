@@ -6,7 +6,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { runSimulation, parseConfig } from '../../src/commands/simulate';
+import { runSimulation, parseConfig, executeSimulateCommand } from '../../src/commands/simulate';
 
 describe('simulate command', () => {
   const testOutputDir = path.join(__dirname, '..', '..', 'test-output');
@@ -148,6 +148,135 @@ describe('simulate command', () => {
       // Z = X + Y, so mean(Z) ≈ mean(X) + mean(Y)
       const expectedMean = results.statistics.X.mean + results.statistics.Y.mean;
       expect(results.statistics.Z.mean).toBeCloseTo(expectedMean, 0);
+    });
+  });
+
+  describe('executeSimulateCommand', () => {
+    let consoleLogSpy: jest.SpyInstance;
+    let consoleErrorSpy: jest.SpyInstance;
+    let processExitSpy: jest.SpyInstance;
+    const testOutputPath = path.join(testOutputDir, 'results.json');
+
+    beforeEach(() => {
+      consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+      consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+      processExitSpy = jest.spyOn(process, 'exit').mockImplementation(() => undefined as never);
+
+      // Clean up output file
+      if (fs.existsSync(testOutputPath)) {
+        fs.unlinkSync(testOutputPath);
+      }
+    });
+
+    afterEach(() => {
+      consoleLogSpy.mockRestore();
+      consoleErrorSpy.mockRestore();
+      processExitSpy.mockRestore();
+
+      // Clean up
+      if (fs.existsSync(testOutputPath)) {
+        fs.unlinkSync(testOutputPath);
+      }
+    });
+
+    it('should print simulation header', () => {
+      executeSimulateCommand(testConfigPath);
+
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`Running simulation from: ${testConfigPath}`)
+      );
+    });
+
+    it('should print completion message with statistics', () => {
+      executeSimulateCommand(testConfigPath);
+
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Simulation complete!'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Iterations:'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Execution time:'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Performance:'));
+    });
+
+    it('should print results for all variables', () => {
+      executeSimulateCommand(testConfigPath);
+
+      // Should print results header
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Results (3 variables)')
+      );
+
+      // Should print variable names
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('X:'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Y:'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Z:'));
+
+      // Should print statistics (Mean, Median, etc.)
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Mean:'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Median:'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Std Dev:'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Min:'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Max:'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('P5:'));
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('P95:'));
+    });
+
+    it('should save results to JSON file when output option provided', () => {
+      executeSimulateCommand(testConfigPath, { output: testOutputPath });
+
+      // File should exist
+      expect(fs.existsSync(testOutputPath)).toBe(true);
+
+      // Should contain valid JSON
+      const content = fs.readFileSync(testOutputPath, 'utf-8');
+      const data = JSON.parse(content);
+
+      // Should have config and results
+      expect(data).toHaveProperty('config');
+      expect(data).toHaveProperty('results');
+      expect(data.results).toHaveProperty('statistics');
+      expect(data.results).toHaveProperty('executionTime');
+      expect(data.results).toHaveProperty('iterationsCompleted');
+
+      // Should print save confirmation
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`Results saved to: ${testOutputPath}`)
+      );
+    });
+
+    it('should include samples in output when verbose flag is set', () => {
+      executeSimulateCommand(testConfigPath, { output: testOutputPath, verbose: true });
+
+      const content = fs.readFileSync(testOutputPath, 'utf-8');
+      const data = JSON.parse(content);
+
+      // Should include samples
+      expect(data.results).toHaveProperty('samples');
+      expect(data.results.samples).toHaveProperty('X');
+      expect(data.results.samples.X.length).toBe(1000); // Iterations from config
+    });
+
+    it('should not include samples when verbose flag is false', () => {
+      executeSimulateCommand(testConfigPath, { output: testOutputPath, verbose: false });
+
+      const content = fs.readFileSync(testOutputPath, 'utf-8');
+      const data = JSON.parse(content);
+
+      // Should NOT include samples
+      expect(data.results).not.toHaveProperty('samples');
+    });
+
+    it('should handle errors and exit with code 1', () => {
+      const invalidPath = path.join(testOutputDir, 'nonexistent.json');
+
+      try {
+        executeSimulateCommand(invalidPath);
+      } catch (error) {
+        // Catch any errors that escape
+      }
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Error:')
+      );
+      expect(processExitSpy).toHaveBeenCalledWith(1);
     });
   });
 });

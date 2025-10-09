@@ -6,7 +6,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { generateTemplate } from '../../src/commands/generate';
+import { generateTemplate, executeGenerateCommand } from '../../src/commands/generate';
 
 describe('generate command', () => {
   const testOutputDir = path.join(__dirname, '..', '..', 'test-output');
@@ -109,6 +109,81 @@ describe('generate command', () => {
       // Check for proper indentation (2 spaces)
       expect(content).toContain('  "iterations"');
       expect(content).toContain('    "name"');
+    });
+  });
+
+  describe('executeGenerateCommand', () => {
+    let consoleLogSpy: jest.SpyInstance;
+    let consoleErrorSpy: jest.SpyInstance;
+    let processExitSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+      consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+      processExitSpy = jest.spyOn(process, 'exit').mockImplementation(() => undefined as never);
+    });
+
+    afterEach(() => {
+      consoleLogSpy.mockRestore();
+      consoleErrorSpy.mockRestore();
+      processExitSpy.mockRestore();
+    });
+
+    it('should print success message after generating template', () => {
+      executeGenerateCommand(testConfigPath, { overwrite: true });
+
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`Template configuration generated: ${testConfigPath}`)
+      );
+    });
+
+    it('should print usage instructions after generating', () => {
+      executeGenerateCommand(testConfigPath, { overwrite: true });
+
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Edit this file with your simulation parameters')
+      );
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`argo simulate ${testConfigPath}`)
+      );
+    });
+
+    it('should handle errors and exit with code 1', () => {
+      // Try to generate without overwrite when file exists
+      fs.writeFileSync(testConfigPath, 'existing');
+
+      // The error will be thrown, caught, logged, and process.exit called
+      // Since process.exit is mocked, execution continues
+      try {
+        executeGenerateCommand(testConfigPath, { overwrite: false });
+      } catch (error) {
+        // Catch any errors that escape the executeGenerateCommand error handling
+      }
+
+      // Verify error was logged
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Error:')
+      );
+      // Verify process.exit(1) was called
+      expect(processExitSpy).toHaveBeenCalledWith(1);
+
+      // Clean up for next tests
+      if (fs.existsSync(testConfigPath)) {
+        fs.unlinkSync(testConfigPath);
+      }
+    });
+
+    it('should use json format by default', () => {
+      executeGenerateCommand(testConfigPath, { overwrite: true });
+
+      const content = fs.readFileSync(testConfigPath, 'utf-8');
+      expect(() => JSON.parse(content)).not.toThrow();
+    });
+
+    it('should respect overwrite option', () => {
+      executeGenerateCommand(testConfigPath, { overwrite: true, format: 'json' });
+
+      expect(fs.existsSync(testConfigPath)).toBe(true);
     });
   });
 });

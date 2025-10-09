@@ -4,7 +4,7 @@
  * Following TDD - these tests are written BEFORE implementation
  */
 
-import { listDistributions } from '../../src/commands/distributions';
+import { listDistributions, executeDistributionsCommand } from '../../src/commands/distributions';
 
 describe('distributions command', () => {
   describe('listDistributions', () => {
@@ -104,6 +104,84 @@ describe('distributions command', () => {
 
       expect(continuous.length).toBe(10);
       expect(discrete.length).toBe(4);
+    });
+  });
+
+  describe('executeDistributionsCommand', () => {
+    let consoleLogSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+    });
+
+    afterEach(() => {
+      consoleLogSpy.mockRestore();
+    });
+
+    it('should print distribution count header', () => {
+      executeDistributionsCommand();
+
+      expect(consoleLogSpy).toHaveBeenCalledWith('\n📊 Argo Probability Distributions\n');
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Total: 14 distributions (10 continuous, 4 discrete)')
+      );
+    });
+
+    it('should print continuous distributions header', () => {
+      executeDistributionsCommand();
+
+      expect(consoleLogSpy).toHaveBeenCalledWith('Continuous Distributions:');
+    });
+
+    it('should print discrete distributions header', () => {
+      executeDistributionsCommand();
+
+      expect(consoleLogSpy).toHaveBeenCalledWith('\nDiscrete Distributions:');
+    });
+
+    it('should print all continuous distributions with descriptions', () => {
+      executeDistributionsCommand();
+
+      const continuousDistributions = ['Normal', 'Uniform', 'Triangular', 'LogNormal', 'Exponential',
+                                       'Beta', 'Gamma', 'Weibull', 'Pareto', 'PERT'];
+
+      for (const dist of continuousDistributions) {
+        expect(consoleLogSpy).toHaveBeenCalledWith(
+          expect.stringContaining(dist)
+        );
+      }
+    });
+
+    it('should print all discrete distributions with descriptions', () => {
+      executeDistributionsCommand();
+
+      const discreteDistributions = ['Binomial', 'Poisson', 'Geometric', 'Hypergeometric'];
+
+      for (const dist of discreteDistributions) {
+        expect(consoleLogSpy).toHaveBeenCalledWith(
+          expect.stringContaining(dist)
+        );
+      }
+    });
+
+    it('should print parameters for each distribution', () => {
+      executeDistributionsCommand();
+
+      // Check that Parameters: is printed for each distribution
+      const parameterCalls = consoleLogSpy.mock.calls.filter(call =>
+        call[0].includes('Parameters:')
+      );
+
+      // Should have 14 parameter lines (one for each distribution)
+      expect(parameterCalls.length).toBe(14);
+    });
+
+    it('should print GitHub URL at the end', () => {
+      executeDistributionsCommand();
+
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining('https://github.com/montge/argo')
+      );
     });
   });
 });

@@ -6,7 +6,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { validateConfig } from '../../src/commands/validate';
+import { validateConfig, executeValidateCommand } from '../../src/commands/validate';
 
 describe('validate command', () => {
   const testOutputDir = path.join(__dirname, '..', '..', 'test-output');
@@ -139,6 +139,90 @@ describe('validate command', () => {
       expect(result.valid).toBe(false);
 
       fs.unlinkSync(noDistPath);
+    });
+  });
+
+  describe('executeValidateCommand', () => {
+    let consoleLogSpy: jest.SpyInstance;
+    let consoleErrorSpy: jest.SpyInstance;
+    let processExitSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+      consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+      processExitSpy = jest.spyOn(process, 'exit').mockImplementation(() => undefined as never);
+    });
+
+    afterEach(() => {
+      consoleLogSpy.mockRestore();
+      consoleErrorSpy.mockRestore();
+      processExitSpy.mockRestore();
+    });
+
+    it('should print success message for valid configuration', () => {
+      executeValidateCommand(validConfigPath);
+
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`Configuration is valid: ${validConfigPath}`)
+      );
+    });
+
+    it('should print usage instructions for valid configuration', () => {
+      executeValidateCommand(validConfigPath);
+
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Ready to run simulation:')
+      );
+      expect(consoleLogSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`argo simulate ${validConfigPath}`)
+      );
+    });
+
+    it('should print error message and exit for invalid configuration', () => {
+      try {
+        executeValidateCommand(invalidConfigPath);
+      } catch (error) {
+        // Catch any errors that escape
+      }
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`Configuration is invalid: ${invalidConfigPath}`)
+      );
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Errors:')
+      );
+      expect(processExitSpy).toHaveBeenCalledWith(1);
+    });
+
+    it('should print all validation errors', () => {
+      try {
+        executeValidateCommand(invalidConfigPath);
+      } catch (error) {
+        // Catch any errors that escape
+      }
+
+      // Should print numbered error list
+      const errorCalls = consoleErrorSpy.mock.calls;
+      const hasNumberedErrors = errorCalls.some(call =>
+        call[0].match(/\d+\./)
+      );
+
+      expect(hasNumberedErrors).toBe(true);
+    });
+
+    it('should handle file read errors and exit', () => {
+      const nonexistentPath = path.join(testOutputDir, 'does-not-exist.json');
+
+      try {
+        executeValidateCommand(nonexistentPath);
+      } catch (error) {
+        // Catch any errors that escape
+      }
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Error:')
+      );
+      expect(processExitSpy).toHaveBeenCalledWith(1);
     });
   });
 });
