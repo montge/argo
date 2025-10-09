@@ -1,0 +1,46 @@
+{
+  "name": "@argo/excel",
+  "version": "5.0.0",
+  "description": "Argo Monte Carlo Simulation Add-in for Microsoft Excel",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src --ext ts,tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\""
+  },
+  "dependencies": {
+    "@argo/core": "file:../argo-core",
+    "@fluentui/react": "^8.119.1",
+    "@fluentui/react-icons": "^2.0.239",
+    "office-addin-manifest": "^1.13.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recharts": "^2.12.2"
+  },
+  "devDependencies": {
+    "@microsoft/office-js": "^1.1.91",
+    "@types/office-js": "^1.0.376",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.6",
+    "vite-plugin-static-copy": "^1.0.2"
+  },
+  "keywords": [
+    "excel",
+    "office-addin",
+    "monte-carlo",
+    "simulation",
+    "risk-analysis",
+    "statistics"
+  ],
+  "author": "Booz Allen Hamilton",
+  "license": "MIT"
+}

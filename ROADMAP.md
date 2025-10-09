@@ -2,7 +2,7 @@
 
 **Branch:** `office365-linux-rebuild`
 **Last Updated:** 2025-10-09
-**Status:** Phase 1 - Core Development (Sprint 8 ✅ COMPLETE | Sprint 9 🔜 NEXT)
+**Status:** Phase 3 - Excel Add-in Development (Sprint 9 🔄 IN PROGRESS)
 
 ---
 
@@ -578,8 +578,9 @@
 
 **Goal:** Excel add-in for Windows/Mac/Web
 
-### Sprint 9: Add-in Foundation
+### 🔄 Sprint 9: Add-in Foundation (IN PROGRESS)
 **Target Date:** Week of 2025-12-09
+**Platform:** Linux-compatible (Windows not required until Sprint 12)
 
 - [ ] **Project Setup**
   - [ ] Create package.json for argo-excel
@@ -709,12 +710,15 @@
 **Target Date:** Week of 2025-12-30
 **Prerequisites:** Sprint 9-11 complete (working Excel add-in)
 
+**⚠️ WINDOWS REQUIRED:** This sprint requires Windows with Excel 365 installed for screenshot capture and real Excel testing. Sprints 9-11 can be completed on Linux.
+
 **Focus:** Generate AppSource marketing materials using automated screenshot tools
 
 - [ ] **Screenshot Automation Setup**
+  - [ ] **Switch to Windows environment** (VM, dual-boot, or native Windows)
+  - [ ] Install Office 365 Excel Desktop for screenshot capture
+  - [ ] Sideload add-in in real Excel for testing
   - [ ] Research screenshot tools (Selenium, Puppeteer, Playwright)
-  - [ ] Set up Windows VM or Windows environment for Excel testing
-  - [ ] Install Office 365 Excel for screenshot capture
   - [ ] Create automated screenshot script
   - [ ] Document screenshot capture process
 

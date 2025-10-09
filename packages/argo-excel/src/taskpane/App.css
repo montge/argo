@@ -1,0 +1,62 @@
+/* Argo Task Pane Styles - Booz Allen Hamilton Brand Colors */
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #01807e 0%, #263846 100%);
+  padding: 16px 20px;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-icon {
+  font-size: 32px;
+  color: #ffffff;
+}
+
+.header-title {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.header-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.app-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.app-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #e1dfdd;
+  background-color: #faf9f8;
+}
+
+.footer-text {
+  color: #666666;
+  text-align: center;
+}
+
+/* Fluent UI overrides for brand colors */
+button[class*="ms-Button--primary"] {
+  background-color: #01807e;
+  border-color: #01807e;
+}
+
+button[class*="ms-Button--primary"]:hover {
+  background-color: #019b98;
+  border-color: #019b98;
+}
+
+button[class*="ms-Button--primary"]:active {
+  background-color: #017270;
+  border-color: #017270;
+}

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+           xsi:type="TaskPaneApp">
+
+  <!-- Basic Settings -->
+  <Id>d8f8c8d0-8c8c-4c8c-8c8c-8c8c8c8c8c8c</Id>
+  <Version>5.0.0</Version>
+  <ProviderName>Booz Allen Hamilton</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Argo - Monte Carlo Simulation"/>
+  <Description DefaultValue="Professional Monte Carlo simulation and risk analysis for Excel"/>
+  <IconUrl DefaultValue="https://localhost:3000/assets/icons/logo-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icons/logo-128.png"/>
+  <SupportUrl DefaultValue="https://github.com/boozallen/argo"/>
+
+  <!-- Hosts -->
+  <Hosts>
+    <Host Name="Workbook"/>
+  </Hosts>
+
+  <!-- Default Settings -->
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://localhost:3000/index.html"/>
+  </DefaultSettings>
+
+  <!-- Permissions -->
+  <Permissions>ReadWriteDocument</Permissions>
+
+  <!-- Version Overrides for Modern Hosts -->
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+
+    <Hosts>
+      <Host xsi:type="Workbook">
+
+        <!-- Runtimes -->
+        <Runtimes>
+          <Runtime resid="Taskpane.Url" lifetime="long"/>
+          <Runtime resid="Functions.Url" lifetime="long"/>
+        </Runtimes>
+
+        <!-- Task Pane -->
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="GetStarted.Title"/>
+            <Description resid="GetStarted.Description"/>
+            <LearnMoreUrl resid="GetStarted.LearnMoreUrl"/>
+          </GetStarted>
+
+          <!-- Ribbon -->
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabHome">
+              <Group id="ArgoGroup">
+                <Label resid="ArgoGroup.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+
+                <!-- Run Simulation Button -->
+                <Control xsi:type="Button" id="SimulateButton">
+                  <Label resid="Simulate.Label"/>
+                  <Supertip>
+                    <Title resid="Simulate.Label"/>
+                    <Description resid="Simulate.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Simulate.16x16"/>
+                    <bt:Image size="32" resid="Simulate.32x32"/>
+                    <bt:Image size="80" resid="Simulate.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ArgoTaskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+
+                <!-- Distribution Builder Button -->
+                <Control xsi:type="Button" id="BuilderButton">
+                  <Label resid="Builder.Label"/>
+                  <Supertip>
+                    <Title resid="Builder.Label"/>
+                    <Description resid="Builder.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Builder.16x16"/>
+                    <bt:Image size="32" resid="Builder.32x32"/>
+                    <bt:Image size="80" resid="Builder.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ArgoTaskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+
+                <!-- Dashboard Button -->
+                <Control xsi:type="Button" id="DashboardButton">
+                  <Label resid="Dashboard.Label"/>
+                  <Supertip>
+                    <Title resid="Dashboard.Label"/>
+                    <Description resid="Dashboard.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Dashboard.16x16"/>
+                    <bt:Image size="32" resid="Dashboard.32x32"/>
+                    <bt:Image size="80" resid="Dashboard.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ArgoTaskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+
+          <!-- Task Pane -->
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <CustomTab id="ArgoTab">
+              <Group id="ArgoGroup">
+                <Label resid="ArgoGroup.Label"/>
+                <!-- Same buttons as above -->
+              </Group>
+              <Label resid="ArgoTab.Label"/>
+            </CustomTab>
+          </ExtensionPoint>
+
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <!-- Resources -->
+    <Resources>
+      <bt:Images>
+        <!-- Logo Icons -->
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icons/logo-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icons/logo-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icons/logo-80.png"/>
+
+        <!-- Simulate Icons -->
+        <bt:Image id="Simulate.16x16" DefaultValue="https://localhost:3000/assets/icons/ribbon-simulate-32.png"/>
+        <bt:Image id="Simulate.32x32" DefaultValue="https://localhost:3000/assets/icons/ribbon-simulate-32.png"/>
+        <bt:Image id="Simulate.80x80" DefaultValue="https://localhost:3000/assets/icons/ribbon-simulate-80.png"/>
+
+        <!-- Builder Icons -->
+        <bt:Image id="Builder.16x16" DefaultValue="https://localhost:3000/assets/icons/ribbon-builder-32.png"/>
+        <bt:Image id="Builder.32x32" DefaultValue="https://localhost:3000/assets/icons/ribbon-builder-32.png"/>
+        <bt:Image id="Builder.80x80" DefaultValue="https://localhost:3000/assets/icons/ribbon-builder-80.png"/>
+
+        <!-- Dashboard Icons -->
+        <bt:Image id="Dashboard.16x16" DefaultValue="https://localhost:3000/assets/icons/ribbon-dashboard-32.png"/>
+        <bt:Image id="Dashboard.32x32" DefaultValue="https://localhost:3000/assets/icons/ribbon-dashboard-32.png"/>
+        <bt:Image id="Dashboard.80x80" DefaultValue="https://localhost:3000/assets/icons/ribbon-dashboard-80.png"/>
+      </bt:Images>
+
+      <bt:Urls>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/index.html"/>
+        <bt:Url id="Functions.Url" DefaultValue="https://localhost:3000/functions.html"/>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://github.com/boozallen/argo"/>
+      </bt:Urls>
+
+      <bt:ShortStrings>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with Argo"/>
+        <bt:String id="ArgoGroup.Label" DefaultValue="Argo"/>
+        <bt:String id="ArgoTab.Label" DefaultValue="Argo"/>
+        <bt:String id="Simulate.Label" DefaultValue="Run Simulation"/>
+        <bt:String id="Builder.Label" DefaultValue="Builder"/>
+        <bt:String id="Dashboard.Label" DefaultValue="Dashboard"/>
+      </bt:ShortStrings>
+
+      <bt:LongStrings>
+        <bt:String id="GetStarted.Description" DefaultValue="Monte Carlo simulation and risk analysis for Excel"/>
+        <bt:String id="Simulate.Tooltip" DefaultValue="Run Monte Carlo simulation on your data"/>
+        <bt:String id="Builder.Tooltip" DefaultValue="Build and configure probability distributions"/>
+        <bt:String id="Dashboard.Tooltip" DefaultValue="View simulation results and statistics"/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
