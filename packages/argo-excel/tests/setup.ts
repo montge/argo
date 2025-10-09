@@ -1,7 +1,5 @@
 /**
  * Jest setup file for argo-excel tests
- *
- * Tests will be added in Sprint 11
  */
 
 // Mock Office.js
@@ -19,3 +17,10 @@ global.Office = {
 global.Excel = {
   run: jest.fn()
 } as any;
+
+// Mock ResizeObserver for Recharts
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn()
+}));
