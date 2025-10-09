@@ -1,0 +1,172 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/office-js/custom-functions.schema.json",
+  "functions": [
+    {
+      "id": "ARGONORMAL",
+      "name": "ARGO.NORMAL",
+      "description": "Returns a random sample from a Normal distribution",
+      "helpUrl": "https://github.com/boozallen/argo",
+      "result": {
+        "type": "number"
+      },
+      "parameters": [
+        {
+          "name": "mean",
+          "description": "The mean (μ) of the distribution",
+          "type": "number"
+        },
+        {
+          "name": "stddev",
+          "description": "The standard deviation (σ) of the distribution",
+          "type": "number"
+        }
+      ],
+      "options": {
+        "volatile": true
+      }
+    },
+    {
+      "id": "ARGOUNIFORM",
+      "name": "ARGO.UNIFORM",
+      "description": "Returns a random sample from a Uniform distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "min", "description": "Minimum value", "type": "number" },
+        { "name": "max", "description": "Maximum value", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOTRIANGULAR",
+      "name": "ARGO.TRIANGULAR",
+      "description": "Returns a random sample from a Triangular distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "min", "description": "Minimum value", "type": "number" },
+        { "name": "mode", "description": "Most likely value", "type": "number" },
+        { "name": "max", "description": "Maximum value", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOLOGNORMAL",
+      "name": "ARGO.LOGNORMAL",
+      "description": "Returns a random sample from a Log-Normal distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "mu", "description": "μ (log scale mean)", "type": "number" },
+        { "name": "sigma", "description": "σ (log scale stddev)", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOEXPONENTIAL",
+      "name": "ARGO.EXPONENTIAL",
+      "description": "Returns a random sample from an Exponential distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "lambda", "description": "Rate parameter (λ)", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOBETA",
+      "name": "ARGO.BETA",
+      "description": "Returns a random sample from a Beta distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "alpha", "description": "Alpha (α) shape parameter", "type": "number" },
+        { "name": "beta", "description": "Beta (β) shape parameter", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOGAMMA",
+      "name": "ARGO.GAMMA",
+      "description": "Returns a random sample from a Gamma distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "shape", "description": "Shape (k)", "type": "number" },
+        { "name": "scale", "description": "Scale (θ)", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOWEIBULL",
+      "name": "ARGO.WEIBULL",
+      "description": "Returns a random sample from a Weibull distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "shape", "description": "Shape (k)", "type": "number" },
+        { "name": "scale", "description": "Scale (λ)", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOPARETO",
+      "name": "ARGO.PARETO",
+      "description": "Returns a random sample from a Pareto distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "shape", "description": "Shape (α)", "type": "number" },
+        { "name": "scale", "description": "Scale (xₘ)", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOPERT",
+      "name": "ARGO.PERT",
+      "description": "Returns a random sample from a PERT distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "min", "description": "Minimum value", "type": "number" },
+        { "name": "mode", "description": "Most likely value", "type": "number" },
+        { "name": "max", "description": "Maximum value", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOBINOMIAL",
+      "name": "ARGO.BINOMIAL",
+      "description": "Returns a random sample from a Binomial distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "n", "description": "Number of trials", "type": "number" },
+        { "name": "p", "description": "Probability of success", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOPOISSON",
+      "name": "ARGO.POISSON",
+      "description": "Returns a random sample from a Poisson distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "lambda", "description": "Rate parameter (λ)", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOGEOMETRIC",
+      "name": "ARGO.GEOMETRIC",
+      "description": "Returns a random sample from a Geometric distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "p", "description": "Probability of success", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    },
+    {
+      "id": "ARGOHYPERGEOMETRIC",
+      "name": "ARGO.HYPERGEOMETRIC",
+      "description": "Returns a random sample from a Hypergeometric distribution",
+      "result": { "type": "number" },
+      "parameters": [
+        { "name": "N", "description": "Population size", "type": "number" },
+        { "name": "K", "description": "Number of successes in population", "type": "number" },
+        { "name": "n", "description": "Number of draws", "type": "number" }
+      ],
+      "options": { "volatile": true }
+    }
+  ]
+}

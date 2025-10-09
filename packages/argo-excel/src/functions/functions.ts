@@ -1,56 +1,118 @@
 /**
  * Argo Custom Functions for Excel
  *
- * These functions provide Monte Carlo simulation capabilities
- * directly in Excel formulas.
+ * All 14 distributions available as Excel formulas
+ * Usage: =ARGO.NORMAL(100, 15)
  */
 
-import { NormalDistribution, UniformDistribution, TriangularDistribution, SimpleRNG } from '@argo/core';
+import {
+  NormalDistribution,
+  UniformDistribution,
+  TriangularDistribution,
+  LogNormalDistribution,
+  ExponentialDistribution,
+  BetaDistribution,
+  GammaDistribution,
+  WeibullDistribution,
+  ParetoDistribution,
+  PERTDistribution,
+  BinomialDistribution,
+  PoissonDistribution,
+  GeometricDistribution,
+  HypergeometricDistribution,
+  SimpleRNG
+} from '@argo/core';
 
-// Initialize RNG (can be seeded for reproducibility)
+// Initialize RNG (volatile - recalculates on each refresh)
 const rng = new SimpleRNG(Date.now());
 
-/**
- * Generates a random sample from a Normal distribution
- * @customfunction ARGO.NORMAL
- * @param mean The mean of the distribution
- * @param stddev The standard deviation of the distribution
- * @returns A random sample from the Normal distribution
- */
-export function normal(mean: number, stddev: number): number {
+/** @customfunction */
+export function ARGONORMAL(mean: number, stddev: number): number {
   const dist = new NormalDistribution(mean, stddev);
   return dist.sample(rng);
 }
 
-/**
- * Generates a random sample from a Uniform distribution
- * @customfunction ARGO.UNIFORM
- * @param min The minimum value
- * @param max The maximum value
- * @returns A random sample from the Uniform distribution
- */
-export function uniform(min: number, max: number): number {
+/** @customfunction */
+export function ARGOUNIFORM(min: number, max: number): number {
   const dist = new UniformDistribution(min, max);
   return dist.sample(rng);
 }
 
-/**
- * Generates a random sample from a Triangular distribution
- * @customfunction ARGO.TRIANGULAR
- * @param min The minimum value
- * @param mode The most likely value
- * @param max The maximum value
- * @returns A random sample from the Triangular distribution
- */
-export function triangular(min: number, mode: number, max: number): number {
+/** @customfunction */
+export function ARGOTRIANGULAR(min: number, mode: number, max: number): number {
   const dist = new TriangularDistribution(min, mode, max);
   return dist.sample(rng);
 }
 
-// Register custom functions with Office.js
+/** @customfunction */
+export function ARGOLOGNORMAL(mu: number, sigma: number): number {
+  const dist = new LogNormalDistribution(mu, sigma);
+  return dist.sample(rng);
+}
+
+/** @customfunction */
+export function ARGOEXPONENTIAL(lambda: number): number {
+  const dist = new ExponentialDistribution(lambda);
+  return dist.sample(rng);
+}
+
+/** @customfunction */
+export function ARGOBETA(alpha: number, beta: number): number {
+  const dist = new BetaDistribution(alpha, beta);
+  return dist.sample(rng);
+}
+
+/** @customfunction */
+export function ARGOGAMMA(shape: number, scale: number): number {
+  const dist = new GammaDistribution(shape, scale);
+  return dist.sample(rng);
+}
+
+/** @customfunction */
+export function ARGOWEIBULL(shape: number, scale: number): number {
+  const dist = new WeibullDistribution(shape, scale);
+  return dist.sample(rng);
+}
+
+/** @customfunction */
+export function ARGOPARETO(shape: number, scale: number): number {
+  const dist = new ParetoDistribution(shape, scale);
+  return dist.sample(rng);
+}
+
+/** @customfunction */
+export function ARGOPERT(min: number, mode: number, max: number): number {
+  const dist = new PERTDistribution(min, mode, max);
+  return dist.sample(rng);
+}
+
+/** @customfunction */
+export function ARGOBINOMIAL(n: number, p: number): number {
+  const dist = new BinomialDistribution(n, p);
+  return dist.sample(rng);
+}
+
+/** @customfunction */
+export function ARGOPOISSON(lambda: number): number {
+  const dist = new PoissonDistribution(lambda);
+  return dist.sample(rng);
+}
+
+/** @customfunction */
+export function ARGOGEOMETRIC(p: number): number {
+  const dist = new GeometricDistribution(p);
+  return dist.sample(rng);
+}
+
+/** @customfunction */
+export function ARGOHYPERGEOMETRIC(N: number, K: number, n: number): number {
+  const dist = new HypergeometricDistribution(N, K, n);
+  return dist.sample(rng);
+}
+
+// Register with Office.js
 if (typeof Office !== 'undefined') {
   Office.onReady(() => {
-    // Custom functions are auto-registered via manifest
-    console.log('Argo custom functions loaded');
+    console.log('Argo: 14 custom functions registered');
   });
 }
