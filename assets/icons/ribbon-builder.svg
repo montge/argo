@@ -4,17 +4,19 @@
 
   <defs>
     <style>
-      .icon-dark { fill: #100e0d; }
-      .icon-stroke { fill: none; stroke: #100e0d; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .icon-teal { fill: #01807e; }
+      .icon-navy { fill: #263846; }
+      .icon-stroke-teal { fill: none; stroke: #01807e; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+      .icon-stroke-navy { fill: none; stroke: #263846; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
     </style>
   </defs>
 
-  <!-- Graph axes -->
-  <line class="icon-stroke" x1="15" y1="60" x2="65" y2="60" stroke-width="2.5"/>
-  <line class="icon-stroke" x1="15" y1="20" x2="15" y2="60" stroke-width="2.5"/>
+  <!-- Graph axes in NAVY -->
+  <line class="icon-stroke-navy" x1="15" y1="60" x2="65" y2="60"/>
+  <line class="icon-stroke-navy" x1="15" y1="20" x2="15" y2="60"/>
 
-  <!-- Bell curve (normal distribution) -->
-  <path class="icon-stroke" d="
+  <!-- Bell curve (normal distribution) in TEAL -->
+  <path class="icon-stroke-teal" d="
     M 20 58
     Q 25 50, 30 42
     Q 35 30, 40 25
@@ -22,13 +24,13 @@
     Q 55 50, 60 58
   " stroke-width="3"/>
 
-  <!-- Grid dots -->
-  <circle class="icon-dark" cx="25" cy="55" r="1"/>
-  <circle class="icon-dark" cx="35" cy="55" r="1"/>
-  <circle class="icon-dark" cx="45" cy="55" r="1"/>
-  <circle class="icon-dark" cx="55" cy="55" r="1"/>
+  <!-- Grid dots in NAVY -->
+  <circle class="icon-navy" cx="25" cy="55" r="1.5"/>
+  <circle class="icon-navy" cx="35" cy="55" r="1.5"/>
+  <circle class="icon-navy" cx="45" cy="55" r="1.5"/>
+  <circle class="icon-navy" cx="55" cy="55" r="1.5"/>
 
-  <!-- Axis arrows -->
-  <path class="icon-dark" d="M 15 18 L 12 23 L 18 23 Z"/>
-  <path class="icon-dark" d="M 67 60 L 62 57 L 62 63 Z"/>
+  <!-- Axis arrows in NAVY -->
+  <path class="icon-navy" d="M 15 18 L 12 23 L 18 23 Z"/>
+  <path class="icon-navy" d="M 67 60 L 62 57 L 62 63 Z"/>
 </svg>

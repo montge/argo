@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-  <!-- Argo Logo v5.0 - Honoring original grayscale heritage -->
-  <!-- Design: Stylized 'A' with statistical curve integrated -->
+  <!-- Argo Logo v5.0 - Booz Allen Hamilton Colorful Brand Palette -->
+  <!-- Design: Stylized 'A' with statistical curve - TEAL primary color -->
 
   <defs>
     <style>
-      .logo-dark { fill: #100e0d; }
-      .logo-curve { fill: none; stroke: #100e0d; stroke-width: 3; stroke-linecap: round; }
+      .logo-teal { fill: #01807e; }
+      .logo-navy { fill: #263846; }
+      .logo-curve { fill: none; stroke: #01807e; stroke-width: 3; stroke-linecap: round; }
     </style>
   </defs>
 
-  <!-- Background circle (subtle) -->
-  <circle cx="64" cy="64" r="60" fill="#f0f0f0" opacity="0.3"/>
+  <!-- Background circle (subtle teal) -->
+  <circle cx="64" cy="64" r="60" fill="#01807e" opacity="0.08"/>
 
-  <!-- Main 'A' letter shape -->
-  <path class="logo-dark" d="
+  <!-- Main 'A' letter shape in TEAL (primary brand color) -->
+  <path class="logo-teal" d="
     M 40 90
     L 64 30
     L 88 90
@@ -24,8 +25,8 @@
     Z
   "/>
 
-  <!-- Horizontal bar of 'A' with integrated distribution curve -->
-  <path class="logo-dark" d="
+  <!-- Horizontal bar of 'A' in NAVY BLUE (accent) -->
+  <path class="logo-navy" d="
     M 52 70
     L 76 70
     L 76 75
@@ -33,7 +34,7 @@
     Z
   "/>
 
-  <!-- Statistical bell curve integrated into design -->
+  <!-- Statistical bell curve in TEAL (brand color) -->
   <path class="logo-curve" d="
     M 35 100
     Q 45 85, 55 82
@@ -41,16 +42,16 @@
     Q 83 85, 93 100
   " stroke-width="2.5"/>
 
-  <!-- Three dots representing Monte Carlo sampling -->
-  <circle class="logo-dark" cx="48" cy="102" r="2"/>
-  <circle class="logo-dark" cx="64" cy="100" r="2"/>
-  <circle class="logo-dark" cx="80" cy="102" r="2"/>
+  <!-- Three dots representing Monte Carlo sampling in NAVY BLUE -->
+  <circle class="logo-navy" cx="48" cy="102" r="2.5"/>
+  <circle class="logo-navy" cx="64" cy="100" r="2.5"/>
+  <circle class="logo-navy" cx="80" cy="102" r="2.5"/>
 
-  <!-- Text: ARGO (below the symbol) -->
+  <!-- Text: ARGO in TEAL (brand color) -->
   <text x="64" y="118"
         font-family="Segoe UI, Arial, sans-serif"
         font-size="14"
         font-weight="600"
-        fill="#100e0d"
+        fill="#01807e"
         text-anchor="middle">ARGO</text>
 </svg>

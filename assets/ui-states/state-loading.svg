@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .spinner { fill: none; stroke: #0078d4; stroke-width: 2; stroke-linecap: round; }
+    .spinner { fill: none; stroke: #01807e; stroke-width: 2; stroke-linecap: round; }
   </style>
-  <!-- Loading spinner (3 dots in circular pattern) -->
+  <!-- Loading spinner (3 dots in circular pattern) - TEAL brand color -->
   <circle class="spinner" cx="12" cy="5" r="2" opacity="1.0"/>
   <circle class="spinner" cx="18" cy="12" r="2" opacity="0.6"/>
   <circle class="spinner" cx="12" cy="19" r="2" opacity="0.3"/>

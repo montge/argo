@@ -12,15 +12,16 @@ This document defines the visual design system for the Argo Monte Carlo Simulati
 
 ### Primary Colors
 
-Inspired by Booz Allen Hamilton's professional, minimalist brand aesthetic:
+Inspired by Booz Allen Hamilton's professional brand palette:
 
 | Color Name | Hex Code | RGB | Usage |
 |------------|----------|-----|-------|
-| **Primary Dark** | `#100e0d` | rgb(16, 14, 13) | Primary text, icons, emphasis elements |
+| **Primary Dark** | `#100e0d` | rgb(16, 14, 13) | Primary text, emphasis elements |
+| **Teal** | `#01807e` | rgb(1, 128, 126) | **PRIMARY BRAND COLOR** - Logo, key icons, interactive elements |
+| **Navy Blue** | `#263846` | rgb(38, 56, 70) | Secondary brand color, headers, accents |
+| **Medium Gray** | `#666666` | rgb(102, 102, 102) | Secondary text, borders |
 | **White** | `#ffffff` | rgb(255, 255, 255) | Backgrounds, inverse text |
-| **Light Gray** | `#f0f0f0` | rgb(240, 240, 240) | Borders, dividers, subtle backgrounds |
-| **Medium Gray** | `#888888` | rgb(136, 136, 136) | Secondary text, disabled states |
-| **Dark Gray** | `#333333` | rgb(51, 51, 51) | Headers, strong text |
+| **Light Gray** | `#eeeeee` | rgb(238, 238, 238) | Subtle backgrounds, dividers |
 
 ### Accent Colors
 
@@ -28,11 +29,11 @@ For data visualization and functional UI states:
 
 | Color Name | Hex Code | RGB | Usage |
 |------------|----------|-----|-------|
-| **Accent Blue** | `#0078d4` | rgb(0, 120, 212) | Links, interactive elements (Fluent UI blue) |
+| **Accent Teal** | `#00b7c3` | rgb(0, 183, 195) | Bright teal for highlights, interactive hover states |
 | **Success Green** | `#107c10` | rgb(16, 124, 16) | Success states, positive indicators |
-| **Warning Yellow** | `#ffaa44` | rgb(255, 170, 68) | Warning states, caution |
+| **Warning Orange** | `#ff8c00` | rgb(255, 140, 0) | Warning states, caution |
 | **Error Red** | `#d13438` | rgb(209, 52, 56) | Error states, critical alerts |
-| **Info Blue** | `#00b7c3` | rgb(0, 183, 195) | Informational messages |
+| **Info Blue** | `#0078d4` | rgb(0, 120, 212) | Informational messages (Fluent UI) |
 
 ### Chart/Distribution Colors
 
@@ -40,11 +41,12 @@ For Monte Carlo simulations and distribution visualizations:
 
 | Color Name | Hex Code | Purpose |
 |------------|----------|---------|
-| **Chart Blue** | `#4472c4` | Primary distribution curves |
-| **Chart Orange** | `#ed7d31` | Secondary/comparison distributions |
+| **Chart Teal** | `#01807e` | Primary distribution curves (brand color) |
+| **Chart Navy** | `#263846` | Secondary/comparison distributions |
 | **Chart Green** | `#70ad47` | Success zones, target ranges |
+| **Chart Orange** | `#ed7d31` | Alternative data series |
 | **Chart Purple** | `#9e4baf` | Correlation indicators |
-| **Chart Teal** | `#5b9bd5` | Alternative data series |
+| **Chart Blue** | `#4472c4` | Additional data series |
 
 ## Typography
 
@@ -71,11 +73,11 @@ Following Office Add-in best practices and Fluent UI:
 
 ### General Principles
 
-1. **Style:** Minimalist, line-based icons (2px stroke weight)
+1. **Style:** Modern, colorful icons with clean lines (2px stroke weight)
 2. **Size:** Design at highest resolution (128x128), scale down
 3. **Padding:** 10% internal padding for all icons
 4. **Format:** PNG with transparency (alpha channel) + SVG source
-5. **Color:** Primary Dark (#100e0d) on transparent background
+5. **Color:** **Teal (#01807e) as primary color**, Navy (#263846) for accents, Dark (#100e0d) for details
 6. **Simplicity:** Maximum 3-4 visual elements per icon
 
 ### Icon Sizes
@@ -95,8 +97,8 @@ Following Office Add-in best practices and Fluent UI:
 
 **Argo Logo Design:**
 - **Concept:** Stylized "A" incorporating statistical/distribution curve
-- **Style:** Clean, geometric, professional
-- **Colors:** Primary Dark (#100e0d) on transparent
+- **Style:** Clean, geometric, professional with vibrant teal
+- **Colors:** **Primary: Teal (#01807e)**, Accent: Navy (#263846), Details: Dark (#100e0d)
 - **Variations:**
   - Full logo with text (128x128)
   - Icon only (64x64, 32x32, 16x16)

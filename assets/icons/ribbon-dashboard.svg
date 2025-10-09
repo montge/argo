@@ -4,32 +4,34 @@
 
   <defs>
     <style>
-      .icon-dark { fill: #100e0d; }
-      .icon-stroke { fill: none; stroke: #100e0d; stroke-width: 2; stroke-linecap: round; }
+      .icon-teal { fill: #01807e; }
+      .icon-navy { fill: #263846; }
+      .icon-stroke-navy { fill: none; stroke: #263846; stroke-width: 2.5; stroke-linecap: round; }
+      .icon-stroke-teal { fill: none; stroke: #01807e; stroke-width: 2; stroke-linecap: round; }
     </style>
   </defs>
 
-  <!-- Outer frame -->
-  <rect x="15" y="15" width="50" height="50" rx="2" class="icon-stroke" stroke-width="2.5"/>
+  <!-- Outer frame in NAVY -->
+  <rect x="15" y="15" width="50" height="50" rx="2" class="icon-stroke-navy"/>
 
   <!-- Vertical divider -->
-  <line class="icon-stroke" x1="40" y1="15" x2="40" y2="65" stroke-width="2.5"/>
+  <line class="icon-stroke-navy" x1="40" y1="15" x2="40" y2="65"/>
 
   <!-- Horizontal divider -->
-  <line class="icon-stroke" x1="15" y1="40" x2="65" y2="65" stroke-width="2.5"/>
+  <line class="icon-stroke-navy" x1="15" y1="40" x2="65" y2="40"/>
 
-  <!-- Top-left panel: Bar chart -->
-  <rect class="icon-dark" x="20" y="30" width="4" height="8"/>
-  <rect class="icon-dark" x="26" y="25" width="4" height="13"/>
-  <rect class="icon-dark" x="32" y="28" width="4" height="10"/>
+  <!-- Top-left panel: Bar chart in TEAL -->
+  <rect class="icon-teal" x="20" y="30" width="4" height="8"/>
+  <rect class="icon-teal" x="26" y="25" width="4" height="13"/>
+  <rect class="icon-teal" x="32" y="28" width="4" height="10"/>
 
-  <!-- Top-right panel: Line chart -->
-  <path class="icon-stroke" d="M 45 30 L 50 25 L 55 28 L 60 22" stroke-width="2"/>
+  <!-- Top-right panel: Line chart in TEAL -->
+  <path class="icon-stroke-teal" d="M 45 30 L 50 25 L 55 28 L 60 22" stroke-width="2"/>
 
-  <!-- Bottom-left panel: Pie chart -->
-  <circle class="icon-stroke" cx="27" cy="52" r="8" stroke-width="2"/>
-  <path class="icon-dark" d="M 27 44 L 27 52 L 35 52 Z"/>
+  <!-- Bottom-left panel: Pie chart in TEAL -->
+  <circle class="icon-stroke-teal" cx="27" cy="52" r="8" stroke-width="2"/>
+  <path class="icon-teal" d="M 27 44 L 27 52 L 35 52 Z"/>
 
-  <!-- Bottom-right panel: Number display -->
-  <text x="52" y="57" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#100e0d" text-anchor="middle">95%</text>
+  <!-- Bottom-right panel: Number display in TEAL -->
+  <text x="52" y="57" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#01807e" text-anchor="middle">95%</text>
 </svg>

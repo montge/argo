@@ -4,24 +4,24 @@
 
   <defs>
     <style>
-      .icon-dark { fill: #100e0d; }
-      .icon-stroke { fill: none; stroke: #100e0d; stroke-width: 2; stroke-linecap: round; }
+      .icon-teal { fill: #01807e; }
+      .icon-stroke-teal { fill: none; stroke: #01807e; stroke-width: 3; stroke-linecap: round; }
     </style>
   </defs>
 
-  <!-- Outer circle -->
-  <circle class="icon-stroke" cx="40" cy="40" r="28" stroke-width="3"/>
+  <!-- Outer circle in TEAL -->
+  <circle class="icon-stroke-teal" cx="40" cy="40" r="28"/>
 
-  <!-- Question mark -->
-  <path class="icon-dark" d="
+  <!-- Question mark in TEAL -->
+  <path d="
     M 32 28
     Q 32 22, 40 22
     Q 48 22, 48 28
     Q 48 32, 44 35
     Q 40 38, 40 42
     L 40 46
-  " fill="none" stroke="#100e0d" stroke-width="3.5" stroke-linecap="round"/>
+  " fill="none" stroke="#01807e" stroke-width="3.5" stroke-linecap="round"/>
 
-  <!-- Dot of question mark -->
-  <circle class="icon-dark" cx="40" cy="54" r="3"/>
+  <!-- Dot of question mark in TEAL -->
+  <circle class="icon-teal" cx="40" cy="54" r="3"/>
 </svg>
