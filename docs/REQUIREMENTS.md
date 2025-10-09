@@ -176,6 +176,73 @@ Argo is a Monte Carlo simulation add-in for Microsoft Excel that enables:
   - Support 50+ output cells simultaneously
   - Handle spreadsheets with 10,000+ formula cells
 
+### 2.5 Documentation & Tutorials
+
+#### FR-027: Jupyter Notebook Tutorials
+- **Priority:** High
+- **Description:** Provide comprehensive Jupyter notebook tutorials for all features
+- **Requirements:**
+  - **Feature-Focused Structure:** Organize notebooks by feature domain, not by development sprint
+  - **Notebook Coverage:**
+    - `01-distributions.ipynb` - All 14 probability distributions with parameters and examples
+    - `02-statistics.ipynb` - Descriptive statistics, percentiles, confidence intervals
+    - `03-risk-analysis.ipynb` - Value at Risk (VaR), CVaR, probability metrics
+    - `04-monte-carlo.ipynb` - Simulation engine, correlations, formula evaluation
+    - `05-cli-usage.ipynb` - Command-line tool usage and configuration files
+    - Additional notebooks for Excel add-in and advanced features as developed
+  - **Tutorial Requirements:**
+    - Executable code examples for every major feature
+    - Visual outputs (charts, tables, distributions)
+    - Clear explanations with markdown cells
+    - Real-world use cases and scenarios
+    - TypeScript code compatible with tslab kernel
+  - **Maintenance:**
+    - Update notebooks whenever features are added or modified
+    - Include notebook updates in sprint success criteria
+    - Keep notebooks synchronized with codebase functionality
+  - **Accessibility:**
+    - All notebooks must execute successfully in Jupyter environment
+    - Compatible with Docker container setup (provided)
+    - Support both local and cloud notebook environments
+
+#### FR-028: Automated Notebook Testing
+- **Priority:** High
+- **Description:** Implement automated testing infrastructure for Jupyter notebooks
+- **Requirements:**
+  - **Local Testing:**
+    - Shell script (`notebooks/test-notebooks.sh`) for headless execution
+    - Use `jupyter nbconvert --execute` for non-interactive testing
+    - Validate that all notebooks execute without errors
+    - Check for broken imports, missing dependencies, runtime exceptions
+    - Generate execution reports with pass/fail status
+  - **CI/CD Integration:**
+    - GitHub Actions workflow for notebook testing
+    - Install Node.js, Python, Jupyter, tslab in CI environment
+    - Build argo-core package before running notebook tests
+    - Execute all notebooks headlessly on every push to main branches
+    - Fail CI pipeline if any notebook fails to execute
+    - Archive executed notebooks as CI artifacts
+  - **Test Validation:**
+    - Verify notebooks execute to completion (exit code 0)
+    - Check that all cells run without exceptions
+    - Validate output cells contain expected data types
+    - Ensure no cells timeout or hang indefinitely
+  - **Documentation:**
+    - Document testing process in `notebooks/README.md`
+    - Provide troubleshooting guide for common notebook errors
+    - Include instructions for adding new notebooks to test suite
+  - **Performance:**
+    - Notebook test suite should complete within 5 minutes
+    - Individual notebooks should execute within 2 minutes
+    - Optimize computationally intensive examples for CI environment
+
+**Success Criteria:**
+- All notebooks execute successfully in local environment
+- All notebooks pass automated testing in CI/CD pipeline
+- Notebooks cover 100% of public API features
+- Test failures block merges to main branches
+- Clear error messages for debugging failed notebooks
+
 ---
 
 ## 3. Non-Functional Requirements
@@ -413,3 +480,4 @@ argo-office365/
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0 | 2025-10-07 | Claude Code (AI) | Initial requirements document from modern rebuild |
+| 1.1 | 2025-10-09 | Claude Code (AI) | Added FR-027 (Jupyter Notebook Tutorials) and FR-028 (Automated Notebook Testing) |

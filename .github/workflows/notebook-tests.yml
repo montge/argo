@@ -1,0 +1,103 @@
+name: Notebook Tests
+
+on:
+  push:
+    branches: [ main, master, office365-linux-rebuild, develop ]
+  pull_request:
+    branches: [ main, master, office365-linux-rebuild, develop ]
+
+jobs:
+  test-notebooks:
+    name: Test Jupyter Notebooks
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install Node.js dependencies
+      run: npm ci
+
+    - name: Install Python dependencies
+      run: |
+        pip install jupyter nbconvert ipykernel
+        echo "Jupyter version: $(jupyter --version)"
+        echo "nbconvert version: $(python -c 'import nbconvert; print(nbconvert.__version__)')"
+
+    - name: Install and register tslab kernel
+      run: |
+        npm install -g tslab
+        tslab install --python=python3
+        echo "Installed Jupyter kernels:"
+        jupyter kernelspec list
+
+    - name: Build argo-core package
+      run: npm run build --workspace=@argo/core
+
+    - name: Verify argo-core build
+      run: |
+        if [ -f packages/argo-core/dist/index.js ]; then
+          echo "✓ argo-core built successfully"
+          ls -lh packages/argo-core/dist/
+        else
+          echo "✗ argo-core build failed"
+          exit 1
+        fi
+
+    - name: Run notebook tests
+      run: |
+        cd notebooks
+        chmod +x test-notebooks.sh
+        ./test-notebooks.sh
+
+    - name: Upload executed notebooks
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: executed-notebooks
+        path: notebooks/test-output/
+        retention-days: 7
+
+    - name: Upload notebook logs
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: notebook-logs
+        path: notebooks/test-output/*.log
+        retention-days: 14
+
+    - name: Test Summary
+      if: always()
+      run: |
+        echo "## Notebook Test Results" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        if [ -d notebooks/test-output ]; then
+          echo "### Executed Notebooks" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          for nb in notebooks/test-output/*_executed.ipynb; do
+            if [ -f "$nb" ]; then
+              basename=$(basename "$nb")
+              echo "- ✅ ${basename/_executed.ipynb/.ipynb}" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if ls notebooks/test-output/*.log >/dev/null 2>&1; then
+            echo "### Test Logs" >> $GITHUB_STEP_SUMMARY
+            echo "Check the 'notebook-logs' artifact for detailed execution logs" >> $GITHUB_STEP_SUMMARY
+          fi
+        else
+          echo "⚠️ No notebook output directory found" >> $GITHUB_STEP_SUMMARY
+        fi

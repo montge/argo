@@ -137,6 +137,51 @@ The main tutorial covers:
 7. Adapt examples to your own use cases
 8. Build custom simulations
 
+## 🧪 Testing Notebooks
+
+### Automated Testing (CI/CD)
+
+All notebooks are automatically tested in GitHub Actions on every push. The CI pipeline:
+- Executes all notebooks headlessly using `jupyter nbconvert --execute`
+- Validates that all cells run without errors
+- Archives executed notebooks as artifacts
+- Fails the build if any notebook fails
+
+### Local Testing
+
+Test notebooks locally before committing:
+
+```bash
+# Test all notebooks
+cd notebooks
+./test-notebooks.sh
+
+# Test specific notebook
+./test-notebooks.sh argo-tutorial.ipynb
+```
+
+The test script will:
+- Execute each notebook in headless mode
+- Generate execution logs
+- Report pass/fail status
+- Save executed notebooks to `test-output/`
+
+### Test Requirements
+
+For notebooks to pass automated tests:
+- All cells must execute without exceptions
+- No broken imports or missing dependencies
+- Execution must complete within timeout (3 minutes per cell, 5 minutes total)
+- No interactive prompts or user input required
+
+### Adding New Notebooks
+
+When creating new notebooks:
+1. Ensure all code cells are executable
+2. Test locally with `./test-notebooks.sh`
+3. Add notebook to repository
+4. Verify CI passes before merging
+
 ## 💡 Tips
 
 - **Reproducibility:** All examples use seeded RNGs - change the seed to see different results
