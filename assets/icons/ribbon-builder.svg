@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Distribution Builder Icon - Graph with bell curve -->
+
+  <defs>
+    <style>
+      .icon-dark { fill: #100e0d; }
+      .icon-stroke { fill: none; stroke: #100e0d; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <!-- Graph axes -->
+  <line class="icon-stroke" x1="15" y1="60" x2="65" y2="60" stroke-width="2.5"/>
+  <line class="icon-stroke" x1="15" y1="20" x2="15" y2="60" stroke-width="2.5"/>
+
+  <!-- Bell curve (normal distribution) -->
+  <path class="icon-stroke" d="
+    M 20 58
+    Q 25 50, 30 42
+    Q 35 30, 40 25
+    Q 45 30, 50 42
+    Q 55 50, 60 58
+  " stroke-width="3"/>
+
+  <!-- Grid dots -->
+  <circle class="icon-dark" cx="25" cy="55" r="1"/>
+  <circle class="icon-dark" cx="35" cy="55" r="1"/>
+  <circle class="icon-dark" cx="45" cy="55" r="1"/>
+  <circle class="icon-dark" cx="55" cy="55" r="1"/>
+
+  <!-- Axis arrows -->
+  <path class="icon-dark" d="M 15 18 L 12 23 L 18 23 Z"/>
+  <path class="icon-dark" d="M 67 60 L 62 57 L 62 63 Z"/>
+</svg>

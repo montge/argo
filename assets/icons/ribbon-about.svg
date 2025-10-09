@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- About Icon - Info 'i' in circle -->
+
+  <defs>
+    <style>
+      .icon-dark { fill: #100e0d; }
+      .icon-stroke { fill: none; stroke: #100e0d; stroke-width: 2; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <!-- Outer circle -->
+  <circle class="icon-stroke" cx="40" cy="40" r="28" stroke-width="3"/>
+
+  <!-- Dot of 'i' -->
+  <circle class="icon-dark" cx="40" cy="26" r="3"/>
+
+  <!-- Stem of 'i' -->
+  <rect class="icon-dark" x="37" y="34" width="6" height="22" rx="1"/>
+
+  <!-- Base line -->
+  <rect class="icon-dark" x="32" y="56" width="16" height="3" rx="1.5"/>
+</svg>

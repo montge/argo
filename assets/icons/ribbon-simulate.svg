@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Run Simulation Icon - Play button with distribution curve -->
+
+  <defs>
+    <style>
+      .icon-dark { fill: #100e0d; }
+      .icon-stroke { fill: none; stroke: #100e0d; stroke-width: 2; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <!-- Play button (triangle) -->
+  <path class="icon-dark" d="
+    M 30 20
+    L 30 60
+    L 60 40
+    Z
+  "/>
+
+  <!-- Distribution curve overlay -->
+  <path class="icon-stroke" d="
+    M 15 65
+    Q 25 55, 35 52
+    Q 40 50, 45 52
+    Q 55 55, 65 65
+  " stroke-width="2.5"/>
+
+  <!-- Small data points -->
+  <circle class="icon-dark" cx="28" cy="58" r="1.5"/>
+  <circle class="icon-dark" cx="40" cy="54" r="1.5"/>
+  <circle class="icon-dark" cx="52" cy="58" r="1.5"/>
+</svg>

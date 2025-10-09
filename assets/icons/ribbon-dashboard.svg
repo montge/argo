@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dashboard Icon - Grid panel layout with charts -->
+
+  <defs>
+    <style>
+      .icon-dark { fill: #100e0d; }
+      .icon-stroke { fill: none; stroke: #100e0d; stroke-width: 2; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <!-- Outer frame -->
+  <rect x="15" y="15" width="50" height="50" rx="2" class="icon-stroke" stroke-width="2.5"/>
+
+  <!-- Vertical divider -->
+  <line class="icon-stroke" x1="40" y1="15" x2="40" y2="65" stroke-width="2.5"/>
+
+  <!-- Horizontal divider -->
+  <line class="icon-stroke" x1="15" y1="40" x2="65" y2="65" stroke-width="2.5"/>
+
+  <!-- Top-left panel: Bar chart -->
+  <rect class="icon-dark" x="20" y="30" width="4" height="8"/>
+  <rect class="icon-dark" x="26" y="25" width="4" height="13"/>
+  <rect class="icon-dark" x="32" y="28" width="4" height="10"/>
+
+  <!-- Top-right panel: Line chart -->
+  <path class="icon-stroke" d="M 45 30 L 50 25 L 55 28 L 60 22" stroke-width="2"/>
+
+  <!-- Bottom-left panel: Pie chart -->
+  <circle class="icon-stroke" cx="27" cy="52" r="8" stroke-width="2"/>
+  <path class="icon-dark" d="M 27 44 L 27 52 L 35 52 Z"/>
+
+  <!-- Bottom-right panel: Number display -->
+  <text x="52" y="57" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#100e0d" text-anchor="middle">95%</text>
+</svg>

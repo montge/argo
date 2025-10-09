@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Help Icon - Question mark in circle -->
+
+  <defs>
+    <style>
+      .icon-dark { fill: #100e0d; }
+      .icon-stroke { fill: none; stroke: #100e0d; stroke-width: 2; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <!-- Outer circle -->
+  <circle class="icon-stroke" cx="40" cy="40" r="28" stroke-width="3"/>
+
+  <!-- Question mark -->
+  <path class="icon-dark" d="
+    M 32 28
+    Q 32 22, 40 22
+    Q 48 22, 48 28
+    Q 48 32, 44 35
+    Q 40 38, 40 42
+    L 40 46
+  " fill="none" stroke="#100e0d" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Dot of question mark -->
+  <circle class="icon-dark" cx="40" cy="54" r="3"/>
+</svg>
